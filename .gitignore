@@ -1,0 +1,11 @@
+# Dependencias y estado local
+node_modules/
+.wrangler/
+.dev.vars
+
+# Archivos temporales
+.tmp/
+*.log
+
+# Sistema
+.DS_Store
