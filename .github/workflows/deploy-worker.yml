@@ -1,4 +1,8 @@
 # Despliegue del Worker de 100 Mexicanos Dijeron a Cloudflare.
+# Usa el Wrangler 4 del propio proyecto (npm ci + npx wrangler deploy).
+# Secrets necesarios en el repositorio (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN y CLOUDFLARE_ACCOUNT_ID (ya agregados).
+
 name: Deploy Worker
 
 on:
@@ -6,6 +10,7 @@ on:
     branches: [main]
     paths:
       - "worker/**"
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -14,9 +19,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: worker
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+
+      - name: Install dependencies
+        working-directory: worker
+        run: npm ci
+
+      - name: Deploy to Cloudflare Workers
+        working-directory: worker
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
