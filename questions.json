@@ -1,0 +1,4134 @@
+{
+  "rounds": [
+    {
+      "id": "q1",
+      "text": "Mencionen algo que se encuentra en una cocina mexicana",
+      "answers": [
+        {
+          "text": "Comal",
+          "points": 28,
+          "aliases": [
+            "comal de barro"
+          ]
+        },
+        {
+          "text": "Sartén",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Licuadora",
+          "points": 18,
+          "aliases": [
+            "licuadora de vaso"
+          ]
+        },
+        {
+          "text": "Molcajete",
+          "points": 14,
+          "aliases": [
+            "metate"
+          ]
+        },
+        {
+          "text": "Olla de presión",
+          "points": 10,
+          "aliases": [
+            "olla express",
+            "olla a presión"
+          ]
+        },
+        {
+          "text": "Cuchillo",
+          "points": 8,
+          "aliases": [
+            "cuchillo de cocina"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": "Digan una razón por la que alguien llega tarde al trabajo",
+      "answers": [
+        {
+          "text": "Tráfico",
+          "points": 35,
+          "aliases": [
+            "embotellamiento"
+          ]
+        },
+        {
+          "text": "Se le hizo tarde",
+          "points": 24,
+          "aliases": [
+            "se durmió",
+            "se levanto tarde"
+          ]
+        },
+        {
+          "text": "El camión no pasó",
+          "points": 16,
+          "aliases": [
+            "no pasó el camión",
+            "no había camión"
+          ]
+        },
+        {
+          "text": "Se descompuso el coche",
+          "points": 12,
+          "aliases": [
+            "se le descompuso el carro",
+            "se quedó el coche"
+          ]
+        },
+        {
+          "text": "Se le olvidó algo",
+          "points": 8,
+          "aliases": [
+            "olvido algo",
+            "regreso por algo"
+          ]
+        },
+        {
+          "text": "Lluvia",
+          "points": 5,
+          "aliases": [
+            "estaba lloviendo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": "Nombren algo que se lleva a la playa",
+      "answers": [
+        {
+          "text": "Bloqueador solar",
+          "points": 30,
+          "aliases": [
+            "bloqueador",
+            "protector solar"
+          ]
+        },
+        {
+          "text": "Toalla",
+          "points": 26,
+          "aliases": [
+            "toalla de playa"
+          ]
+        },
+        {
+          "text": "Traje de baño",
+          "points": 18,
+          "aliases": [
+            "bikini",
+            "bañador"
+          ]
+        },
+        {
+          "text": "Sombrilla",
+          "points": 12,
+          "aliases": [
+            "parasol"
+          ]
+        },
+        {
+          "text": "Hielera",
+          "points": 9,
+          "aliases": [
+            "nevera",
+            "cooler"
+          ]
+        },
+        {
+          "text": "Sandalias",
+          "points": 5,
+          "aliases": [
+            "chanclas",
+            "hawaianas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Mencionen algo que hace la gente los domingos en familia",
+      "answers": [
+        {
+          "text": "Comer juntos",
+          "points": 32,
+          "aliases": [
+            "comer en familia",
+            "la comida familiar"
+          ]
+        },
+        {
+          "text": "Ir a misa",
+          "points": 20,
+          "aliases": [
+            "ir a la iglesia"
+          ]
+        },
+        {
+          "text": "Ver televisión",
+          "points": 16,
+          "aliases": [
+            "ver la tele",
+            "ver películas"
+          ]
+        },
+        {
+          "text": "Ir al parque",
+          "points": 14,
+          "aliases": [
+            "pasear al parque"
+          ]
+        },
+        {
+          "text": "Visitar a los abuelos",
+          "points": 10,
+          "aliases": [
+            "ir con los abuelos"
+          ]
+        },
+        {
+          "text": "Dormir la siesta",
+          "points": 8,
+          "aliases": [
+            "echarse una siesta",
+            "dormir"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Digan algo que se encuentra en un salón de clases",
+      "answers": [
+        {
+          "text": "Pizarrón",
+          "points": 34,
+          "aliases": [
+            "pizarra",
+            "pintarrón"
+          ]
+        },
+        {
+          "text": "Pupitres",
+          "points": 24,
+          "aliases": [
+            "mesabancos",
+            "bancas"
+          ]
+        },
+        {
+          "text": "Mochilas",
+          "points": 16,
+          "aliases": [
+            "mochila"
+          ]
+        },
+        {
+          "text": "Libros",
+          "points": 12,
+          "aliases": [
+            "libros de texto"
+          ]
+        },
+        {
+          "text": "Borrador",
+          "points": 8,
+          "aliases": [
+            "goma de borrar"
+          ]
+        },
+        {
+          "text": "Gis",
+          "points": 6,
+          "aliases": [
+            "tiza",
+            "marcador"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "text": "Nombren un deporte que se juega con una pelota",
+      "answers": [
+        {
+          "text": "Fútbol",
+          "points": 42,
+          "aliases": [
+            "soccer"
+          ]
+        },
+        {
+          "text": "Básquetbol",
+          "points": 22,
+          "aliases": [
+            "basquet"
+          ]
+        },
+        {
+          "text": "Voleibol",
+          "points": 14,
+          "aliases": [
+            "voley",
+            "volibol"
+          ]
+        },
+        {
+          "text": "Béisbol",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Tenis",
+          "points": 7,
+          "aliases": [
+            "tenis de cancha"
+          ]
+        },
+        {
+          "text": "Golf",
+          "points": 5,
+          "aliases": [
+            "golfito"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "text": "Mencionen algo que se pone en los tacos",
+      "answers": [
+        {
+          "text": "Salsa",
+          "points": 30,
+          "aliases": [
+            "salsa picante"
+          ]
+        },
+        {
+          "text": "Cebolla",
+          "points": 22,
+          "aliases": [
+            "cebolla picada"
+          ]
+        },
+        {
+          "text": "Cilantro",
+          "points": 18,
+          "aliases": [
+            "cilantro picado"
+          ]
+        },
+        {
+          "text": "Limón",
+          "points": 14,
+          "aliases": []
+        },
+        {
+          "text": "Queso",
+          "points": 9,
+          "aliases": [
+            "queso rallado"
+          ]
+        },
+        {
+          "text": "Crema",
+          "points": 7,
+          "aliases": [
+            "crema ácida"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "text": "Digan algo que la gente hace en la mañana al despertar",
+      "answers": [
+        {
+          "text": "Lavarse los dientes",
+          "points": 28,
+          "aliases": [
+            "cepillarse los dientes"
+          ]
+        },
+        {
+          "text": "Bañarse",
+          "points": 24,
+          "aliases": [
+            "ducharse",
+            "meterse a bañar"
+          ]
+        },
+        {
+          "text": "Desayunar",
+          "points": 18,
+          "aliases": [
+            "tomar desayuno"
+          ]
+        },
+        {
+          "text": "Revisar el celular",
+          "points": 14,
+          "aliases": [
+            "ver el celular",
+            "checar el teléfono"
+          ]
+        },
+        {
+          "text": "Tender la cama",
+          "points": 9,
+          "aliases": [
+            "hacer la cama"
+          ]
+        },
+        {
+          "text": "Hacer ejercicio",
+          "points": 7,
+          "aliases": [
+            "ejercitarse",
+            "correr"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "Nombren un lugar donde se puede bailar",
+      "answers": [
+        {
+          "text": "Antro",
+          "points": 32,
+          "aliases": [
+            "discoteca",
+            "bar"
+          ]
+        },
+        {
+          "text": "Boda",
+          "points": 24,
+          "aliases": [
+            "una boda"
+          ]
+        },
+        {
+          "text": "Fiesta",
+          "points": 16,
+          "aliases": [
+            "una fiesta"
+          ]
+        },
+        {
+          "text": "Salón de baile",
+          "points": 12,
+          "aliases": [
+            "salón"
+          ]
+        },
+        {
+          "text": "Quinceañera",
+          "points": 9,
+          "aliases": [
+            "quince años"
+          ]
+        },
+        {
+          "text": "Playa",
+          "points": 7,
+          "aliases": [
+            "la playa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "text": "Mencionen algo que se regala en un cumpleaños",
+      "answers": [
+        {
+          "text": "Pastel",
+          "points": 30,
+          "aliases": [
+            "tarta",
+            "un pastel"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 22,
+          "aliases": [
+            "una playera",
+            "un pantalón"
+          ]
+        },
+        {
+          "text": "Dinero",
+          "points": 18,
+          "aliases": [
+            "efectivo",
+            "un sobre con dinero"
+          ]
+        },
+        {
+          "text": "Flores",
+          "points": 12,
+          "aliases": [
+            "un ramo"
+          ]
+        },
+        {
+          "text": "Perfume",
+          "points": 10,
+          "aliases": [
+            "loción",
+            "fragancia"
+          ]
+        },
+        {
+          "text": "Juguetes",
+          "points": 8,
+          "aliases": [
+            "un juguete"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "text": "Digan algo que se hace en Navidad en México",
+      "answers": [
+        {
+          "text": "Poner el árbol",
+          "points": 30,
+          "aliases": [
+            "armar el árbol",
+            "poner el arbolito"
+          ]
+        },
+        {
+          "text": "Cenar en familia",
+          "points": 26,
+          "aliases": [
+            "la cena navideña"
+          ]
+        },
+        {
+          "text": "Romper la piñata",
+          "points": 16,
+          "aliases": [
+            "la piñata"
+          ]
+        },
+        {
+          "text": "Cantar villancicos",
+          "points": 12,
+          "aliases": [
+            "villancicos"
+          ]
+        },
+        {
+          "text": "Intercambio de regalos",
+          "points": 10,
+          "aliases": [
+            "intercambio"
+          ]
+        },
+        {
+          "text": "Ir a misa de gallo",
+          "points": 6,
+          "aliases": [
+            "misa de gallo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "text": "Nombren un animal que se tiene como mascota",
+      "answers": [
+        {
+          "text": "Perro",
+          "points": 44,
+          "aliases": [
+            "perrito",
+            "can"
+          ]
+        },
+        {
+          "text": "Gato",
+          "points": 26,
+          "aliases": [
+            "gatito",
+            "michi"
+          ]
+        },
+        {
+          "text": "Pájaro",
+          "points": 12,
+          "aliases": [
+            "perico",
+            "canario"
+          ]
+        },
+        {
+          "text": "Pez",
+          "points": 8,
+          "aliases": [
+            "peces",
+            "pescadito"
+          ]
+        },
+        {
+          "text": "Conejo",
+          "points": 6,
+          "aliases": [
+            "conejito"
+          ]
+        },
+        {
+          "text": "Hámster",
+          "points": 4,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "text": "Mencionen algo que se encuentra en un baño",
+      "answers": [
+        {
+          "text": "Regadera",
+          "points": 30,
+          "aliases": [
+            "ducha"
+          ]
+        },
+        {
+          "text": "Espejo",
+          "points": 24,
+          "aliases": [
+            "el espejo"
+          ]
+        },
+        {
+          "text": "Toalla",
+          "points": 16,
+          "aliases": [
+            "toalla de baño"
+          ]
+        },
+        {
+          "text": "Jabón",
+          "points": 12,
+          "aliases": [
+            "jabón de manos"
+          ]
+        },
+        {
+          "text": "Cepillo de dientes",
+          "points": 10,
+          "aliases": [
+            "cepillo dental"
+          ]
+        },
+        {
+          "text": "Papel higiénico",
+          "points": 8,
+          "aliases": [
+            "papel de baño",
+            "papel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "text": "Digan una razón por la que alguien va al doctor",
+      "answers": [
+        {
+          "text": "Dolor de cabeza",
+          "points": 28,
+          "aliases": [
+            "le duele la cabeza",
+            "migraña"
+          ]
+        },
+        {
+          "text": "Gripe",
+          "points": 24,
+          "aliases": [
+            "resfriado",
+            "tos"
+          ]
+        },
+        {
+          "text": "Dolor de estómago",
+          "points": 18,
+          "aliases": [
+            "dolor de panza"
+          ]
+        },
+        {
+          "text": "Fiebre",
+          "points": 14,
+          "aliases": [
+            "temperatura"
+          ]
+        },
+        {
+          "text": "Chequeo",
+          "points": 9,
+          "aliases": [
+            "revisión",
+            "chequeo general"
+          ]
+        },
+        {
+          "text": "Dolor de muela",
+          "points": 7,
+          "aliases": [
+            "dolor de dientes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "text": "Nombren algo que se vende en un mercado",
+      "answers": [
+        {
+          "text": "Frutas",
+          "points": 32,
+          "aliases": [
+            "fruta"
+          ]
+        },
+        {
+          "text": "Verduras",
+          "points": 26,
+          "aliases": [
+            "verdura"
+          ]
+        },
+        {
+          "text": "Flores",
+          "points": 14,
+          "aliases": [
+            "flores frescas"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 12,
+          "aliases": [
+            "ropa usada",
+            "ropa nueva"
+          ]
+        },
+        {
+          "text": "Comida",
+          "points": 10,
+          "aliases": [
+            "comida preparada",
+            "antojitos"
+          ]
+        },
+        {
+          "text": "Artesanías",
+          "points": 6,
+          "aliases": [
+            "recuerdos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "text": "Mencionen algo que hace la gente en la playa",
+      "answers": [
+        {
+          "text": "Nadar",
+          "points": 36,
+          "aliases": [
+            "meterse al mar",
+            "bañarse"
+          ]
+        },
+        {
+          "text": "Tomar el sol",
+          "points": 24,
+          "aliases": [
+            "broncearse",
+            "asolearse"
+          ]
+        },
+        {
+          "text": "Jugar voleibol",
+          "points": 14,
+          "aliases": [
+            "voleibol de playa"
+          ]
+        },
+        {
+          "text": "Caminar",
+          "points": 12,
+          "aliases": [
+            "caminar por la orilla"
+          ]
+        },
+        {
+          "text": "Hacer castillos de arena",
+          "points": 8,
+          "aliases": [
+            "castillos de arena"
+          ]
+        },
+        {
+          "text": "Surfear",
+          "points": 6,
+          "aliases": [
+            "surf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "text": "Digan algo que se pone en una maleta para viajar",
+      "answers": [
+        {
+          "text": "Ropa",
+          "points": 38,
+          "aliases": [
+            "ropa limpia",
+            "cambios de ropa"
+          ]
+        },
+        {
+          "text": "Cepillo de dientes",
+          "points": 20,
+          "aliases": [
+            "cepillo dental"
+          ]
+        },
+        {
+          "text": "Zapatos",
+          "points": 16,
+          "aliases": [
+            "tenis",
+            "calzado"
+          ]
+        },
+        {
+          "text": "Cargador",
+          "points": 12,
+          "aliases": [
+            "cargador del celular"
+          ]
+        },
+        {
+          "text": "Bloqueador",
+          "points": 8,
+          "aliases": [
+            "bloqueador solar"
+          ]
+        },
+        {
+          "text": "Pasaporte",
+          "points": 6,
+          "aliases": [
+            "pasaporte vigente"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "text": "Nombren una fruta que se vende en México",
+      "answers": [
+        {
+          "text": "Mango",
+          "points": 30,
+          "aliases": [
+            "mangos"
+          ]
+        },
+        {
+          "text": "Plátano",
+          "points": 24,
+          "aliases": [
+            "plátanos",
+            "banana"
+          ]
+        },
+        {
+          "text": "Naranja",
+          "points": 16,
+          "aliases": [
+            "naranjas"
+          ]
+        },
+        {
+          "text": "Manzana",
+          "points": 12,
+          "aliases": [
+            "manzanas"
+          ]
+        },
+        {
+          "text": "Sandía",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Papaya",
+          "points": 8,
+          "aliases": [
+            "papayas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "text": "Mencionen algo que se encuentra en una oficina",
+      "answers": [
+        {
+          "text": "Computadora",
+          "points": 36,
+          "aliases": [
+            "computador",
+            "laptop"
+          ]
+        },
+        {
+          "text": "Escritorio",
+          "points": 22,
+          "aliases": [
+            "mesa de trabajo"
+          ]
+        },
+        {
+          "text": "Silla",
+          "points": 16,
+          "aliases": [
+            "silla de oficina"
+          ]
+        },
+        {
+          "text": "Impresora",
+          "points": 12,
+          "aliases": [
+            "impresora multifuncional"
+          ]
+        },
+        {
+          "text": "Teléfono",
+          "points": 8,
+          "aliases": [
+            "teléfono de oficina"
+          ]
+        },
+        {
+          "text": "Papelería",
+          "points": 6,
+          "aliases": [
+            "papeles",
+            "hojas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "text": "Digan algo que hacen los niños en el recreo",
+      "answers": [
+        {
+          "text": "Jugar fútbol",
+          "points": 34,
+          "aliases": [
+            "echar la cascarita"
+          ]
+        },
+        {
+          "text": "Jugar a las escondidas",
+          "points": 22,
+          "aliases": [
+            "escondidas"
+          ]
+        },
+        {
+          "text": "Comer su lonche",
+          "points": 16,
+          "aliases": [
+            "comer el lonche"
+          ]
+        },
+        {
+          "text": "Platicar",
+          "points": 12,
+          "aliases": [
+            "platicar con amigos"
+          ]
+        },
+        {
+          "text": "Jugar en los columpios",
+          "points": 10,
+          "aliases": [
+            "columpios"
+          ]
+        },
+        {
+          "text": "Correr",
+          "points": 6,
+          "aliases": [
+            "correr por el patio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "text": "Nombren algo que se escucha en la radio",
+      "answers": [
+        {
+          "text": "Música",
+          "points": 38,
+          "aliases": [
+            "canciones"
+          ]
+        },
+        {
+          "text": "Noticias",
+          "points": 22,
+          "aliases": [
+            "el noticiero"
+          ]
+        },
+        {
+          "text": "Deportes",
+          "points": 14,
+          "aliases": [
+            "los deportes"
+          ]
+        },
+        {
+          "text": "Chistes",
+          "points": 12,
+          "aliases": [
+            "los chistes"
+          ]
+        },
+        {
+          "text": "Anuncios",
+          "points": 8,
+          "aliases": [
+            "comerciales"
+          ]
+        },
+        {
+          "text": "Novelas",
+          "points": 6,
+          "aliases": [
+            "radionovelas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "text": "Mencionen algo que se hace en una fiesta de quince años",
+      "answers": [
+        {
+          "text": "Bailar el vals",
+          "points": 32,
+          "aliases": [
+            "el vals"
+          ]
+        },
+        {
+          "text": "Partir el pastel",
+          "points": 22,
+          "aliases": [
+            "cortar el pastel"
+          ]
+        },
+        {
+          "text": "Brindis",
+          "points": 16,
+          "aliases": [
+            "el brindis"
+          ]
+        },
+        {
+          "text": "Tomarse fotos",
+          "points": 12,
+          "aliases": [
+            "fotos"
+          ]
+        },
+        {
+          "text": "Última muñeca",
+          "points": 10,
+          "aliases": [
+            "la muñeca"
+          ]
+        },
+        {
+          "text": "Cambio de zapatilla",
+          "points": 8,
+          "aliases": [
+            "la zapatilla"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "text": "Digan una razón por la que alguien no va a la escuela",
+      "answers": [
+        {
+          "text": "Está enfermo",
+          "points": 36,
+          "aliases": [
+            "enfermo",
+            "se enfermó"
+          ]
+        },
+        {
+          "text": "No hizo la tarea",
+          "points": 20,
+          "aliases": [
+            "no entregó la tarea"
+          ]
+        },
+        {
+          "text": "Se quedó dormido",
+          "points": 16,
+          "aliases": [
+            "se durmió"
+          ]
+        },
+        {
+          "text": "No hay clases",
+          "points": 12,
+          "aliases": [
+            "suspensión de clases",
+            "puente"
+          ]
+        },
+        {
+          "text": "No tiene dinero para el camión",
+          "points": 9,
+          "aliases": [
+            "no tiene para el pasaje"
+          ]
+        },
+        {
+          "text": "No quiere ir",
+          "points": 7,
+          "aliases": [
+            "no tiene ganas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "text": "Nombren algo que se encuentra en un parque",
+      "answers": [
+        {
+          "text": "Columpios",
+          "points": 30,
+          "aliases": [
+            "columpio"
+          ]
+        },
+        {
+          "text": "Árboles",
+          "points": 26,
+          "aliases": [
+            "árbol"
+          ]
+        },
+        {
+          "text": "Bancas",
+          "points": 16,
+          "aliases": [
+            "banca"
+          ]
+        },
+        {
+          "text": "Resbaladilla",
+          "points": 12,
+          "aliases": [
+            "tobogán"
+          ]
+        },
+        {
+          "text": "Fuente",
+          "points": 9,
+          "aliases": [
+            "la fuente"
+          ]
+        },
+        {
+          "text": "Canchas",
+          "points": 7,
+          "aliases": [
+            "cancha"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "text": "Mencionen algo que se pone en un sándwich",
+      "answers": [
+        {
+          "text": "Jamón",
+          "points": 32,
+          "aliases": [
+            "jamón de pavo"
+          ]
+        },
+        {
+          "text": "Queso",
+          "points": 24,
+          "aliases": [
+            "queso amarillo"
+          ]
+        },
+        {
+          "text": "Jitomate",
+          "points": 16,
+          "aliases": [
+            "tomate"
+          ]
+        },
+        {
+          "text": "Lechuga",
+          "points": 12,
+          "aliases": [
+            "lechuga fresca"
+          ]
+        },
+        {
+          "text": "Mayonesa",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Aguacate",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "text": "Digan algo que la gente hace cuando está aburrida",
+      "answers": [
+        {
+          "text": "Ver televisión",
+          "points": 30,
+          "aliases": [
+            "ver la tele"
+          ]
+        },
+        {
+          "text": "Revisar el celular",
+          "points": 26,
+          "aliases": [
+            "ver el teléfono"
+          ]
+        },
+        {
+          "text": "Dormir",
+          "points": 16,
+          "aliases": [
+            "echarse a dormir"
+          ]
+        },
+        {
+          "text": "Comer",
+          "points": 12,
+          "aliases": [
+            "picar algo",
+            "botanear"
+          ]
+        },
+        {
+          "text": "Salir a caminar",
+          "points": 9,
+          "aliases": [
+            "caminar"
+          ]
+        },
+        {
+          "text": "Leer",
+          "points": 7,
+          "aliases": [
+            "leer un libro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "text": "Nombren un lugar donde se puede comer en México",
+      "answers": [
+        {
+          "text": "Restaurante",
+          "points": 34,
+          "aliases": [
+            "un restaurante"
+          ]
+        },
+        {
+          "text": "Mercado",
+          "points": 22,
+          "aliases": [
+            "el mercado"
+          ]
+        },
+        {
+          "text": "Puesto de tacos",
+          "points": 18,
+          "aliases": [
+            "taquería"
+          ]
+        },
+        {
+          "text": "Fonda",
+          "points": 12,
+          "aliases": [
+            "una fonda"
+          ]
+        },
+        {
+          "text": "Casa",
+          "points": 8,
+          "aliases": [
+            "en casa"
+          ]
+        },
+        {
+          "text": "Cafetería",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "text": "Mencionen algo que se necesita para hacer una carne asada",
+      "answers": [
+        {
+          "text": "Carbón",
+          "points": 32,
+          "aliases": []
+        },
+        {
+          "text": "Carne",
+          "points": 26,
+          "aliases": [
+            "carne asada",
+            "arrachera"
+          ]
+        },
+        {
+          "text": "Tortillas",
+          "points": 16,
+          "aliases": [
+            "tortillas de maíz"
+          ]
+        },
+        {
+          "text": "Salsa",
+          "points": 12,
+          "aliases": [
+            "salsa para asar"
+          ]
+        },
+        {
+          "text": "Cerveza",
+          "points": 8,
+          "aliases": [
+            "cervezas"
+          ]
+        },
+        {
+          "text": "Asador",
+          "points": 6,
+          "aliases": [
+            "parrilla"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "text": "Digan algo que se hace antes de dormir",
+      "answers": [
+        {
+          "text": "Lavarse los dientes",
+          "points": 30,
+          "aliases": [
+            "cepillarse"
+          ]
+        },
+        {
+          "text": "Ponerse la pijama",
+          "points": 24,
+          "aliases": [
+            "ponerse el pijama"
+          ]
+        },
+        {
+          "text": "Ver el celular",
+          "points": 18,
+          "aliases": [
+            "revisar el teléfono"
+          ]
+        },
+        {
+          "text": "Leer",
+          "points": 12,
+          "aliases": [
+            "leer un libro"
+          ]
+        },
+        {
+          "text": "Rezar",
+          "points": 9,
+          "aliases": [
+            "orar"
+          ]
+        },
+        {
+          "text": "Apagar la luz",
+          "points": 7,
+          "aliases": [
+            "apagar las luces"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "text": "Nombren algo que se encuentra en un coche",
+      "answers": [
+        {
+          "text": "Volante",
+          "points": 34,
+          "aliases": [
+            "el volante"
+          ]
+        },
+        {
+          "text": "Asientos",
+          "points": 22,
+          "aliases": [
+            "asiento"
+          ]
+        },
+        {
+          "text": "Espejos",
+          "points": 16,
+          "aliases": [
+            "espejo retrovisor"
+          ]
+        },
+        {
+          "text": "Radio",
+          "points": 12,
+          "aliases": [
+            "estéreo"
+          ]
+        },
+        {
+          "text": "Llanta de refacción",
+          "points": 9,
+          "aliases": [
+            "llanta de repuesto"
+          ]
+        },
+        {
+          "text": "Cinturón de seguridad",
+          "points": 7,
+          "aliases": [
+            "cinturón"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "text": "Mencionen algo que se vende en una tienda de abarrotes",
+      "answers": [
+        {
+          "text": "Refrescos",
+          "points": 30,
+          "aliases": [
+            "refresco",
+            "soda"
+          ]
+        },
+        {
+          "text": "Pan",
+          "points": 24,
+          "aliases": [
+            "pan dulce",
+            "bolillo"
+          ]
+        },
+        {
+          "text": "Leche",
+          "points": 16,
+          "aliases": [
+            "leche entera"
+          ]
+        },
+        {
+          "text": "Huevos",
+          "points": 12,
+          "aliases": [
+            "huevo"
+          ]
+        },
+        {
+          "text": "Dulces",
+          "points": 10,
+          "aliases": [
+            "dulce",
+            "chocolates"
+          ]
+        },
+        {
+          "text": "Tortillas",
+          "points": 8,
+          "aliases": [
+            "tortilla"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q32",
+      "text": "Digan una razón por la que alguien va al gimnasio",
+      "answers": [
+        {
+          "text": "Bajar de peso",
+          "points": 36,
+          "aliases": [
+            "adelgazar",
+            "perder peso"
+          ]
+        },
+        {
+          "text": "Ponerse fuerte",
+          "points": 24,
+          "aliases": [
+            "hacer músculo",
+            "marcarse"
+          ]
+        },
+        {
+          "text": "Salud",
+          "points": 16,
+          "aliases": [
+            "por salud"
+          ]
+        },
+        {
+          "text": "Verse bien",
+          "points": 12,
+          "aliases": [
+            "verse mejor"
+          ]
+        },
+        {
+          "text": "Desestresarse",
+          "points": 7,
+          "aliases": [
+            "quitarse el estrés"
+          ]
+        },
+        {
+          "text": "Conocer gente",
+          "points": 5,
+          "aliases": [
+            "hacer amigos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q33",
+      "text": "Nombren un instrumento musical",
+      "answers": [
+        {
+          "text": "Guitarra",
+          "points": 38,
+          "aliases": [
+            "guitarra acústica"
+          ]
+        },
+        {
+          "text": "Piano",
+          "points": 22,
+          "aliases": [
+            "teclado"
+          ]
+        },
+        {
+          "text": "Batería",
+          "points": 14,
+          "aliases": []
+        },
+        {
+          "text": "Trompeta",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Violín",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Flauta",
+          "points": 7,
+          "aliases": [
+            "flauta dulce"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q34",
+      "text": "Mencionen algo que se hace en una boda",
+      "answers": [
+        {
+          "text": "Bailar",
+          "points": 30,
+          "aliases": [
+            "bailar toda la noche"
+          ]
+        },
+        {
+          "text": "Comer",
+          "points": 24,
+          "aliases": [
+            "cenar"
+          ]
+        },
+        {
+          "text": "Brindis",
+          "points": 16,
+          "aliases": [
+            "el brindis"
+          ]
+        },
+        {
+          "text": "Tomarse fotos",
+          "points": 12,
+          "aliases": [
+            "fotos"
+          ]
+        },
+        {
+          "text": "Lanzar el ramo",
+          "points": 10,
+          "aliases": [
+            "el ramo"
+          ]
+        },
+        {
+          "text": "Partir el pastel",
+          "points": 8,
+          "aliases": [
+            "cortar el pastel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q35",
+      "text": "Digan algo que se encuentra en una recámara",
+      "answers": [
+        {
+          "text": "Cama",
+          "points": 40,
+          "aliases": [
+            "la cama"
+          ]
+        },
+        {
+          "text": "Almohada",
+          "points": 20,
+          "aliases": [
+            "almohadas"
+          ]
+        },
+        {
+          "text": "Cobija",
+          "points": 14,
+          "aliases": [
+            "cobertor",
+            "manta"
+          ]
+        },
+        {
+          "text": "Ropero",
+          "points": 12,
+          "aliases": [
+            "clóset",
+            "armario"
+          ]
+        },
+        {
+          "text": "Lámpara",
+          "points": 8,
+          "aliases": [
+            "lámpara de noche"
+          ]
+        },
+        {
+          "text": "Espejo",
+          "points": 6,
+          "aliases": [
+            "el espejo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q36",
+      "text": "Nombren algo que se compra en Navidad",
+      "answers": [
+        {
+          "text": "Regalos",
+          "points": 34,
+          "aliases": [
+            "regalo"
+          ]
+        },
+        {
+          "text": "Árbol",
+          "points": 22,
+          "aliases": [
+            "árbol de navidad"
+          ]
+        },
+        {
+          "text": "Luces",
+          "points": 16,
+          "aliases": [
+            "luces navideñas"
+          ]
+        },
+        {
+          "text": "Comida",
+          "points": 12,
+          "aliases": [
+            "comida para la cena"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 9,
+          "aliases": [
+            "ropa nueva"
+          ]
+        },
+        {
+          "text": "Juguetes",
+          "points": 7,
+          "aliases": [
+            "juguete"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q37",
+      "text": "Mencionen algo que hace un bebé",
+      "answers": [
+        {
+          "text": "Llorar",
+          "points": 36,
+          "aliases": [
+            "llora"
+          ]
+        },
+        {
+          "text": "Dormir",
+          "points": 24,
+          "aliases": [
+            "duerme"
+          ]
+        },
+        {
+          "text": "Comer",
+          "points": 16,
+          "aliases": [
+            "come"
+          ]
+        },
+        {
+          "text": "Gatear",
+          "points": 10,
+          "aliases": [
+            "gatea"
+          ]
+        },
+        {
+          "text": "Reír",
+          "points": 8,
+          "aliases": [
+            "se ríe"
+          ]
+        },
+        {
+          "text": "Balbucear",
+          "points": 6,
+          "aliases": [
+            "balbucea"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "text": "Digan una razón por la que alguien se enoja",
+      "answers": [
+        {
+          "text": "Le mienten",
+          "points": 30,
+          "aliases": [
+            "le dicen mentiras"
+          ]
+        },
+        {
+          "text": "Llega tarde",
+          "points": 22,
+          "aliases": [
+            "llegan tarde"
+          ]
+        },
+        {
+          "text": "No le hacen caso",
+          "points": 18,
+          "aliases": [
+            "lo ignoran"
+          ]
+        },
+        {
+          "text": "Le quitan algo",
+          "points": 12,
+          "aliases": [
+            "le roban algo"
+          ]
+        },
+        {
+          "text": "Le gritan",
+          "points": 10,
+          "aliases": [
+            "le alzan la voz"
+          ]
+        },
+        {
+          "text": "Le rompen algo",
+          "points": 8,
+          "aliases": [
+            "le descomponen algo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "text": "Nombren un lugar donde se pasa el fin de semana",
+      "answers": [
+        {
+          "text": "Casa",
+          "points": 30,
+          "aliases": [
+            "en casa"
+          ]
+        },
+        {
+          "text": "Playa",
+          "points": 24,
+          "aliases": [
+            "la playa"
+          ]
+        },
+        {
+          "text": "Parque",
+          "points": 16,
+          "aliases": [
+            "el parque"
+          ]
+        },
+        {
+          "text": "Centro comercial",
+          "points": 12,
+          "aliases": [
+            "plaza",
+            "mall"
+          ]
+        },
+        {
+          "text": "Cine",
+          "points": 10,
+          "aliases": [
+            "el cine"
+          ]
+        },
+        {
+          "text": "Rancho",
+          "points": 8,
+          "aliases": [
+            "el rancho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "text": "Mencionen algo que se usa en la escuela",
+      "answers": [
+        {
+          "text": "Lápiz",
+          "points": 32,
+          "aliases": []
+        },
+        {
+          "text": "Cuaderno",
+          "points": 26,
+          "aliases": [
+            "libreta"
+          ]
+        },
+        {
+          "text": "Mochila",
+          "points": 18,
+          "aliases": [
+            "mochila escolar"
+          ]
+        },
+        {
+          "text": "Regla",
+          "points": 10,
+          "aliases": [
+            "regla de plástico"
+          ]
+        },
+        {
+          "text": "Borrador",
+          "points": 8,
+          "aliases": [
+            "goma"
+          ]
+        },
+        {
+          "text": "Sacapuntas",
+          "points": 6,
+          "aliases": [
+            "sacapunta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q41",
+      "text": "Digan algo que se hace en Semana Santa",
+      "answers": [
+        {
+          "text": "Ir a la playa",
+          "points": 34,
+          "aliases": [
+            "vacaciones en la playa"
+          ]
+        },
+        {
+          "text": "Ir a misa",
+          "points": 22,
+          "aliases": [
+            "ir a la iglesia"
+          ]
+        },
+        {
+          "text": "Comer pescado",
+          "points": 16,
+          "aliases": [
+            "pescado"
+          ]
+        },
+        {
+          "text": "Ver la pasión",
+          "points": 12,
+          "aliases": [
+            "la pasión de cristo"
+          ]
+        },
+        {
+          "text": "Descansar",
+          "points": 9,
+          "aliases": [
+            "descansar en casa"
+          ]
+        },
+        {
+          "text": "Visitar familiares",
+          "points": 7,
+          "aliases": [
+            "ir con la familia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q42",
+      "text": "Nombren algo que se encuentra en una farmacia",
+      "answers": [
+        {
+          "text": "Medicinas",
+          "points": 38,
+          "aliases": [
+            "medicamentos"
+          ]
+        },
+        {
+          "text": "Vitaminas",
+          "points": 20,
+          "aliases": [
+            "vitamina c"
+          ]
+        },
+        {
+          "text": "Curitas",
+          "points": 14,
+          "aliases": [
+            "banditas"
+          ]
+        },
+        {
+          "text": "Jabón",
+          "points": 12,
+          "aliases": [
+            "jabón antibacterial"
+          ]
+        },
+        {
+          "text": "Pañales",
+          "points": 9,
+          "aliases": [
+            "pañal"
+          ]
+        },
+        {
+          "text": "Termómetro",
+          "points": 7,
+          "aliases": [
+            "termometro digital"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q43",
+      "text": "Mencionen algo que se pone en el Día de Muertos",
+      "answers": [
+        {
+          "text": "Ofrenda",
+          "points": 36,
+          "aliases": [
+            "el altar"
+          ]
+        },
+        {
+          "text": "Pan de muerto",
+          "points": 22,
+          "aliases": [
+            "pan"
+          ]
+        },
+        {
+          "text": "Flores de cempasúchil",
+          "points": 16,
+          "aliases": [
+            "cempasúchil"
+          ]
+        },
+        {
+          "text": "Veladoras",
+          "points": 12,
+          "aliases": [
+            "velas"
+          ]
+        },
+        {
+          "text": "Calaveras de azúcar",
+          "points": 8,
+          "aliases": [
+            "calaveras"
+          ]
+        },
+        {
+          "text": "Fotos",
+          "points": 6,
+          "aliases": [
+            "fotos de los difuntos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q44",
+      "text": "Digan algo que la gente hace en el cine",
+      "answers": [
+        {
+          "text": "Ver películas",
+          "points": 40,
+          "aliases": [
+            "ver la película"
+          ]
+        },
+        {
+          "text": "Comer palomitas",
+          "points": 26,
+          "aliases": [
+            "palomitas"
+          ]
+        },
+        {
+          "text": "Tomar refresco",
+          "points": 14,
+          "aliases": [
+            "refresco"
+          ]
+        },
+        {
+          "text": "Reír",
+          "points": 8,
+          "aliases": [
+            "reírse"
+          ]
+        },
+        {
+          "text": "Llorar",
+          "points": 7,
+          "aliases": [
+            "llorar con la película"
+          ]
+        },
+        {
+          "text": "Dormir",
+          "points": 5,
+          "aliases": [
+            "quedarse dormido"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q45",
+      "text": "Nombren un platillo típico mexicano",
+      "answers": [
+        {
+          "text": "Tacos",
+          "points": 36,
+          "aliases": [
+            "tacos al pastor"
+          ]
+        },
+        {
+          "text": "Tamales",
+          "points": 22,
+          "aliases": [
+            "tamal"
+          ]
+        },
+        {
+          "text": "Pozole",
+          "points": 16,
+          "aliases": [
+            "pozole rojo"
+          ]
+        },
+        {
+          "text": "Mole",
+          "points": 12,
+          "aliases": [
+            "mole poblano"
+          ]
+        },
+        {
+          "text": "Enchiladas",
+          "points": 8,
+          "aliases": [
+            "enchiladas verdes"
+          ]
+        },
+        {
+          "text": "Chiles en nogada",
+          "points": 6,
+          "aliases": [
+            "chile en nogada"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q46",
+      "text": "Mencionen algo que se encuentra en un hospital",
+      "answers": [
+        {
+          "text": "Doctores",
+          "points": 30,
+          "aliases": [
+            "médicos"
+          ]
+        },
+        {
+          "text": "Enfermeras",
+          "points": 24,
+          "aliases": [
+            "enfermera"
+          ]
+        },
+        {
+          "text": "Camillas",
+          "points": 16,
+          "aliases": [
+            "camilla"
+          ]
+        },
+        {
+          "text": "Sillas de ruedas",
+          "points": 12,
+          "aliases": [
+            "silla de ruedas"
+          ]
+        },
+        {
+          "text": "Medicinas",
+          "points": 10,
+          "aliases": [
+            "medicamentos"
+          ]
+        },
+        {
+          "text": "Camas",
+          "points": 8,
+          "aliases": [
+            "camas de hospital"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q47",
+      "text": "Digan una razón por la que alguien aprende inglés",
+      "answers": [
+        {
+          "text": "Para trabajar",
+          "points": 34,
+          "aliases": [
+            "por el trabajo"
+          ]
+        },
+        {
+          "text": "Para viajar",
+          "points": 24,
+          "aliases": [
+            "para ir de viaje"
+          ]
+        },
+        {
+          "text": "Para estudiar",
+          "points": 16,
+          "aliases": [
+            "para la escuela"
+          ]
+        },
+        {
+          "text": "Para ver películas",
+          "points": 10,
+          "aliases": [
+            "para ver series"
+          ]
+        },
+        {
+          "text": "Para hablar con extranjeros",
+          "points": 9,
+          "aliases": [
+            "para comunicarse"
+          ]
+        },
+        {
+          "text": "Por gusto",
+          "points": 7,
+          "aliases": [
+            "porque le gusta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q48",
+      "text": "Nombren algo que se hace en un cumpleaños",
+      "answers": [
+        {
+          "text": "Cantar las mañanitas",
+          "points": 32,
+          "aliases": [
+            "las mañanitas"
+          ]
+        },
+        {
+          "text": "Soplar las velitas",
+          "points": 24,
+          "aliases": [
+            "soplar las velas"
+          ]
+        },
+        {
+          "text": "Partir el pastel",
+          "points": 18,
+          "aliases": [
+            "cortar el pastel"
+          ]
+        },
+        {
+          "text": "Romper la piñata",
+          "points": 12,
+          "aliases": [
+            "la piñata"
+          ]
+        },
+        {
+          "text": "Bailar",
+          "points": 8,
+          "aliases": []
+        },
+        {
+          "text": "Tomarse fotos",
+          "points": 6,
+          "aliases": [
+            "fotos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q49",
+      "text": "Mencionen algo que se vende en una panadería",
+      "answers": [
+        {
+          "text": "Pan dulce",
+          "points": 36,
+          "aliases": [
+            "panecito"
+          ]
+        },
+        {
+          "text": "Bolillo",
+          "points": 22,
+          "aliases": [
+            "bolillos",
+            "telera"
+          ]
+        },
+        {
+          "text": "Conchas",
+          "points": 16,
+          "aliases": [
+            "concha"
+          ]
+        },
+        {
+          "text": "Pasteles",
+          "points": 12,
+          "aliases": [
+            "pastel"
+          ]
+        },
+        {
+          "text": "Galletas",
+          "points": 8,
+          "aliases": []
+        },
+        {
+          "text": "Donas",
+          "points": 6,
+          "aliases": [
+            "dona"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q50",
+      "text": "Digan algo que se hace con el celular",
+      "answers": [
+        {
+          "text": "Llamar",
+          "points": 32,
+          "aliases": [
+            "hacer llamadas"
+          ]
+        },
+        {
+          "text": "Mandar mensajes",
+          "points": 26,
+          "aliases": [
+            "mandar whatsapp",
+            "textear"
+          ]
+        },
+        {
+          "text": "Tomar fotos",
+          "points": 16,
+          "aliases": [
+            "sacar fotos"
+          ]
+        },
+        {
+          "text": "Jugar",
+          "points": 10,
+          "aliases": [
+            "jugar videojuegos"
+          ]
+        },
+        {
+          "text": "Ver videos",
+          "points": 9,
+          "aliases": [
+            "ver tiktoks",
+            "ver youtube"
+          ]
+        },
+        {
+          "text": "Escuchar música",
+          "points": 7,
+          "aliases": [
+            "oír música"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q51",
+      "text": "Nombren un lugar turístico de México",
+      "answers": [
+        {
+          "text": "Cancún",
+          "points": 32,
+          "aliases": []
+        },
+        {
+          "text": "Ciudad de México",
+          "points": 22,
+          "aliases": [
+            "la capital",
+            "cdmx"
+          ]
+        },
+        {
+          "text": "Chichen Itzá",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Guadalajara",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Oaxaca",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Acapulco",
+          "points": 8,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q52",
+      "text": "Mencionen algo que se encuentra en un jardín",
+      "answers": [
+        {
+          "text": "Flores",
+          "points": 32,
+          "aliases": [
+            "flor"
+          ]
+        },
+        {
+          "text": "Pasto",
+          "points": 24,
+          "aliases": [
+            "césped"
+          ]
+        },
+        {
+          "text": "Árboles",
+          "points": 16,
+          "aliases": [
+            "árbol"
+          ]
+        },
+        {
+          "text": "Macetas",
+          "points": 12,
+          "aliases": [
+            "maceta"
+          ]
+        },
+        {
+          "text": "Fuente",
+          "points": 9,
+          "aliases": [
+            "la fuente"
+          ]
+        },
+        {
+          "text": "Columpios",
+          "points": 7,
+          "aliases": [
+            "columpio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q53",
+      "text": "Digan una razón por la que alguien se casa",
+      "answers": [
+        {
+          "text": "Por amor",
+          "points": 42,
+          "aliases": [
+            "porque se aman"
+          ]
+        },
+        {
+          "text": "Para formar una familia",
+          "points": 22,
+          "aliases": [
+            "para tener hijos"
+          ]
+        },
+        {
+          "text": "Por tradición",
+          "points": 12,
+          "aliases": [
+            "por costumbre"
+          ]
+        },
+        {
+          "text": "Por compromiso",
+          "points": 10,
+          "aliases": [
+            "porque ya se comprometió"
+          ]
+        },
+        {
+          "text": "Por el embarazo",
+          "points": 8,
+          "aliases": [
+            "porque viene un bebé"
+          ]
+        },
+        {
+          "text": "Por conveniencia",
+          "points": 6,
+          "aliases": [
+            "por interés"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q54",
+      "text": "Nombren algo que se usa para limpiar la casa",
+      "answers": [
+        {
+          "text": "Escoba",
+          "points": 34,
+          "aliases": [
+            "la escoba"
+          ]
+        },
+        {
+          "text": "Trapeador",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Trapo",
+          "points": 16,
+          "aliases": [
+            "jerga"
+          ]
+        },
+        {
+          "text": "Jabón",
+          "points": 12,
+          "aliases": [
+            "jabón para pisos"
+          ]
+        },
+        {
+          "text": "Aspiradora",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Cubeta",
+          "points": 7,
+          "aliases": [
+            "balde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q55",
+      "text": "Mencionen algo que se hace en Año Nuevo",
+      "answers": [
+        {
+          "text": "Brindar",
+          "points": 30,
+          "aliases": [
+            "el brindis"
+          ]
+        },
+        {
+          "text": "Comer uvas",
+          "points": 26,
+          "aliases": [
+            "las doce uvas"
+          ]
+        },
+        {
+          "text": "Abrazarse",
+          "points": 16,
+          "aliases": [
+            "abrazar a la familia"
+          ]
+        },
+        {
+          "text": "Ver fuegos artificiales",
+          "points": 12,
+          "aliases": [
+            "los cuetes",
+            "pirotecnia"
+          ]
+        },
+        {
+          "text": "Poner propósitos",
+          "points": 9,
+          "aliases": [
+            "propósitos de año nuevo"
+          ]
+        },
+        {
+          "text": "Bailar",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q56",
+      "text": "Digan algo que los niños piden a Santa Claus",
+      "answers": [
+        {
+          "text": "Bicicleta",
+          "points": 30,
+          "aliases": [
+            "bici"
+          ]
+        },
+        {
+          "text": "Videojuegos",
+          "points": 24,
+          "aliases": [
+            "videojuego",
+            "consola"
+          ]
+        },
+        {
+          "text": "Muñeca",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Carritos",
+          "points": 12,
+          "aliases": [
+            "carros de juguete"
+          ]
+        },
+        {
+          "text": "Pelota",
+          "points": 10,
+          "aliases": [
+            "balón"
+          ]
+        },
+        {
+          "text": "Patineta",
+          "points": 8,
+          "aliases": [
+            "skate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q57",
+      "text": "Nombren un medio de transporte público",
+      "answers": [
+        {
+          "text": "Camión",
+          "points": 38,
+          "aliases": [
+            "autobús",
+            "el camión"
+          ]
+        },
+        {
+          "text": "Metro",
+          "points": 24,
+          "aliases": [
+            "el metro"
+          ]
+        },
+        {
+          "text": "Taxi",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Colectivo",
+          "points": 10,
+          "aliases": [
+            "combi",
+            "pesero"
+          ]
+        },
+        {
+          "text": "Tren",
+          "points": 7,
+          "aliases": [
+            "el tren"
+          ]
+        },
+        {
+          "text": "Metrobús",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q58",
+      "text": "Mencionen algo que se encuentra en una biblioteca",
+      "answers": [
+        {
+          "text": "Libros",
+          "points": 40,
+          "aliases": [
+            "libro"
+          ]
+        },
+        {
+          "text": "Mesas",
+          "points": 20,
+          "aliases": [
+            "mesa de estudio"
+          ]
+        },
+        {
+          "text": "Sillas",
+          "points": 14,
+          "aliases": [
+            "silla"
+          ]
+        },
+        {
+          "text": "Computadoras",
+          "points": 12,
+          "aliases": [
+            "computadora"
+          ]
+        },
+        {
+          "text": "Revistas",
+          "points": 8,
+          "aliases": [
+            "revista"
+          ]
+        },
+        {
+          "text": "Periódicos",
+          "points": 6,
+          "aliases": [
+            "periódico"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q59",
+      "text": "Digan algo que se hace en una alberca",
+      "answers": [
+        {
+          "text": "Nadar",
+          "points": 38,
+          "aliases": []
+        },
+        {
+          "text": "Echarse clavados",
+          "points": 22,
+          "aliases": [
+            "clavados"
+          ]
+        },
+        {
+          "text": "Jugar",
+          "points": 16,
+          "aliases": [
+            "jugar en el agua"
+          ]
+        },
+        {
+          "text": "Tomar el sol",
+          "points": 10,
+          "aliases": [
+            "asolearse"
+          ]
+        },
+        {
+          "text": "Flotar",
+          "points": 8,
+          "aliases": []
+        },
+        {
+          "text": "Hacer ejercicio",
+          "points": 6,
+          "aliases": [
+            "ejercicio acuático"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q60",
+      "text": "Nombren algo que se regala el Día de las Madres",
+      "answers": [
+        {
+          "text": "Flores",
+          "points": 34,
+          "aliases": [
+            "un ramo de flores"
+          ]
+        },
+        {
+          "text": "Perfume",
+          "points": 22,
+          "aliases": [
+            "loción"
+          ]
+        },
+        {
+          "text": "Chocolates",
+          "points": 16,
+          "aliases": [
+            "una caja de chocolates"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 12,
+          "aliases": [
+            "una blusa"
+          ]
+        },
+        {
+          "text": "Electrodomésticos",
+          "points": 9,
+          "aliases": [
+            "una licuadora",
+            "una plancha"
+          ]
+        },
+        {
+          "text": "Tarjeta",
+          "points": 7,
+          "aliases": [
+            "una tarjeta"
+          ]
+        }
+      ]
+    }
+  ],
+  "fastMoney": [
+    {
+      "id": "f1",
+      "text": "Nombren un color",
+      "answers": [
+        {
+          "text": "Rojo",
+          "points": 32,
+          "aliases": []
+        },
+        {
+          "text": "Azul",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Verde",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Amarillo",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Rosa",
+          "points": 8,
+          "aliases": [
+            "rosado"
+          ]
+        },
+        {
+          "text": "Negro",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "text": "Digan un mes del año",
+      "answers": [
+        {
+          "text": "Diciembre",
+          "points": 34,
+          "aliases": [
+            "dic"
+          ]
+        },
+        {
+          "text": "Mayo",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Junio",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Enero",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Noviembre",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Septiembre",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "text": "Nombren un día de la semana",
+      "answers": [
+        {
+          "text": "Sábado",
+          "points": 36,
+          "aliases": []
+        },
+        {
+          "text": "Domingo",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Viernes",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Lunes",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Miércoles",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Jueves",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "text": "Digan un número de la suerte",
+      "answers": [
+        {
+          "text": "Siete",
+          "points": 40,
+          "aliases": [
+            "el 7",
+            "7"
+          ]
+        },
+        {
+          "text": "Tres",
+          "points": 22,
+          "aliases": [
+            "el 3",
+            "3"
+          ]
+        },
+        {
+          "text": "Cinco",
+          "points": 14,
+          "aliases": [
+            "el 5",
+            "5"
+          ]
+        },
+        {
+          "text": "Uno",
+          "points": 10,
+          "aliases": [
+            "el 1",
+            "1"
+          ]
+        },
+        {
+          "text": "Nueve",
+          "points": 8,
+          "aliases": [
+            "el 9",
+            "9"
+          ]
+        },
+        {
+          "text": "Trece",
+          "points": 6,
+          "aliases": [
+            "el 13",
+            "13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "text": "Nombren una bebida caliente",
+      "answers": [
+        {
+          "text": "Café",
+          "points": 44,
+          "aliases": []
+        },
+        {
+          "text": "Té",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Chocolate",
+          "points": 14,
+          "aliases": [
+            "chocolate caliente"
+          ]
+        },
+        {
+          "text": "Atole",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Leche",
+          "points": 6,
+          "aliases": [
+            "leche caliente"
+          ]
+        },
+        {
+          "text": "Ponche",
+          "points": 4,
+          "aliases": [
+            "ponche navideño"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "text": "Digan una bebida fría",
+      "answers": [
+        {
+          "text": "Refresco",
+          "points": 36,
+          "aliases": [
+            "soda",
+            "coca"
+          ]
+        },
+        {
+          "text": "Agua",
+          "points": 24,
+          "aliases": [
+            "agua fresca"
+          ]
+        },
+        {
+          "text": "Jugo",
+          "points": 16,
+          "aliases": [
+            "jugo de naranja"
+          ]
+        },
+        {
+          "text": "Cerveza",
+          "points": 12,
+          "aliases": [
+            "chela"
+          ]
+        },
+        {
+          "text": "Limonada",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Malteada",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "text": "Nombren un sabor de helado",
+      "answers": [
+        {
+          "text": "Vainilla",
+          "points": 34,
+          "aliases": []
+        },
+        {
+          "text": "Chocolate",
+          "points": 28,
+          "aliases": []
+        },
+        {
+          "text": "Fresa",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Limón",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Mango",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Nuez",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "text": "Digan un superhéroe",
+      "answers": [
+        {
+          "text": "Superman",
+          "points": 32,
+          "aliases": [
+            "super man"
+          ]
+        },
+        {
+          "text": "Batman",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Spiderman",
+          "points": 18,
+          "aliases": [
+            "hombre araña"
+          ]
+        },
+        {
+          "text": "Iron Man",
+          "points": 12,
+          "aliases": [
+            "ironman"
+          ]
+        },
+        {
+          "text": "Hulk",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Thor",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "text": "Nombren un animal de la granja",
+      "answers": [
+        {
+          "text": "Vaca",
+          "points": 34,
+          "aliases": []
+        },
+        {
+          "text": "Gallina",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Cerdo",
+          "points": 16,
+          "aliases": [
+            "puerco",
+            "cochino"
+          ]
+        },
+        {
+          "text": "Caballo",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Borrego",
+          "points": 8,
+          "aliases": [
+            "oveja"
+          ]
+        },
+        {
+          "text": "Pato",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "text": "Digan un animal salvaje",
+      "answers": [
+        {
+          "text": "León",
+          "points": 36,
+          "aliases": []
+        },
+        {
+          "text": "Tigre",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Elefante",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Oso",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Serpiente",
+          "points": 8,
+          "aliases": [
+            "víbora"
+          ]
+        },
+        {
+          "text": "Mono",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "text": "Nombren una parte del cuerpo",
+      "answers": [
+        {
+          "text": "Cabeza",
+          "points": 32,
+          "aliases": [
+            "la cabeza"
+          ]
+        },
+        {
+          "text": "Mano",
+          "points": 24,
+          "aliases": [
+            "la mano"
+          ]
+        },
+        {
+          "text": "Pie",
+          "points": 16,
+          "aliases": [
+            "el pie"
+          ]
+        },
+        {
+          "text": "Ojo",
+          "points": 12,
+          "aliases": [
+            "el ojo"
+          ]
+        },
+        {
+          "text": "Boca",
+          "points": 9,
+          "aliases": [
+            "la boca"
+          ]
+        },
+        {
+          "text": "Nariz",
+          "points": 7,
+          "aliases": [
+            "la nariz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "text": "Digan un deporte olímpico",
+      "answers": [
+        {
+          "text": "Natación",
+          "points": 30,
+          "aliases": [
+            "nadar"
+          ]
+        },
+        {
+          "text": "Atletismo",
+          "points": 24,
+          "aliases": [
+            "correr"
+          ]
+        },
+        {
+          "text": "Fútbol",
+          "points": 18,
+          "aliases": []
+        },
+        {
+          "text": "Box",
+          "points": 12,
+          "aliases": [
+            "boxeo"
+          ]
+        },
+        {
+          "text": "Gimnasia",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Ciclismo",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "text": "Nombren algo que se hace en verano",
+      "answers": [
+        {
+          "text": "Ir a la playa",
+          "points": 38,
+          "aliases": [
+            "playa"
+          ]
+        },
+        {
+          "text": "Nadar",
+          "points": 24,
+          "aliases": [
+            "meterse a nadar"
+          ]
+        },
+        {
+          "text": "Comer helado",
+          "points": 16,
+          "aliases": [
+            "helado"
+          ]
+        },
+        {
+          "text": "Viajar",
+          "points": 12,
+          "aliases": [
+            "ir de vacaciones"
+          ]
+        },
+        {
+          "text": "Acampar",
+          "points": 6,
+          "aliases": []
+        },
+        {
+          "text": "Hacer carne asada",
+          "points": 4,
+          "aliases": [
+            "carne asada"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f14",
+      "text": "Digan un oficio",
+      "answers": [
+        {
+          "text": "Carpintero",
+          "points": 28,
+          "aliases": []
+        },
+        {
+          "text": "Albañil",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Plomero",
+          "points": 18,
+          "aliases": []
+        },
+        {
+          "text": "Electricista",
+          "points": 14,
+          "aliases": []
+        },
+        {
+          "text": "Panadero",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Mecánico",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f15",
+      "text": "Nombren una profesión",
+      "answers": [
+        {
+          "text": "Doctor",
+          "points": 36,
+          "aliases": [
+            "médico"
+          ]
+        },
+        {
+          "text": "Maestro",
+          "points": 24,
+          "aliases": [
+            "profesor"
+          ]
+        },
+        {
+          "text": "Abogado",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Ingeniero",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Arquitecto",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Contador",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f16",
+      "text": "Digan un electrodoméstico",
+      "answers": [
+        {
+          "text": "Refrigerador",
+          "points": 32,
+          "aliases": [
+            "refri",
+            "nevera"
+          ]
+        },
+        {
+          "text": "Lavadora",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Estufa",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Microondas",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Licuadora",
+          "points": 9,
+          "aliases": []
+        },
+        {
+          "text": "Televisión",
+          "points": 7,
+          "aliases": [
+            "tele",
+            "tv"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f17",
+      "text": "Nombren una prenda de ropa",
+      "answers": [
+        {
+          "text": "Camisa",
+          "points": 32,
+          "aliases": []
+        },
+        {
+          "text": "Pantalón",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Vestido",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Zapatos",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Falda",
+          "points": 8,
+          "aliases": []
+        },
+        {
+          "text": "Sombrero",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f18",
+      "text": "Digan un medio de transporte",
+      "answers": [
+        {
+          "text": "Coche",
+          "points": 38,
+          "aliases": [
+            "carro",
+            "auto"
+          ]
+        },
+        {
+          "text": "Camión",
+          "points": 22,
+          "aliases": [
+            "autobús"
+          ]
+        },
+        {
+          "text": "Avión",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Bicicleta",
+          "points": 10,
+          "aliases": [
+            "bici"
+          ]
+        },
+        {
+          "text": "Moto",
+          "points": 8,
+          "aliases": [
+            "motocicleta"
+          ]
+        },
+        {
+          "text": "Barco",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f19",
+      "text": "Nombren un lugar de la casa",
+      "answers": [
+        {
+          "text": "Cocina",
+          "points": 36,
+          "aliases": [
+            "la cocina"
+          ]
+        },
+        {
+          "text": "Baño",
+          "points": 24,
+          "aliases": [
+            "el baño"
+          ]
+        },
+        {
+          "text": "Recámara",
+          "points": 16,
+          "aliases": [
+            "cuarto",
+            "dormitorio"
+          ]
+        },
+        {
+          "text": "Sala",
+          "points": 12,
+          "aliases": [
+            "la sala"
+          ]
+        },
+        {
+          "text": "Jardín",
+          "points": 7,
+          "aliases": [
+            "el jardín"
+          ]
+        },
+        {
+          "text": "Garage",
+          "points": 5,
+          "aliases": [
+            "cochera"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f20",
+      "text": "Digan un dulce mexicano",
+      "answers": [
+        {
+          "text": "Mazapán",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "text": "Cajeta",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Alegría",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Cocada",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Palanqueta",
+          "points": 11,
+          "aliases": []
+        },
+        {
+          "text": "Borrachitos",
+          "points": 9,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f21",
+      "text": "Nombren un platillo para el desayuno",
+      "answers": [
+        {
+          "text": "Huevos",
+          "points": 34,
+          "aliases": [
+            "huevos revueltos"
+          ]
+        },
+        {
+          "text": "Chilaquiles",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Pan",
+          "points": 16,
+          "aliases": [
+            "pan dulce"
+          ]
+        },
+        {
+          "text": "Tamales",
+          "points": 12,
+          "aliases": [
+            "tamal"
+          ]
+        },
+        {
+          "text": "Fruta",
+          "points": 8,
+          "aliases": [
+            "fruta picada"
+          ]
+        },
+        {
+          "text": "Hot cakes",
+          "points": 6,
+          "aliases": [
+            "hotcakes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f22",
+      "text": "Digan una salsa mexicana",
+      "answers": [
+        {
+          "text": "Salsa verde",
+          "points": 32,
+          "aliases": [
+            "verde"
+          ]
+        },
+        {
+          "text": "Salsa roja",
+          "points": 26,
+          "aliases": [
+            "roja"
+          ]
+        },
+        {
+          "text": "Guacamole",
+          "points": 18,
+          "aliases": []
+        },
+        {
+          "text": "Pico de gallo",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Salsa de chile de árbol",
+          "points": 7,
+          "aliases": [
+            "chile de árbol"
+          ]
+        },
+        {
+          "text": "Salsa macha",
+          "points": 5,
+          "aliases": [
+            "macha"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f23",
+      "text": "Nombren un estado de México",
+      "answers": [
+        {
+          "text": "Jalisco",
+          "points": 28,
+          "aliases": []
+        },
+        {
+          "text": "Quintana Roo",
+          "points": 22,
+          "aliases": []
+        },
+        {
+          "text": "Yucatán",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Nuevo León",
+          "points": 14,
+          "aliases": []
+        },
+        {
+          "text": "Oaxaca",
+          "points": 11,
+          "aliases": []
+        },
+        {
+          "text": "Puebla",
+          "points": 9,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f24",
+      "text": "Digan un país de América",
+      "answers": [
+        {
+          "text": "Estados Unidos",
+          "points": 36,
+          "aliases": [
+            "usa",
+            "gringolandia"
+          ]
+        },
+        {
+          "text": "México",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Canadá",
+          "points": 14,
+          "aliases": []
+        },
+        {
+          "text": "Brasil",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Argentina",
+          "points": 8,
+          "aliases": []
+        },
+        {
+          "text": "Colombia",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f25",
+      "text": "Nombren un planeta",
+      "answers": [
+        {
+          "text": "Tierra",
+          "points": 36,
+          "aliases": [
+            "la tierra"
+          ]
+        },
+        {
+          "text": "Marte",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Júpiter",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Saturno",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Venus",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Mercurio",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f26",
+      "text": "Digan una red social",
+      "answers": [
+        {
+          "text": "Facebook",
+          "points": 36,
+          "aliases": [
+            "face"
+          ]
+        },
+        {
+          "text": "WhatsApp",
+          "points": 24,
+          "aliases": [
+            "whats",
+            "wats"
+          ]
+        },
+        {
+          "text": "Instagram",
+          "points": 18,
+          "aliases": [
+            "insta",
+            "ig"
+          ]
+        },
+        {
+          "text": "TikTok",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "YouTube",
+          "points": 6,
+          "aliases": []
+        },
+        {
+          "text": "X",
+          "points": 4,
+          "aliases": [
+            "twitter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f27",
+      "text": "Nombren un juego de mesa",
+      "answers": [
+        {
+          "text": "Dominó",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "text": "Lotería",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Ajedrez",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Monopoly",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Serpientes y escaleras",
+          "points": 9,
+          "aliases": [
+            "serpientes"
+          ]
+        },
+        {
+          "text": "Jenga",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f28",
+      "text": "Digan un género musical",
+      "answers": [
+        {
+          "text": "Banda",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "text": "Reguetón",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Pop",
+          "points": 16,
+          "aliases": []
+        },
+        {
+          "text": "Rock",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Ranchera",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "text": "Cumbia",
+          "points": 8,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f29",
+      "text": "Nombren un cantante mexicano",
+      "answers": [
+        {
+          "text": "Vicente Fernández",
+          "points": 30,
+          "aliases": [
+            "chente"
+          ]
+        },
+        {
+          "text": "Luis Miguel",
+          "points": 26,
+          "aliases": [
+            "luismi"
+          ]
+        },
+        {
+          "text": "Juan Gabriel",
+          "points": 18,
+          "aliases": [
+            "juanga"
+          ]
+        },
+        {
+          "text": "Pedro Infante",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Alejandro Fernández",
+          "points": 8,
+          "aliases": [
+            "el potrillo"
+          ]
+        },
+        {
+          "text": "Thalía",
+          "points": 6,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "f30",
+      "text": "Nombren algo que se hace en una oficina",
+      "answers": [
+        {
+          "text": "Trabajar en la computadora",
+          "points": 32,
+          "aliases": [
+            "trabajar"
+          ]
+        },
+        {
+          "text": "Contestar el teléfono",
+          "points": 24,
+          "aliases": [
+            "contestar llamadas"
+          ]
+        },
+        {
+          "text": "Juntas",
+          "points": 16,
+          "aliases": [
+            "reuniones"
+          ]
+        },
+        {
+          "text": "Tomar café",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Archivar papeles",
+          "points": 9,
+          "aliases": [
+            "archivar"
+          ]
+        },
+        {
+          "text": "Comer",
+          "points": 7,
+          "aliases": []
+        }
+      ]
+    }
+  ]
+}
