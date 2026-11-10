@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>100 Mexicanos Dijeron — ¡A jugar!</title>
+<meta name="description" content="100 Mexicanos Dijeron en línea: Tato vs Ledya. Cara a cara, tablero, robo y Dinero Rápido con carta comodín.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+</head>
+<body>
+<div id="confetti" aria-hidden="true"></div>
+
+<div class="app">
+  <header class="topbar">
+    <div class="logo" aria-label="100 Mexicanos Dijeron">
+      <span class="logo-num">100</span>
+      <span class="logo-text">MEXICANOS<br>DIJERON</span>
+    </div>
+    <div class="top-meta">
+      <span id="connDot" class="conn-dot off" title="Sin conexión"></span>
+      <span id="roomBadge" class="room-badge" hidden>Sala <b id="roomCode">····</b></span>
+    </div>
+  </header>
+
+  <div id="configWarning" class="warning" hidden>
+    ⚠️ <b>Falta configurar la dirección del servidor.</b><br>
+    En <code>config.js</code> hay que poner la URL del Worker en
+    <code>window.GAME_API_URL</code>. Mientras tanto puedes ver el demo con
+    <a href="?demo=1">?demo=1</a>.
+  </div>
+
+  <section id="scoreboard" aria-label="Marcador">
+    <div id="players" class="players"></div>
+    <div id="roundInfo" class="round-info" hidden></div>
+  </section>
+
+  <div id="timerWrap" class="timer-wrap" hidden>
+    <div class="timer-track"><div id="timerBar" class="timer-bar"></div></div>
+    <div id="timerText" class="timer-text">20</div>
+  </div>
+
+  <main id="stage" class="stage" aria-live="polite">
+    <div class="loading">🎬 Cargando el set…</div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <div id="demoBar" class="demo-bar" hidden>
+    <div class="demo-title">🎭 MODO DEMO — vista previa sin servidor</div>
+    <div id="demoButtons" class="demo-buttons"></div>
+    <p class="demo-note">El demo solo muestra cómo se ve cada fase. El juego real necesita el servidor configurado.</p>
+  </div>
+
+  <footer class="footer">
+    4 rondas · ×1 ×1 ×2 ×3 · 3 cruces y hay robo · Dinero Rápido: solo el ganador, 100 puntos o más = carta comodín 🃏
+  </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
