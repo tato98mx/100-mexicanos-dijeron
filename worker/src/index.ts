@@ -1,3 +1,4 @@
+// Despliegue inicial - 2026-11-10
 /**
  * 100 Mexicanos Dijeron — Cloudflare Worker + Durable Object (plan gratuito).
  *
