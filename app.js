@@ -895,7 +895,7 @@ function renderLobby(state) {
       '<input type="text" id="codeInput" class="code-input" placeholder="ABCD" maxlength="4" autocomplete="off">' +
       '<button type="button" class="btn btn-red" id="joinBtn" ' + (configured ? "" : "disabled") + '>🚪 Unirse a la sala</button>' +
     '</form>' +
-    (code ? '<div class="lobby-code-big">' + esc(code) + '</div><p class="share-note">Comparte este código con tu rival para que se una. En cuanto entren los dos, ¡empieza el cara a cara!</p>' : "") +
+    (code ? '<div class="lobby-code-big">' + esc(code) + '</div><p class="share-note">Comparte este código con tu rival para que se una. En cuanto entren los dos, sale el botón de <b>Listo a jugar</b> y el juego empieza cuando los dos lo opriman.</p>' : "") +
     (players.length === 1 ? '<p class="share-note"><b>' + esc(players[0].name) + '</b> ya está en la sala. Esperando rival…</p>' : "") +
     '</div>';
 
