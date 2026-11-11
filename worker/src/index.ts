@@ -275,6 +275,11 @@ export class RoomDO extends DurableObject<Env> {
         this.send(ws, { type: "error", message: result.error ?? "Movimiento no válido." });
       } else {
         changed = true;
+        // Aviso para el jugador que hizo el movimiento (p. ej. respuesta ya
+        // revelada): no es error ni cambia el juego, solo hay que mostrarlo.
+        if (result.notice) {
+          this.send(ws, { type: "notice", message: result.notice });
+        }
       }
     };
 

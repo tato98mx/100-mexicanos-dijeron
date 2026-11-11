@@ -355,6 +355,31 @@ describe("cara a cara", () => {
     assert.equal(s.board[1].revealed, false);
   });
 
+  it("una respuesta ya revelada no cuenta cruz: avisa y se puede intentar otra", () => {
+    const s = newGame();
+    const top = s.board[0].text; // 40 pts
+    const second = s.board[1].text; // 30 pts
+    submitFaceoffAnswer(s, "p1", second, 1000);
+    submitFaceoffAnswer(s, "p2", top, 1000);
+    tick(s, 1000 + FACEOFF_REVEAL_MS + 1, fixture);
+    assert.equal(s.phase, "board");
+    assert.equal(s.control, "p2");
+    // La respuesta del cara a cara ya está revelada: decirla otra vez no es
+    // fallo, solo avisa. No suma cruz ni cambia el banco.
+    const res = submitGuess(s, "p2", top, 2000);
+    assert.equal(res.ok, true);
+    assert.match(res.notice ?? "", /ya está en el tablero/);
+    assert.equal(s.strikes, 0);
+    assert.equal(s.bank, 40);
+    assert.equal(s.phase, "board");
+    // Y una respuesta nueva sí vale después del aviso.
+    const res2 = submitGuess(s, "p2", second, 3000);
+    assert.equal(res2.ok, true);
+    assert.equal(res2.notice, undefined);
+    assert.equal(s.bank, 70);
+    assert.equal(s.strikes, 0);
+  });
+
   it("el ganador se anuncia en faceoffReveal con respuestas y puntos antes del tablero", () => {
     const s = newGame();
     const top = s.board[0].text; // 40 pts
@@ -461,15 +486,18 @@ describe("ronda del tablero", () => {
     assert.equal(s.players.find((p) => p.id === s.roundResult.winner).score, total);
   });
 
-  it("decir una respuesta ya revelada cuenta como fallo", () => {
+  it("decir una respuesta ya revelada NO cuenta como fallo: avisa y se intenta otra", () => {
     const s = newGame();
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
-    // Comal ya está revelada desde el cara a cara: decirla cuenta como fallo.
-    submitGuess(s, control, s.board[0].text, 1000);
-    assert.equal(s.strikes, 1);
+    // Comal ya está revelada desde el cara a cara: decirla no cuenta cruz,
+    // solo avisa que ya está en el tablero.
+    const res = submitGuess(s, control, s.board[0].text, 1000);
+    assert.equal(res.ok, true);
+    assert.match(res.notice ?? "", /ya está en el tablero/);
+    assert.equal(s.strikes, 0);
     // Y una respuesta nueva sí acierta sin sumar cruz.
     submitGuess(s, control, s.board[1].text, 1000);
-    assert.equal(s.strikes, 1);
+    assert.equal(s.strikes, 0);
     assert.equal(s.board[1].revealed, true);
   });
 

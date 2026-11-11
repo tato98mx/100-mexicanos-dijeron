@@ -100,8 +100,11 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   respuesta, 20 s por intento).
 - **Acierto**: se revela la respuesta en el tablero con su puntaje y se suma
   al banco de la ronda (puntos × multiplicador de la ronda).
-- **Fallo** (respuesta no está en el tablero, ya fue revelada, o tiempo
-  agotado): una cruz (X). **Con 3 cruces → robo.**
+- **Respuesta ya revelada** (p. ej. la del cara a cara): NO es fallo ni cruz;
+  solo avisa "¡Esa respuesta ya está en el tablero! Prueba con otra." y se
+  puede intentar otra dentro del tiempo. Lo mismo en el robo.
+- **Fallo** (respuesta no está en el tablero, o tiempo agotado): una cruz
+  (X). **Con 3 cruces → robo.**
 - Si se revela **todo el tablero** antes de las 3 cruces, el jugador con el
   control se lleva todos los puntos de la ronda.
 - **Robo**: el otro jugador tiene UNA oportunidad: da una respuesta; si está

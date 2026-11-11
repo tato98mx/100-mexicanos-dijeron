@@ -166,6 +166,9 @@ export type Rng = () => number;
 export interface ActionResult {
   ok: boolean;
   error?: string;
+  /** Mensaje para el jugador que hizo el movimiento (no es error ni cambia
+   *  el estado del juego): p. ej. "esa respuesta ya está en el tablero". */
+  notice?: string;
 }
 
 function ok(): ActionResult {
@@ -596,11 +599,11 @@ export function submitGuess(
 ): ActionResult {
   if (state.phase !== "board") return fail("No estamos en la ronda del tablero.");
   if (playerId !== state.control) return fail("No tienes el control del tablero.");
-  applyGuess(state, answer, now);
-  return ok();
+  const notice = applyGuess(state, answer, now);
+  return notice ? { ok: true, notice } : ok();
 }
 
-function applyGuess(state: GameState, answer: string | null, now: number): void {
+function applyGuess(state: GameState, answer: string | null, now: number): string | null {
   const idx = matchAnswer(answer, state.board);
   if (idx >= 0 && !state.board[idx].revealed) {
     state.board[idx].revealed = true;
@@ -610,9 +613,16 @@ function applyGuess(state: GameState, answer: string | null, now: number): void 
     } else {
       state.deadline = now + GUESS_MS;
     }
-    return;
+    return null;
   }
-  // Fallo: respuesta no está, ya fue revelada, o tiempo agotado.
+  // La respuesta SÍ está en el tablero pero ya fue revelada (p. ej. la del
+  // cara a cara): no es un fallo, solo hay que probar con otra. No cuenta
+  // cruz y se avisa con un notice para que el jugador lo sepa.
+  if (idx >= 0 && state.board[idx].revealed) {
+    state.deadline = now + GUESS_MS;
+    return "¡Esa respuesta ya está en el tablero! Prueba con otra.";
+  }
+  // Fallo: respuesta no está, o tiempo agotado.
   state.strikes += 1;
   if (state.strikes >= 3) {
     state.stealPlayer = otherPlayer(state, state.control as string)?.id ?? null;
@@ -621,6 +631,7 @@ function applyGuess(state: GameState, answer: string | null, now: number): void 
   } else {
     state.deadline = now + GUESS_MS;
   }
+  return null;
 }
 
 /** Respuesta del robo (solo el jugador que NO tiene el control). */
@@ -633,6 +644,12 @@ export function submitStealAnswer(
   if (state.phase !== "steal") return fail("No estamos en el robo.");
   if (playerId !== state.stealPlayer) return fail("No te toca robar.");
   const idx = matchAnswer(answer, state.board);
+  if (idx >= 0 && state.board[idx].revealed) {
+    // La respuesta sí está pero ya fue revelada: no se pierde el robo,
+    // solo se avisa y se puede intentar con otra dentro del tiempo.
+    state.deadline = now + GUESS_MS;
+    return { ok: true, notice: "¡Esa respuesta ya está en el tablero! Prueba con otra." };
+  }
   if (idx >= 0 && !state.board[idx].revealed) {
     // Acierta el robo: se revela su respuesta, suma al banco y se lleva TODO.
     state.board[idx].revealed = true;

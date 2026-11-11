@@ -470,6 +470,7 @@ function connectWS(code) {
     try { msg = JSON.parse(ev.data); } catch (e) { return; }
     if (msg.type === "state" && msg.state) onState(msg.state);
     else if (msg.type === "error" && msg.message) buzzer("🔔 " + msg.message);
+    else if (msg.type === "notice" && msg.message) toast(msg.message);
   };
   ws.onclose = function () {
     setConnected(false);
