@@ -224,6 +224,25 @@ describe("matching de respuestas", () => {
     assert.equal(matchAnswer(null, answers), -1);
     assert.equal(matchAnswer("", answers), -1);
   });
+
+  it("acepta respuestas cercanas como en el programa (typos y palabras)", () => {
+    const answers = [
+      { text: "Jugar a las escondidas", points: 22, aliases: [] },
+      { text: "Le mienten", points: 30, aliases: [] },
+      { text: "Comal", points: 40, aliases: ["comal de barro"] },
+    ];
+    // Typos de 1-2 letras.
+    assert.equal(matchAnswer("le mientan", answers), 1);
+    assert.equal(matchAnswer("coml", answers), 2);
+    assert.equal(matchAnswer("escondidas", answers), 0); // subcadena
+    // Sin palabras de relleno y en otro orden.
+    assert.equal(matchAnswer("jugar escondidas", answers), 0);
+    assert.equal(matchAnswer("escondidas jugar", answers), 0);
+    // Pero una respuesta muy distinta no vale.
+    assert.equal(matchAnswer("cocinar", answers), -1);
+    assert.equal(matchAnswer("ver tele", answers), -1);
+    assert.equal(matchAnswer("pan", answers), -1);
+  });
 });
 
 describe("listo a jugar", () => {

@@ -202,12 +202,47 @@ export function normalizeAnswer(raw: string): string {
     .trim();
 }
 
+/** Distancia de Levenshtein (ediciones) entre dos cadenas. Sirve para
+ *  aceptar respuestas con typos (teclado del teléfono) si están muy cerca
+ *  de la correcta. */
+export function levenshtein(a: string, b: string): number {
+  const m = a.length;
+  const n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+
+/** Palabras de relleno que no aportan significado (artículos, preposiciones).
+ *  Se quitan para comparar las palabras importantes de una respuesta. */
+const STOP_WORDS = new Set([
+  "a", "al", "con", "de", "del", "el", "ella", "en", "es", "la", "las", "le",
+  "les", "lo", "los", "me", "mi", "para", "por", "que", "se", "son", "su",
+  "sus", "te", "un", "una", "uno", "unos", "unas", "y",
+]);
+
+/** Palabras con significado de una respuesta normalizada. */
+function contentWords(normalized: string): string[] {
+  return normalized.split(" ").filter((w) => w && !STOP_WORDS.has(w));
+}
+
 /**
  * Matching de respuestas (servidor, autoritativo).
  * Devuelve el índice de la respuesta del tablero, o -1 si no es válida.
- * Vale si la respuesta normalizada es igual al texto o a un alias; como
- * respaldo, si tiene 5+ caracteres y es subcadena del texto (o viceversa),
- * también vale.
+ * Como en el programa: no hace falta la respuesta exacta, basta con
+ * acercarse mucho. Vale si la respuesta normalizada es igual al texto o
+ * a un alias; si es subcadena (5+ caracteres); si tiene pocos typos
+ * (distancia de edición pequeña); o si cubre las palabras importantes
+ * de la respuesta (sin importar el orden ni las palabras de relleno).
  */
 export function matchAnswer(
   raw: string | null | undefined,
@@ -233,6 +268,42 @@ export function matchAnswer(
       for (const alias of answers[i].aliases ?? []) {
         const a = normalizeAnswer(alias);
         if (a.includes(n) || n.includes(a)) return i;
+      }
+    }
+  }
+
+  // 3) Typos: distancia de edición pequeña (solo respuestas de 4+ caracteres
+  // para no confundir palabras muy cortas). 1 edición en respuestas cortas,
+  // 2 en medianas y 3 en largas, siempre que la similitud sea alta.
+  if (n.length >= 4) {
+    for (let i = 0; i < answers.length; i++) {
+      const candidates = [answers[i].text, ...(answers[i].aliases ?? [])];
+      for (const c of candidates) {
+        const t = normalizeAnswer(c);
+        if (t.length < 4) continue;
+        const d = levenshtein(n, t);
+        const maxD = t.length < 8 ? 1 : t.length >= 12 ? 3 : 2;
+        const sim = 1 - d / Math.max(n.length, t.length);
+        if (d <= maxD && sim >= 0.75) return i;
+      }
+    }
+  }
+
+  // 4) Palabras importantes: la respuesta del usuario cubre todas las
+  // palabras con significado del tablero (sin importar orden ni relleno),
+  // o el usuario dijo al menos 2 palabras importantes del tablero.
+  const userWords = contentWords(n);
+  if (userWords.length > 0) {
+    for (let i = 0; i < answers.length; i++) {
+      const candidates = [answers[i].text, ...(answers[i].aliases ?? [])];
+      for (const c of candidates) {
+        const boardWords = contentWords(normalizeAnswer(c));
+        if (boardWords.length === 0) continue;
+        const covered = boardWords.filter((w) => userWords.includes(w)).length;
+        // Todas las palabras importantes del tablero están en la respuesta.
+        if (covered === boardWords.length) return i;
+        // O el usuario dijo al menos 2 palabras importantes del tablero.
+        if (covered >= 2 && covered >= Math.ceil(boardWords.length / 2)) return i;
       }
     }
   }

@@ -158,10 +158,16 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 ## 3. Matching de respuestas (servidor, autoritativo)
 
 Normalizar: minúsculas, sin acentos, sin puntuación, espacios colapsados.
-Una respuesta del jugador es válida si, normalizada, es igual a una respuesta
-del tablero o a uno de sus alias. Además, como respaldo, si la respuesta
-normalizada tiene 5+ caracteres y es subcadena de la respuesta del tablero
-(o viceversa), también vale. El servidor decide; el cliente nunca puntúa.
+Como en el programa, **no hace falta la respuesta exacta**: basta con
+acercarse mucho. Una respuesta del jugador es válida si, normalizada:
+1. es igual a una respuesta del tablero o a uno de sus alias;
+2. tiene 5+ caracteres y es subcadena de la respuesta del tablero (o viceversa);
+3. tiene pocos typos (distancia de Levenshtein pequeña: 1 edición en
+   respuestas cortas, 2 en medianas, 3 en largas, con similitud ≥ 0.75);
+4. cubre las palabras importantes de la respuesta del tablero, sin importar
+   el orden ni las palabras de relleno (artículos, preposiciones).
+Una respuesta muy distinta (otra palabra) sigue sin valer. El servidor
+decide; el cliente nunca puntúa.
 
 ## 4. Arquitectura y protocolo
 
