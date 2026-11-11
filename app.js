@@ -223,7 +223,7 @@ function ensureAudio() {
     if (!AC) return false;
     audioCtx = new AC();
     musicGainNode = audioCtx.createGain();
-    musicGainNode.gain.value = 0.045; // música bajita, de fondo
+    musicGainNode.gain.value = 0.065; // música de fondo, que se escuche sin tapar los efectos
     musicGainNode.connect(audioCtx.destination);
     sfxGainNode = audioCtx.createGain();
     sfxGainNode.gain.value = 0.5;
@@ -1396,10 +1396,15 @@ function init() {
     });
   }
   // La música 8-bit arranca con el primer toque (política de autoplay).
-  document.addEventListener("pointerdown", function onFirstGesture() {
-    document.removeEventListener("pointerdown", onFirstGesture);
+  // Se escucha pointerdown y touchstart por si el navegador no dispara
+  // el primero (iOS antiguo), y también se intenta al crear/unirse a sala.
+  var unlockOnce = function () {
+    document.removeEventListener("pointerdown", unlockOnce);
+    document.removeEventListener("touchstart", unlockOnce);
     unlockAudio();
-  });
+  };
+  document.addEventListener("pointerdown", unlockOnce);
+  document.addEventListener("touchstart", unlockOnce);
   var params = new URLSearchParams(window.location.search || "");
   if (params.get("demo") === "1") { startDemo(); return; }
   if (!apiBase()) {

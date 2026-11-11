@@ -29,7 +29,6 @@
       <span class="logo-text">MEXICANOS<br>DIJERON</span>
     </div>
     <div class="top-meta">
-      <button id="soundBtn" class="sound-btn" title="Sonido encendido (tocar para apagar)">🔊</button>
       <span id="connDot" class="conn-dot off" title="Sin conexión"></span>
       <span id="roomBadge" class="room-badge" hidden>Sala <b id="roomCode">····</b></span>
     </div>
@@ -67,6 +66,10 @@
   <footer class="footer">
     4 rondas · ×1 ×1 ×2 ×3 · 3 cruces y hay robo · Dinero Rápido: solo el ganador, 100 puntos o más = carta comodín 🃏
   </footer>
+
+  <!-- Botón de sonido flotante, abajo a la derecha, al alcance del pulgar.
+       Antes estaba arriba en la barra, donde el notch del teléfono lo tapaba. -->
+  <button id="soundBtn" class="sound-btn sound-fab" title="Sonido encendido (tocar para apagar)" aria-label="Activar o silenciar el sonido">🔊</button>
 </div>
 
 <script src="app.js"></script>
