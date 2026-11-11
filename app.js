@@ -180,6 +180,212 @@ function spawnConfetti(n) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Sonido (Web Audio API): música 8-bit de fondo + efectos             */
+/*                                                                     */
+/* Todo se genera con osciladores (sin archivos de audio), así el      */
+/* juego sigue siendo 100% estático. El contexto de audio solo se      */
+/* crea tras un gesto del usuario (política de autoplay del navegador) */
+/* y la música arranca con el primer toque. Hay botón de silencio 🔊.  */
+/* ------------------------------------------------------------------ */
+
+var LS_MUTED = "100mxd-muted";
+var audioCtx = null;
+var musicGainNode = null;
+var sfxGainNode = null;
+var soundMuted = false;
+try { soundMuted = localStorage.getItem(LS_MUTED) === "1"; } catch (e) {}
+var musicTimer = null;
+var musicStep = 0;
+
+/* Melodía 8-bit en loop (16 pasos de corchea, ~132 BPM, progresión
+ * C–G–Am–F). Notas en Hz; 0 = silencio. */
+var MUSIC_BPM = 132;
+var MUSIC_MELODY = [
+  523.25, 659.25, 783.99, 659.25,  // C5 E5 G5 E5
+  880.00, 783.99, 659.25, 587.33,  // A5 G5 E5 D5
+  523.25, 659.25, 783.99, 659.25,  // C5 E5 G5 E5
+  587.33, 523.25, 587.33, 659.25   // D5 C5 D5 E5
+];
+var MUSIC_BASS = [
+  130.81, 0, 0, 0,  // C3
+  98.00, 0, 0, 0,   // G2
+  110.00, 0, 0, 0,  // A2
+  87.31, 0, 0, 0    // F2
+];
+
+function ensureAudio() {
+  if (audioCtx) {
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    return true;
+  }
+  try {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    audioCtx = new AC();
+    musicGainNode = audioCtx.createGain();
+    musicGainNode.gain.value = 0.045; // música bajita, de fondo
+    musicGainNode.connect(audioCtx.destination);
+    sfxGainNode = audioCtx.createGain();
+    sfxGainNode.gain.value = 0.5;
+    sfxGainNode.connect(audioCtx.destination);
+    return true;
+  } catch (e) { return false; }
+}
+
+/* Tono simple con envolvente. Si el audio no está corriendo o está
+ * silenciado, no hace nada (evita acumular notas en pausa). */
+function playTone(freq, startOffset, dur, type, vol, dest) {
+  if (!audioCtx || audioCtx.state !== "running" || soundMuted) return;
+  var t0 = audioCtx.currentTime + (startOffset || 0);
+  var osc = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  osc.type = type || "square";
+  osc.frequency.setValueAtTime(freq, t0);
+  g.gain.setValueAtTime(0, t0);
+  g.gain.linearRampToValueAtTime(vol || 0.5, t0 + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+  osc.connect(g);
+  g.connect(dest || sfxGainNode);
+  osc.start(t0);
+  osc.stop(t0 + dur + 0.05);
+}
+
+function musicTick() {
+  if (!audioCtx || audioCtx.state !== "running" || soundMuted) return;
+  var stepDur = 60 / MUSIC_BPM / 2; // corchea
+  var mel = MUSIC_MELODY[musicStep % MUSIC_MELODY.length];
+  var bass = MUSIC_BASS[musicStep % MUSIC_BASS.length];
+  if (mel) playTone(mel, 0, stepDur * 0.9, "square", 0.35, musicGainNode);
+  if (bass) playTone(bass, 0, stepDur * 1.8, "triangle", 0.6, musicGainNode);
+  musicStep++;
+}
+
+function startMusic() {
+  if (musicTimer || soundMuted) return;
+  if (!ensureAudio()) return;
+  var stepDur = 60 / MUSIC_BPM / 2;
+  musicTimer = setInterval(musicTick, stepDur * 1000);
+}
+
+function stopMusic() {
+  if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+}
+
+/* Desbloquea el audio tras un gesto del usuario y arranca la música. */
+function unlockAudio() {
+  if (!ensureAudio()) return;
+  startMusic();
+}
+
+function setMuted(m) {
+  soundMuted = !!m;
+  try { localStorage.setItem(LS_MUTED, soundMuted ? "1" : "0"); } catch (e) {}
+  if (soundMuted) stopMusic(); else startMusic();
+  var btn = $("soundBtn");
+  if (btn) {
+    btn.textContent = soundMuted ? "🔇" : "🔊";
+    btn.title = soundMuted ? "Sonido apagado (tocar para encender)" : "Sonido encendido (tocar para apagar)";
+  }
+}
+
+/* --- Efectos de sonido --- */
+function sfxCorrect() { // acierto en el tablero: ding ascendente
+  playTone(659.25, 0, 0.12, "square", 0.5);
+  playTone(880.00, 0.1, 0.2, "square", 0.5);
+}
+function sfxWrong() { // cruz (X): zumbido grave tipo buzzer del show
+  if (!audioCtx || audioCtx.state !== "running" || soundMuted) return;
+  var t0 = audioCtx.currentTime;
+  var osc = audioCtx.createOscillator();
+  var g = audioCtx.createGain();
+  osc.type = "sawtooth";
+  osc.frequency.setValueAtTime(160, t0);
+  osc.frequency.exponentialRampToValueAtTime(70, t0 + 0.4);
+  g.gain.setValueAtTime(0.5, t0);
+  g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.45);
+  osc.connect(g);
+  g.connect(sfxGainNode);
+  osc.start(t0);
+  osc.stop(t0 + 0.5);
+}
+function sfxWin() { // fanfarria del ganador
+  playTone(523.25, 0, 0.14, "square", 0.5);
+  playTone(659.25, 0.12, 0.14, "square", 0.5);
+  playTone(783.99, 0.24, 0.14, "square", 0.5);
+  playTone(1046.50, 0.36, 0.3, "square", 0.55);
+}
+function sfxCountdown() { // bip de la cuenta atrás 3-2-1
+  playTone(880.00, 0, 0.09, "square", 0.5);
+}
+function sfxGo() { // bip agudo de "¡a jugar!"
+  playTone(1318.51, 0, 0.22, "square", 0.55);
+}
+function sfxDice() { // traqueteo de dados
+  for (var i = 0; i < 5; i++) {
+    playTone(1100 + Math.random() * 500, i * 0.07, 0.04, "square", 0.4);
+  }
+}
+function sfxSteal() { // alerta de robo: dos notas descendentes
+  playTone(440.00, 0, 0.16, "square", 0.5);
+  playTone(349.23, 0.15, 0.22, "square", 0.5);
+}
+function sfxRoundEnd() { // jingle corto de fin de ronda
+  playTone(392.00, 0, 0.12, "square", 0.45);
+  playTone(523.25, 0.11, 0.12, "square", 0.45);
+  playTone(659.25, 0.22, 0.2, "square", 0.5);
+}
+function sfxGameWin() { // fanfarria larga al ganar el juego
+  playTone(523.25, 0, 0.14, "square", 0.5);
+  playTone(659.25, 0.12, 0.14, "square", 0.5);
+  playTone(783.99, 0.24, 0.14, "square", 0.5);
+  playTone(1046.50, 0.36, 0.18, "square", 0.55);
+  playTone(1318.51, 0.52, 0.4, "square", 0.55);
+}
+function sfxGameLose() { // tonada suave al perder
+  playTone(659.25, 0, 0.16, "triangle", 0.5);
+  playTone(523.25, 0.15, 0.16, "triangle", 0.5);
+  playTone(440.00, 0.3, 0.3, "triangle", 0.5);
+}
+
+function revealedCount(state) {
+  if (!state || !state.question || !state.question.answers) return 0;
+  return state.question.answers.filter(function (a) { return a.revealed; }).length;
+}
+
+/* Dispara los sonidos según lo que cambió entre el estado anterior y el
+ * nuevo. Se llama desde onState antes de renderizar. */
+var prevSoundState = null;
+function handleStateSounds(prev, next) {
+  if (!next) return;
+  if (!prev) { prevSoundState = next; return; }
+  // Cruz nueva → zumbido de X.
+  if (typeof next.strikes === "number" && typeof prev.strikes === "number" &&
+      next.strikes > prev.strikes) {
+    sfxWrong();
+  }
+  // Respuesta nueva revelada en el tablero → ding de acierto.
+  if ((next.phase === "board" || next.phase === "roundEnd") &&
+      revealedCount(next) > revealedCount(prev)) {
+    sfxCorrect();
+  }
+  // Cambios de fase.
+  if (prev.phase !== next.phase) {
+    if (next.phase === "faceoffReveal") sfxWin();
+    else if (next.phase === "dice") sfxDice();
+    else if (next.phase === "board" && prev.phase === "faceoffReveal") sfxGo();
+    else if (next.phase === "steal") sfxSteal();
+    else if (next.phase === "roundEnd") sfxRoundEnd();
+    else if (next.phase === "fastMoney") sfxWin();
+    else if (next.phase === "fastMoneyReveal") {
+      if (fmWildcardEarned(next)) sfxWin(); else sfxRoundEnd();
+    } else if (next.phase === "gameOver") {
+      if (next.winner === myId) sfxGameWin(); else sfxGameLose();
+    }
+  }
+  prevSoundState = next;
+}
+
+/* ------------------------------------------------------------------ */
 /* Conexión: crear sala / unirse / WebSocket                           */
 /* ------------------------------------------------------------------ */
 
@@ -308,6 +514,7 @@ function showConfigWarning() {
 /* ------------------------------------------------------------------ */
 
 function onState(state) {
+  var prev = currentState;
   currentState = state;
   identifyMe(state);
   if (state.code) {
@@ -327,6 +534,7 @@ function onState(state) {
     });
   }
   if (state.phase === "gameOver") recordGameQuestions();
+  handleStateSounds(prev, state);
   render(state);
 }
 
@@ -713,6 +921,14 @@ function renderFaceoff(state) {
     '<p class="phase-sub">Escriban su respuesta <b>en secreto</b>, sin ver la del otro. ¡20 segundos!</p>' +
     questionHTML(state);
 
+  // Si el cara a cara se repitió porque nadie acertó, avisar para que no
+  // parezca que el juego se quedó callado.
+  var answeredMap = fa.answered || {};
+  var anyoneAnswered = !!(answeredMap.p1 || answeredMap.p2);
+  if ((fa.retries || 0) > 0 && !anyoneAnswered) {
+    html += '<div class="retry-note">⏰ Nadie acertó la vez pasada. ¡Otra vez con la misma pregunta!</div>';
+  }
+
   if (myAns == null) {
     html += answerFormHTML("faceoffForm", "Tu respuesta secreta…", "✅ Enviar mi respuesta");
   } else {
@@ -741,6 +957,83 @@ function renderFaceoff(state) {
 
   stage.innerHTML = html;
   bindForm("faceoffForm", function (val) { send({ type: "faceoff-answer", answer: val }); });
+}
+
+/* ------------------------------------------------------------------ */
+/* Cuenta atrás de la revelación del ganador (3-2-1)                   */
+/* ------------------------------------------------------------------ */
+
+var revealCountdownTimer = null;
+var revealCountdownLast = null;
+
+function stopRevealCountdown() {
+  if (revealCountdownTimer) { clearInterval(revealCountdownTimer); revealCountdownTimer = null; }
+  revealCountdownLast = null;
+}
+
+/* La revelación dura 5 s: los primeros ~2 s se lee quién ganó y los
+ * últimos 3 s muestran la cuenta atrás 3-2-1 con un bip por número. */
+function startRevealCountdown(state) {
+  stopRevealCountdown();
+  var el = $("revealCountdown");
+  if (!el || !state.deadline) return;
+  var update = function () {
+    var el2 = $("revealCountdown");
+    if (!el2) { stopRevealCountdown(); return; }
+    var remainMs = state.deadline - Date.now();
+    if (remainMs <= 0) { el2.textContent = "¡YA!"; stopRevealCountdown(); return; }
+    var secs = Math.ceil(remainMs / 1000);
+    if (secs > 3) {
+      el2.textContent = "¡Prepárate…";
+      el2.classList.add("prep");
+    } else {
+      el2.textContent = String(secs);
+      el2.classList.remove("prep");
+      if (revealCountdownLast !== secs) {
+        revealCountdownLast = secs;
+        sfxCountdown();
+      }
+    }
+  };
+  update();
+  revealCountdownTimer = setInterval(update, 200);
+}
+
+/* Revelación del ganador del cara a cara: nombre del ganador, las dos
+ * respuestas con sus puntos, quién empieza el tablero y la cuenta 3-2-1. */
+function renderFaceoffReveal(state) {
+  var stage = $("stage");
+  var fa = state.faceoff || {};
+  var answers = fa.answers || {};
+  var points = fa.points || {};
+  var winnerId = state.control || fa.winner;
+  var winnerName = otherPlayerName(state, winnerId);
+  var iWon = winnerId === myId;
+  var players = state.players || [];
+
+  var cards = players.map(function (p) {
+    var ans = answers[p.id];
+    var pts = typeof points[p.id] === "number" ? points[p.id] : null;
+    var isWinner = p.id === winnerId;
+    return '<div class="fo-card' + (isWinner ? " winner" : "") + '">' +
+      '<div class="fo-name">' + esc(p.name) + (p.id === myId ? " (tú)" : "") + '</div>' +
+      '<div class="fo-answer">' + esc(ans == null ? "— sin respuesta —" : ans) + '</div>' +
+      (pts != null ? '<div class="fo-points">' + pts + ' puntos</div>' : '<div class="fo-points">Sin puntos</div>') +
+      (isWinner ? '<div class="fo-points">🏆 ¡Gana el control!</div>' : "") +
+      '</div>';
+  }).join("");
+
+  stage.innerHTML = '<div class="reveal-banner">' +
+    '<div class="reveal-trophy">🏆</div>' +
+    '<div class="reveal-title">¡GANADOR' + (iWon ? "" : "") + '!</div>' +
+    '<div class="reveal-name">' + esc(winnerName) + '</div>' +
+    '<div class="reveal-sub">Siguiente turno: <b>' + esc(winnerName) + '</b> — ¡empieza el tablero!</div>' +
+    '</div>' +
+    questionHTML(state) +
+    '<div class="faceoff-answers">' + cards + '</div>' +
+    '<div class="countdown-wrap"><div id="revealCountdown" class="countdown-big">…</div>' +
+    '<div class="countdown-label">El tablero empieza en</div></div>';
+  startRevealCountdown(state);
 }
 
 function renderDice(state) {
@@ -974,9 +1267,11 @@ function render(state) {
   if (!state) return;
   renderScoreboard(state);
   startTimerLoop();
+  stopRevealCountdown(); // solo corre durante la revelación del ganador
   switch (state.phase) {
     case "lobby": renderLobby(state); break;
     case "faceoff": renderFaceoff(state); break;
+    case "faceoffReveal": renderFaceoffReveal(state); break;
     case "dice": renderDice(state); break;
     case "board": renderBoard(state); break;
     case "steal": renderSteal(state); break;
@@ -1036,7 +1331,8 @@ function demoStates() {
   return [
     { label: "🏠 Lobby", state: withPhase(base, { phase: "lobby", players: [{ id: "p1", name: "Tato", score: 0, wildcards: 0 }], question: null }) },
     { label: "⚔️ Cara a cara", state: withPhase(base, { phase: "faceoff", question: clone(base.question) }) },
-    { label: "⚔️ Cara a cara (revelado)", state: withPhase(base, { phase: "faceoff", faceoff: { answers: { p1: "Música", p2: "Comida" }, dice: null, points: { p1: 32, p2: 28 } } }) },
+    { label: "⚔️ Cara a cara (revelado)", state: withPhase(base, { phase: "faceoff", faceoff: { answers: { p1: "Música", p2: "Comida" }, dice: null, points: { p1: 32, p2: 28 }, retries: 0 } }) },
+    { label: "🏆 Ganador del cara a cara", state: withPhase(base, { phase: "faceoffReveal", control: "p1", deadline: Date.now() + 5000, faceoff: { answers: { p1: "Música", p2: "Comida" }, dice: null, winner: "p1", points: { p1: 32, p2: 28 }, retries: 0 } }) },
     { label: "🎲 Dados", state: withPhase(base, { phase: "dice", faceoff: { answers: { p1: "Música", p2: "Música" }, dice: { p1: 4, p2: 6 } } }) },
     { label: "🎯 Tablero (tu turno + comodín)", state: withPhase(base, { phase: "board", strikes: 1, bank: 60 }) },
     { label: "🚨 Robo", state: withPhase(base, { phase: "steal", control: "p1", strikes: 3, bank: 60 }) },
@@ -1089,6 +1385,21 @@ function showDemo(i) {
 /* ------------------------------------------------------------------ */
 
 function init() {
+  // Botón de silencio (🔊/🔇) en la barra superior.
+  var soundBtn = $("soundBtn");
+  if (soundBtn) {
+    soundBtn.textContent = soundMuted ? "🔇" : "🔊";
+    soundBtn.title = soundMuted ? "Sonido apagado (tocar para encender)" : "Sonido encendido (tocar para apagar)";
+    soundBtn.addEventListener("click", function () {
+      unlockAudio();
+      setMuted(!soundMuted);
+    });
+  }
+  // La música 8-bit arranca con el primer toque (política de autoplay).
+  document.addEventListener("pointerdown", function onFirstGesture() {
+    document.removeEventListener("pointerdown", onFirstGesture);
+    unlockAudio();
+  });
   var params = new URLSearchParams(window.location.search || "");
   if (params.get("demo") === "1") { startDemo(); return; }
   if (!apiBase()) {

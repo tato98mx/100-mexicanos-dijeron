@@ -58,6 +58,12 @@ body {
   border-radius: 999px; padding: 5px 12px; font-weight: 800; font-size: 14px; letter-spacing: 1px;
 }
 .room-badge b { color: var(--gold); letter-spacing: 3px; }
+.sound-btn {
+  background: rgba(255, 215, 0, .15); border: 2px solid var(--gold); color: var(--gold-soft);
+  border-radius: 50%; width: 34px; height: 34px; font-size: 17px; line-height: 1;
+  cursor: pointer; padding: 0; flex: 0 0 auto;
+}
+.sound-btn:active { transform: scale(.92); }
 
 .warning {
   background: #4a1500; border: 2px solid #ff8c42; color: #ffd9b0;
@@ -241,6 +247,46 @@ body {
 .fo-card .fo-answer { font-family: "Archivo Black", sans-serif; font-size: 19px; color: var(--gold-soft); margin-top: 6px; word-break: break-word; }
 .fo-card .fo-points { font-size: 14px; font-weight: 900; color: var(--green); margin-top: 4px; }
 .fo-card .fo-secret { font-size: 26px; margin-top: 8px; letter-spacing: 4px; }
+
+/* Aviso de que el cara a cara se repitió porque nadie acertó. */
+.retry-note {
+  text-align: center; font-weight: 800; font-size: 15px; line-height: 1.45;
+  background: #4a1500; border: 2px solid #ff8c42; color: #ffd9b0;
+  border-radius: var(--radius); padding: 11px 12px; margin: 0 0 14px;
+}
+
+/* ---------- Revelación del ganador del cara a cara ---------- */
+.reveal-banner {
+  text-align: center; margin: 4px 0 14px; padding: 18px 12px 14px;
+  background: linear-gradient(180deg, rgba(46,224,111,.22), rgba(0,0,0,.3));
+  border: 3px solid var(--green); border-radius: 18px;
+  box-shadow: 0 0 26px rgba(46,224,111,.45);
+  animation: revealPop .6s cubic-bezier(.2, 1.6, .4, 1) both;
+}
+@keyframes revealPop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.reveal-trophy { font-size: 54px; line-height: 1; }
+.reveal-title {
+  font-family: "Archivo Black", "Arial Black", sans-serif; font-size: 26px; color: var(--gold);
+  text-shadow: 0 0 14px rgba(255,215,0,.7), 0 2px 0 #7a5b00; margin-top: 6px; letter-spacing: 1px;
+}
+.reveal-name {
+  font-family: "Archivo Black", "Arial Black", sans-serif; font-size: 38px; color: var(--white);
+  text-shadow: 0 0 18px rgba(46,224,111,.8), 0 3px 0 rgba(0,0,0,.5); margin-top: 2px;
+  word-break: break-word;
+}
+.reveal-sub { font-size: 15px; font-weight: 800; color: #dfe3ff; margin-top: 8px; line-height: 1.45; }
+.reveal-sub b { color: var(--gold-soft); }
+
+/* Cuenta atrás 3-2-1 antes de que empiece el tablero. */
+.countdown-wrap { text-align: center; margin-top: 18px; }
+.countdown-big {
+  font-family: "Archivo Black", "Arial Black", sans-serif; font-size: 72px; line-height: 1;
+  color: var(--gold); text-shadow: 0 0 22px rgba(255,215,0,.75), 0 3px 0 #7a5b00;
+  animation: countdownPulse .9s ease both;
+}
+.countdown-big.prep { font-size: 30px; color: var(--gold-soft); text-shadow: 0 0 12px rgba(255,215,0,.5); animation: none; }
+@keyframes countdownPulse { 0% { transform: scale(1.5); opacity: .4; } 100% { transform: scale(1); opacity: 1; } }
+.countdown-label { font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #cfd6ff; margin-top: 6px; }
 
 /* ---------- Dados ---------- */
 .dice-area { display: flex; justify-content: center; gap: 22px; margin: 18px 0 6px; }

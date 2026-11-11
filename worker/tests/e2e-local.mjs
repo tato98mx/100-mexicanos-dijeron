@@ -114,6 +114,15 @@ check(s.question.id === gameQuestions[0], "se repite el cara a cara con la misma
 const q1 = findRound(s.question.id);
 tato.send({ type: "faceoff-answer", answer: q1.answers[0].text }); // mejor rankeada
 ledya.send({ type: "faceoff-answer", answer: q1.answers[2].text }); // peor rankeada
+// La revelación del ganador (faceoffReveal) anuncia al ganador con sus puntos
+// y hace la cuenta 3-2-1 antes del tablero.
+s = await tato.waitFor((x) => x.phase === "faceoffReveal", "revelación del ganador ronda 1");
+check(s.faceoff.winner === "p1", "la revelación nombra a Tato como ganador");
+check(s.control === "p1", "el control ya está en Tato durante la revelación");
+check(s.faceoff.answers.p1 === q1.answers[0].text, "la revelación muestra la respuesta de Tato");
+check(s.faceoff.points.p1 === q1.answers[0].points, `la revelación muestra los puntos de Tato (${s.faceoff.points.p1})`);
+check(s.faceoff.points.p2 === q1.answers[2].points, `la revelación muestra los puntos de Ledya (${s.faceoff.points.p2})`);
+check(sameState(tato.lastState, ledya.lastState), "los dos clientes ven la misma revelación");
 s = await tato.waitFor((x) => x.phase === "board", "tablero ronda 1");
 check(s.control === "p1", "Tato gana el control (respuesta mejor rankeada)");
 check(sameState(tato.lastState, ledya.lastState), "los dos clientes ven el mismo estado");

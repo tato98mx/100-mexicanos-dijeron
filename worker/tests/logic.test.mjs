@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
   FACEOFF_MS,
+  FACEOFF_REVEAL_MS,
   FAST_MONEY_COUNT,
   MULTIPLIERS,
   addPlayer,
@@ -185,6 +186,10 @@ function playFaceoff(state, a1, a2, now = 1000, rng = constRng(0.5)) {
   if (state.phase === "dice") {
     tick(state, now + 3001, fixture, rng);
   }
+  // La revelación del ganador (faceoffReveal) dura 5 s antes del tablero.
+  if (state.phase === "faceoffReveal") {
+    tick(state, now + FACEOFF_REVEAL_MS + 1, fixture, rng);
+  }
   assert.equal(state.phase, "board", `fase inesperada: ${state.phase}`);
   return state.control;
 }
@@ -270,6 +275,41 @@ describe("cara a cara", () => {
     assert.deepEqual(s.faceoff.answered, {});
   });
 
+  it("el ganador se anuncia en faceoffReveal con respuestas y puntos antes del tablero", () => {
+    const s = newGame();
+    const top = s.board[0].text; // 40 pts
+    const second = s.board[1].text; // 30 pts
+    submitFaceoffAnswer(s, "p1", second, 1000);
+    assert.equal(s.phase, "faceoff");
+    submitFaceoffAnswer(s, "p2", top, 1000);
+    // No va directo al tablero: pasa por la revelación del ganador.
+    assert.equal(s.phase, "faceoffReveal");
+    assert.equal(s.faceoff.winner, "p2");
+    assert.equal(s.control, "p2");
+    assert.deepEqual(s.faceoff.points, { p1: 30, p2: 40 });
+    // El estado público revela las respuestas y sus puntos en esta fase.
+    const pub = publicState(s);
+    assert.equal(pub.phase, "faceoffReveal");
+    assert.equal(pub.faceoff.answers.p1, second);
+    assert.equal(pub.faceoff.answers.p2, top);
+    assert.deepEqual(pub.faceoff.points, { p1: 30, p2: 40 });
+    // Antes de la fecha límite sigue en revelación; después, al tablero.
+    assert.equal(tick(s, 1000 + FACEOFF_REVEAL_MS - 1, fixture), false);
+    assert.equal(s.phase, "faceoffReveal");
+    assert.equal(tick(s, 1000 + FACEOFF_REVEAL_MS + 1, fixture), true);
+    assert.equal(s.phase, "board");
+    assert.equal(s.control, "p2");
+  });
+
+  it("si nadie acierta, el contador de repeticiones sube y el cliente puede avisar", () => {
+    const s = newGame();
+    submitFaceoffAnswer(s, "p1", "invento uno", 1000);
+    submitFaceoffAnswer(s, "p2", "invento dos", 1000);
+    assert.equal(s.phase, "faceoff");
+    assert.equal(s.faceoff.retries, 1);
+    assert.equal(publicState(s).faceoff.retries, 1);
+  });
+
   it("si se acaba el tiempo sin contestar, las respuestas son nulas", () => {
     const s = newGame();
     const changed = tick(s, 1000 + FACEOFF_MS + 1, fixture);
@@ -349,7 +389,8 @@ describe("ronda del tablero", () => {
     const s = newGame();
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
     assert.equal(s.control, control);
-    tick(s, 1000 + 20001, fixture);
+    // Agotar la fecha límite del intento en el tablero.
+    tick(s, s.deadline + 1, fixture);
     assert.equal(s.strikes, 1);
     assert.equal(s.phase, "board");
   });

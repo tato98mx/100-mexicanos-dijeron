@@ -35,6 +35,9 @@ export const FACEOFF_MS = 20_000; // cara a cara: 20 s por jugador
 export const GUESS_MS = 20_000; // intento en el tablero: 20 s
 export const FAST_MONEY_MS = 20_000; // Dinero Rápido: 20 s en total (5 preguntas)
 export const DICE_MS = 3_000; // pausa para animar los dados antes de seguir
+/** Revelación del ganador del cara a cara: 5 s para leer quién ganó y la
+ *  cuenta atrás 3-2-1 antes de que empiece el tablero. */
+export const FACEOFF_REVEAL_MS = 5_000;
 
 /** Puntos necesarios en Dinero Rápido para ganar un comodín. */
 export const FAST_MONEY_WILDCARD_THRESHOLD = 100;
@@ -68,6 +71,7 @@ export interface QuestionBank {
 export type Phase =
   | "lobby"
   | "faceoff"
+  | "faceoffReveal"
   | "dice"
   | "board"
   | "steal"
@@ -126,6 +130,12 @@ export interface GameState {
     answered: Record<string, boolean>;
     dice: DiceState | null;
     winner: string | null;
+    /** Puntos de encuesta de cada respuesta del cara a cara (null si la
+     *  respuesta no está en el tablero o no se contestó). Se revelan junto
+     *  con las respuestas para que se vea quién ganó y por cuánto. */
+    points: Record<string, number | null>;
+    /** Cuántas veces se repitió el cara a cara porque nadie acertó. */
+    retries: number;
   };
   control: string | null;
   stealPlayer: string | null;
@@ -280,7 +290,7 @@ export function createGame(code: string, opts: CreateGameOptions = {}): GameStat
     questionId: null,
     questionText: null,
     board: [],
-    faceoff: { answers: {}, answered: {}, dice: null, winner: null },
+    faceoff: { answers: {}, answered: {}, dice: null, winner: null, points: {}, retries: 0 },
     control: null,
     stealPlayer: null,
     strikes: 0,
@@ -365,7 +375,7 @@ function setupFaceoff(state: GameState, questionIndex: number, now: number): voi
     aliases: [...(a.aliases ?? [])],
     revealed: false,
   }));
-  state.faceoff = { answers: {}, answered: {}, dice: null, winner: null };
+  state.faceoff = { answers: {}, answered: {}, dice: null, winner: null, points: {}, retries: 0 };
   state.control = null;
   state.stealPlayer = null;
   state.strikes = 0;
@@ -403,6 +413,11 @@ function resolveFaceoff(state: GameState, now: number, rng: Rng): void {
   const r2 = rank(p2.id);
   const valid1 = r1 >= 0;
   const valid2 = r2 >= 0;
+  // Puntos de encuesta de cada respuesta, para mostrarlos en la revelación.
+  state.faceoff.points = {
+    [p1.id]: valid1 ? state.board[r1].points : null,
+    [p2.id]: valid2 ? state.board[r2].points : null,
+  };
 
   if (valid1 && valid2 && r1 === r2) {
     // Misma respuesta válida: dados.
@@ -427,12 +442,17 @@ function resolveFaceoff(state: GameState, now: number, rng: Rng): void {
     return;
   }
   // Nadie acertó: se repite el cara a cara con la misma pregunta.
-  state.faceoff = { answers: {}, answered: {}, dice: null, winner: null };
+  // Se conserva `retries` para que el cliente avise que nadie acertó.
+  const retries = (state.faceoff.retries ?? 0) + 1;
+  state.faceoff = { answers: {}, answered: {}, dice: null, winner: null, points: {}, retries };
   state.phase = "faceoff";
   state.deadline = now + FACEOFF_MS;
 }
 
-/** El ganador del cara a cara toma el control (o gana la muerte súbita). */
+/** El ganador del cara a cara toma el control (o gana la muerte súbita).
+ *  En vez de ir directo al tablero, pasa por la fase "faceoffReveal" para
+ *  anunciar el ganador con su nombre, mostrar las dos respuestas con sus
+ *  puntos y hacer la cuenta atrás 3-2-1 antes de empezar el tablero. */
 function finishFaceoff(state: GameState, winnerId: string, now: number): void {
   state.faceoff.winner = winnerId;
   if (state.suddenDeath) {
@@ -442,8 +462,8 @@ function finishFaceoff(state: GameState, winnerId: string, now: number): void {
     return;
   }
   state.control = winnerId;
-  state.phase = "board";
-  state.deadline = now + GUESS_MS;
+  state.phase = "faceoffReveal";
+  state.deadline = now + FACEOFF_REVEAL_MS;
 }
 
 /** Intento en el tablero (solo el jugador con el control). */
@@ -718,6 +738,13 @@ export function tick(
       resolveFaceoff(state, now, rng);
       return true;
     }
+    case "faceoffReveal": {
+      // Terminó el anuncio del ganador y la cuenta atrás: empieza el tablero
+      // con el ganador del cara a cara en control (ya se fijó en finishFaceoff).
+      state.phase = "board";
+      state.deadline = now + GUESS_MS;
+      return true;
+    }
     case "dice": {
       const diceWinner = state.faceoff.dice?.winner ?? null;
       if (state.suddenDeath) {
@@ -806,6 +833,10 @@ export function publicState(state: GameState): Record<string, unknown> {
       answered: { ...state.faceoff.answered },
       dice: state.faceoff.dice,
       winner: state.faceoff.winner,
+      // Los puntos del cara a cara solo se muestran tras la resolución
+      // (en faceoffReveal, dice, board…); en "faceoff" aún no hay ganador.
+      points: state.phase === "faceoff" ? {} : { ...state.faceoff.points },
+      retries: state.faceoff.retries ?? 0,
     },
     control: state.control,
     stealPlayer: state.stealPlayer,

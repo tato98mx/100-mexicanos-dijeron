@@ -39,7 +39,25 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   un dado para cada uno (animación en pantalla); gana el número mayor. Si los
   dados empatan, se vuelve a tirar automáticamente.
 - Si **ninguno** dio una respuesta válida → se repite el cara a cara con la
-  misma pregunta (nuevo intento simultáneo).
+  misma pregunta (nuevo intento simultáneo). El estado lleva
+  `faceoff.retries` (cuántas veces se repitió) para que el cliente avise
+  "Nadie acertó la vez pasada. ¡Otra vez con la misma pregunta!" y no parezca
+  que el juego se quedó callado.
+
+### Revelación del ganador del cara a cara (fase `faceoffReveal`)
+- Cuando el cara a cara se resuelve con un ganador claro (no por dados), el
+  servidor NO pasa directo al tablero: entra en la fase **`faceoffReveal`**
+  de **5 segundos** para anunciar al ganador antes de que empiece la ronda.
+- En esa fase el cliente muestra, en grande: **🏆 ¡GANADOR: [nombre]!**,
+  las dos respuestas con sus puntos de encuesta, y **"Siguiente turno:
+  [nombre] — ¡empieza el tablero!"**.
+- Los últimos **3 segundos** muestran una cuenta atrás grande **3-2-1** con
+  un bip por número, y al terminar suena el bip agudo de "¡a jugar!" y
+  empieza el tablero con el ganador en control (el control ya se fijó al
+  entrar en la revelación).
+- El servidor guarda los puntos de cada respuesta en `faceoff.points`
+  (`{p1: 32, p2: 28}` o `null` si no acertó) y los envía en el estado
+  público para mostrarlos en la revelación.
 
 ### Ronda del tablero
 - El jugador con el control adivina respuestas una por una (escribe la
@@ -148,17 +166,30 @@ normalizada tiene 5+ caracteres y es subcadena de la respuesta del tablero
   calculan puntos ni transiciones.**
 - `{type:"error", message}` — sala llena, movimiento no válido, etc.
 
+### Sonido (cliente, Web Audio API, sin archivos de audio)
+- **Música de fondo 8-bit** en loop (melodía con onda cuadrada + bajo),
+  bajita, que arranca con el primer toque del usuario (autoplay) y se
+  puede apagar con el botón 🔊/🔇 de la barra superior (se guarda en
+  `localStorage`).
+- **Efectos:** acierto (ding ascendente), cruz/X (**zumbido grave tipo
+  buzzer del show**), fanfarria del ganador, bip de la cuenta atrás 3-2-1,
+  bip agudo de "¡a jugar!", traqueteo de dados, alerta de robo, jingle de
+  fin de ronda y fanfarria de fin de juego. El cliente los dispara al
+  detectar el cambio de estado (nueva cruz, nueva respuesta revelada,
+  cambio de fase); nunca decide puntos ni transiciones.
+
 ### Forma del estado (JSON)
 ```json
 {
   "code": "ABCD",
-  "phase": "lobby|faceoff|dice|board|steal|roundEnd|fastMoney|fastMoneyReveal|gameOver",
+  "phase": "lobby|faceoff|faceoffReveal|dice|board|steal|roundEnd|fastMoney|fastMoneyReveal|gameOver",
   "players": [{"id": "p1", "name": "Tato", "score": 0, "wildcards": 0},
               {"id": "p2", "name": "Ledya", "score": 0, "wildcards": 0}],
   "round": 1, "multiplier": 1,
   "question": {"id": "q12", "text": "Mencionen algo que...",
     "answers": [{"text": null, "points": null, "revealed": false}]},
-  "faceoff": {"answers": {"p1": "X", "p2": null}, "dice": null},
+  "faceoff": {"answers": {"p1": "X", "p2": null}, "dice": null,
+    "winner": "p1", "points": {"p1": 32, "p2": 28}, "retries": 0},
   "control": "p1",
   "strikes": 0,
   "bank": 0,
@@ -178,7 +209,7 @@ empatan, el servidor vuelve a tirar automáticamente tras una pausa corta.
 
 ### Temporizadores
 El servidor guarda la fecha límite de cada fase con tiempo (cara a cara 20 s,
-intento del tablero 20 s, Dinero Rápido 20 s por jugador). El cliente muestra
+revelación del ganador 5 s, intento del tablero 20 s, Dinero Rápido 20 s por jugador). El cliente muestra
 la cuenta regresiva; si se agota sin respuesta, el cliente envía la
 respuesta nula / paso correspondiente. El servidor ignora respuestas que
 lleguen fuera de plazo.
@@ -205,6 +236,7 @@ lleguen fuera de plazo.
 ```
 /index.html, /app.js, /style.css, /config.js   (frontend, GitHub Pages)
 /questions.json                                (banco, referencia; el Worker lo importa)
+/tests-client/smoke.test.cjs                   (prueba de humo del cliente con DOM mínimo)
 /worker/wrangler.toml, /worker/package.json
 /worker/src/index.ts                           (Worker + RoomDO)
 /worker/src/questions.json                     (copia que importa el Worker)
