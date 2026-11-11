@@ -329,6 +329,29 @@ describe("cara a cara", () => {
     assert.deepEqual([a, b], [1, 6]);
   });
 
+  it("el estado público dice si cada respuesta está en el tablero (palomita/tache) sin revelar cuál es", () => {
+    const s = newGame();
+    // p1 contesta bien (Comal), p2 aún no contesta: el estado público
+    // esconde las respuestas (null) pero dice correct: p1 true, p2 null.
+    // El cliente usa answered + correct para quitar el formulario y mostrar
+    // la palomita; antes usaba answers (siempre null) y nunca lo quitaba.
+    submitFaceoffAnswer(s, "p1", s.board[0].text, 1000);
+    const pub = publicState(s);
+    assert.equal(s.phase, "faceoff");
+    assert.deepEqual(pub.faceoff.answers, { p1: null, p2: null });
+    assert.deepEqual(pub.faceoff.answered, { p1: true });
+    assert.deepEqual(pub.faceoff.correct, { p1: true, p2: null });
+    // p2 contesta mal: correct p2 es false (sin revelar su respuesta).
+    // Al contestar los dos, la fase pasa a faceoffReveal y ahí sí se
+    // revelan las respuestas; el correct sigue diciendo p1 true, p2 false.
+    submitFaceoffAnswer(s, "p2", "invento total", 1000);
+    assert.equal(s.phase, "faceoffReveal");
+    const pub2 = publicState(s);
+    assert.equal(pub2.faceoff.correct.p1, true);
+    assert.equal(pub2.faceoff.correct.p2, false);
+    assert.deepEqual(pub2.faceoff.answers, { p1: s.board[0].text, p2: "invento total" });
+  });
+
   it("si nadie acierta, se repite el cara a cara con la misma pregunta", () => {
     const s = newGame();
     const qid = s.questionId;
@@ -475,6 +498,32 @@ describe("ronda del tablero", () => {
     assert.equal(submitStealAnswer(s, stealer, "invento", 1000).ok, true);
     assert.equal(s.roundResult.winner, control);
     assert.equal(s.players.find((p) => p.id === control).score - before, 40);
+  });
+
+  it("robo con respuesta ya revelada: avisa, NO pierde el robo y se puede reintentar y ganar", () => {
+    const s = newGame();
+    const control = playFaceoff(s, s.board[0].text, s.board[1].text);
+    const stealer = control === "p1" ? "p2" : "p1";
+    // El control acierta otra (Sartén, 30) y falla 3 veces: banco 70.
+    submitGuess(s, control, s.board[1].text, 1000);
+    for (let i = 0; i < 3; i++) submitGuess(s, control, "invento", 1000);
+    assert.equal(s.phase, "steal");
+    assert.equal(s.bank, 70);
+    // La que roba da la respuesta del cara a cara (Comal, 40), que ya está
+    // revelada: NO gana ni pierde el robo, solo recibe el aviso y puede
+    // reintentar con otra. Antes el aviso era un toast que se desvanecía y
+    // el jugador no lo veía: se le acababa el tiempo y el control ganaba.
+    const r = submitStealAnswer(s, stealer, s.board[0].text, 1000);
+    assert.equal(r.ok, true);
+    assert.match(r.notice ?? "", /ya está en el tablero/);
+    assert.equal(s.phase, "steal", "sigue en robo, no se cerró la ronda");
+    assert.equal(s.roundResult, null);
+    // Reintenta con una sin revelar (Licuadora, 20) y gana el banco (90).
+    const before = s.players.find((p) => p.id === stealer).score;
+    assert.equal(submitStealAnswer(s, stealer, s.board[2].text, 1000).ok, true);
+    assert.equal(s.phase, "roundEnd");
+    assert.equal(s.roundResult.winner, stealer);
+    assert.equal(s.players.find((p) => p.id === stealer).score - before, 90);
   });
 
   it("revelar todo el tablero da la ronda al control sin robo", () => {

@@ -274,6 +274,23 @@ body {
   border-radius: var(--radius); padding: 11px 12px; margin: 0 0 14px;
 }
 
+/* Aviso inmediato del cara a cara: palomita si la respuesta está en el
+ * tablero, tache si no está. No revela la respuesta ni sus puntos. */
+.faceoff-verdict {
+  text-align: center; font-weight: 900; font-size: 19px; line-height: 1.4;
+  border-radius: var(--radius); padding: 14px 12px; margin: 0 0 10px;
+}
+.faceoff-verdict.good { background: #0c3d1a; border: 2px solid #4ade80; color: #bbf7d0; }
+.faceoff-verdict.bad { background: #4a0d08; border: 2px solid #ff5a4e; color: #fecaca; }
+
+/* Aviso persistente (robo/tablero): queda fijo y en grande hasta que cambie
+ * la fase o se intente otra respuesta. */
+.persistent-notice {
+  text-align: center; font-weight: 900; font-size: 16px; line-height: 1.45;
+  background: #4a1500; border: 3px solid #ff8c42; color: #ffe1c2;
+  border-radius: var(--radius); padding: 13px 12px; margin: 0 0 14px;
+}
+
 /* ---------- Revelación del ganador del cara a cara ---------- */
 .reveal-banner {
   text-align: center; margin: 4px 0 14px; padding: 18px 12px 14px;

@@ -1000,6 +1000,18 @@ export function publicState(state: GameState): Record<string, unknown> {
       // Los puntos del cara a cara solo se muestran tras la resolución
       // (en faceoffReveal, dice, board…); en "faceoff" aún no hay ganador.
       points: state.phase === "faceoff" ? {} : { ...state.faceoff.points },
+      // Si la respuesta de cada jugador está en el tablero (true), no está
+      // (false) o aún no contestó (null). Solo dice SI/NO, sin revelar cuál
+      // respuesta ni sus puntos: es el aviso inmediato del cara a cara para
+      // que el jugador sepa si acertó sin seguir escribiendo.
+      correct: Object.fromEntries(
+        state.players.map((p) => [
+          p.id,
+          state.faceoff.answered[p.id]
+            ? matchAnswer(state.faceoff.answers[p.id] ?? null, state.board) >= 0
+            : null,
+        ]),
+      ),
       retries: state.faceoff.retries ?? 0,
     },
     control: state.control,

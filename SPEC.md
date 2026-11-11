@@ -58,7 +58,7 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   un ding fuerte para comprobar que se oye; si no suena nada, el teléfono está
   en silencio o el volumen está bajo. Al tocar el botón de sonido para
   encenderlo también suena un ding inmediato. Los archivos CSS/JS llevan
-  versión (`?v=9`) para que el teléfono no se quede con la versión vieja en
+  versión (`?v=10`) para que el teléfono no se quede con la versión vieja en
   caché.
 - **Aplausos al ganar la ronda:** al terminar cada ronda, el fin de ronda
   muestra el nombre del ganador **EN GRANDE** (👏 ¡GANA LA RONDA! [nombre] —
@@ -69,6 +69,15 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 - La computadora muestra la pregunta a los dos jugadores **al mismo tiempo**.
 - Cada jugador escribe **UNA respuesta en secreto** (sin ver la del otro),
   con límite de 20 segundos. Si no contesta a tiempo, su respuesta es nula.
+- **Aviso inmediato al contestar:** al enviar la respuesta, la barra se
+  bloquea (desaparece el formulario) y sale una palomita **✅ ¡Tu respuesta
+  está en el tablero!** si acertó, o un tache **❌ Esa respuesta no está en
+  el tablero** si no acertó — SIN revelar la respuesta ni sus puntos en el
+  tablero. El servidor manda `faceoff.correct` (`{p1: true/false/null, p2:
+  ...}`) en el estado público para esto. El cliente decide si ya contestó
+  con `faceoff.answered[myId]` (visible), NO con `faceoff.answers[myId]`
+  (el servidor las esconde durante el cara a cara, así que siempre es null
+  y el formulario nunca se quitaba: ese era el fallo).
 - Se revelan las dos respuestas a la vez.
 - Gana el control quien dio la respuesta **mejor rankeada** (número más bajo
   = más popular). Una respuesta válida gana siempre contra una respuesta no
@@ -87,8 +96,11 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   servidor NO pasa directo al tablero: entra en la fase **`faceoffReveal`**
   de **5 segundos** para anunciar al ganador antes de que empiece la ronda.
 - En esa fase el cliente muestra, en grande: **🏆 ¡GANADOR: [nombre]!**,
-  las dos respuestas con sus puntos de encuesta, y **"Siguiente turno:
-  [nombre] — ¡empieza el tablero!"**.
+  **solo la respuesta del ganador** con sus puntos de encuesta, y
+  **"Siguiente turno: [nombre] — ¡empieza el tablero!"**. La respuesta del
+  perdedor se esconde del oponente (**🔒 Respuesta oculta**): si no, el que
+  tiene el control la ve gratis y la adivina en el tablero, y en el robo ya
+  no sirve. El perdedor sí ve su propia respuesta (él sabe lo que escribió).
 - Los últimos **3 segundos** muestran una cuenta atrás grande **3-2-1** con
   un bip por número, y al terminar suena el bip agudo de "¡a jugar!" y
   empieza el tablero con el ganador en control (el control ya se fijó al
@@ -118,6 +130,14 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   en el tablero y no ha sido revelada, se lleva **TODOS los puntos de la
   ronda** (el banco completo, ya multiplicado); si no, el jugador que tenía
   el control se queda con los puntos de la ronda.
+  - **Respuesta ya revelada en el robo:** NO pierde el robo; solo avisa y
+    puede intentar con otra dentro del tiempo (se renueva la fecha límite).
+    El aviso es **persistente y en grande** en la pantalla de robo (no solo
+    el toast que se desvanece), con la regla escrita: "Para robar tienes que
+    dar una respuesta que esté en el tablero pero que todavía NO se haya
+    revelado". Antes el aviso era solo un toast: el jugador repetía una
+    respuesta ya revelada, no entendía por qué no ganaba, se le acababa el
+    tiempo y el control se quedaba con la ronda.
 - Al final de la ronda se revelan las respuestas que nadie dijo.
 
 ### Dinero Rápido (decisión del usuario, 2026-11-09 — CORREGIDA: solo juega el ganador)

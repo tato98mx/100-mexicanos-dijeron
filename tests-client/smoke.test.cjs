@@ -112,7 +112,10 @@ console.log("faceoffReveal:");
   check("anuncia GANADOR con el nombre", html.includes("¡GANADOR") && html.includes("Tato"), html.slice(0, 200));
   check("dice Siguiente turno: Tato", html.includes("Siguiente turno") && html.includes("Tato"));
   check("muestra la respuesta Limón con 32 puntos", html.includes("Limón") && html.includes("32 puntos"));
-  check("muestra la respuesta Salsa con 28 puntos", html.includes("Salsa") && html.includes("28 puntos"));
+  // La respuesta del PERDEDOR (Salsa, 28) se esconde del oponente: si no, el
+  // que tiene el control la ve gratis y la adivina en el tablero.
+  // Solo se muestra la del ganador (pública, ya queda en el tablero).
+  check("esconde la respuesta del perdedor (Salsa)", !html.includes("Salsa") && !html.includes("28 puntos") && html.includes("Respuesta oculta"));
   check("tiene la cuenta atrás (revealCountdown)", html.includes('id="revealCountdown"'));
   check("la tarjeta del ganador lleva la clase winner", html.includes("fo-card winner"));
 }
@@ -125,6 +128,36 @@ console.log("cara a cara con repetición (nadie acertó):");
   api.renderState(s);
   const html = getEl("stage").innerHTML;
   check("avisa que nadie acertó y se repite", html.includes("Nadie acertó") && html.includes("Otra vez"), html.slice(0, 300));
+}
+
+console.log("cara a cara: aviso inmediato y barra bloqueada tras contestar:");
+{
+  // Sin contestar: sale el formulario.
+  const s0 = clone(base);
+  s0.phase = "faceoff"; s0.myId = "p1";
+  s0.faceoff = { answers: { p1: null, p2: null }, answered: {}, dice: null, winner: null, points: {}, correct: { p1: null, p2: null }, retries: 0 };
+  api.renderState(s0);
+  let html = getEl("stage").innerHTML;
+  check("sin contestar sale el formulario", html.includes('id="faceoffForm"'));
+  // Contesté bien: el formulario DESAPARECE (barra bloqueada) y sale la palomita.
+  // OJO: answers sigue en null (el servidor las esconde); lo que dice que ya
+  // contesté es answered + correct. Antes el cliente usaba answers y nunca
+  // quitaba el formulario.
+  const s1 = clone(base);
+  s1.phase = "faceoff"; s1.myId = "p1";
+  s1.faceoff = { answers: { p1: null, p2: null }, answered: { p1: true }, dice: null, winner: null, points: {}, correct: { p1: true, p2: null }, retries: 0 };
+  api.renderState(s1);
+  html = getEl("stage").innerHTML;
+  check("tras contestar bien se quita el formulario", !html.includes('id="faceoffForm"'));
+  check("tras contestar bien sale la palomita", html.includes("✅") && html.includes("está en el tablero"));
+  // Contesté mal: sale el tache, sin revelar la respuesta en el tablero.
+  const s2 = clone(base);
+  s2.phase = "faceoff"; s2.myId = "p1";
+  s2.faceoff = { answers: { p1: null, p2: null }, answered: { p1: true }, dice: null, winner: null, points: {}, correct: { p1: false, p2: null }, retries: 0 };
+  api.renderState(s2);
+  html = getEl("stage").innerHTML;
+  check("tras contestar mal se quita el formulario", !html.includes('id="faceoffForm"'));
+  check("tras contestar mal sale el tache", html.includes("❌") && html.includes("no está en el tablero"));
 }
 {
   const s = clone(base);

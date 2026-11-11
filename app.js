@@ -72,6 +72,12 @@ var diceAnimKey = "";
 var diceAnimTimer = null;
 var confettiDoneForKey = "";
 var toastTimer = null;
+/* Aviso persistente (p. ej. "esa respuesta ya está en el tablero"): el toast
+ * se desvanece en segundos y el jugador no lo alcanza a leer; este aviso
+ * queda fijo en la pantalla hasta que cambie la fase o se intente otra
+ * respuesta. Sin esto, en el robo el jugador repetía una respuesta ya
+ * revelada, no entendía por qué no ganaba y se le acababa el tiempo. */
+var persistentNotice = "";
 
 /* ------------------------------------------------------------------ */
 /* Utilidades                                                          */
@@ -510,7 +516,13 @@ function connectWS(code) {
     try { msg = JSON.parse(ev.data); } catch (e) { return; }
     if (msg.type === "state" && msg.state) onState(msg.state);
     else if (msg.type === "error" && msg.message) buzzer("🔔 " + msg.message);
-    else if (msg.type === "notice" && msg.message) toast(msg.message);
+    else if (msg.type === "notice" && msg.message) {
+      toast(msg.message);
+      // Aviso persistente: queda fijo en la pantalla (robo/tablero) hasta que
+      // cambie la fase o se intente otra respuesta; el toast solo se desvanece.
+      persistentNotice = msg.message;
+      if (currentState) render(currentState);
+    }
   };
   ws.onclose = function () {
     setConnected(false);
@@ -600,6 +612,8 @@ function onState(state) {
   var prev = currentState;
   currentState = state;
   identifyMe(state);
+  // Al cambiar de fase, el aviso persistente ya no aplica.
+  if (prev && prev.phase !== state.phase) persistentNotice = "";
   if (state.code) {
     roomCode = state.code;
     var badge = $("roomBadge");
@@ -1055,11 +1069,13 @@ function renderReady(state) {
 function renderFaceoff(state) {
   var stage = $("stage");
   var fa = state.faceoff || {};
-  var answers = fa.answers || {};
-  var myAns = myId ? answers[myId] : undefined;
-  var opp = opponent(state);
-  var oppAns = opp ? answers[opp.id] : undefined;
-  var bothIn = myAns != null && oppAns != null;
+  // OJO: durante el cara a cara el servidor ESCONDE las respuestas
+  // (answers[myId] es null aunque ya contesté). Para saber si ya contesté
+  // hay que usar fa.answered[myId], que sí viene visible. Antes se usaba
+  // answers y el formulario nunca se quitaba: uno seguía escribiendo sin
+  // aviso de si estaba bien o mal.
+  var answeredMap = fa.answered || {};
+  var iAnswered = !!answeredMap[myId];
 
   var html = '<div class="phase-title">⚔️ CARA A CARA</div>' +
     '<p class="phase-sub">Escriban su respuesta <b>en secreto</b>, sin ver la del otro. ¡20 segundos!</p>' +
@@ -1067,36 +1083,26 @@ function renderFaceoff(state) {
 
   // Si el cara a cara se repitió porque nadie acertó, avisar para que no
   // parezca que el juego se quedó callado.
-  var answeredMap = fa.answered || {};
   var anyoneAnswered = !!(answeredMap.p1 || answeredMap.p2);
   if ((fa.retries || 0) > 0 && !anyoneAnswered) {
     html += '<div class="retry-note">⏰ Nadie acertó la vez pasada. ¡Otra vez con la misma pregunta!</div>';
   }
 
-  if (myAns == null) {
+  if (!iAnswered) {
     html += answerFormHTML("faceoffForm", "Tu respuesta secreta…", "✅ Enviar mi respuesta");
   } else {
-    html += '<div class="waiting">✅ Respuesta enviada. Esperando a tu rival<span class="dots"></span></div>';
-  }
-
-  // La respuesta del rival solo se muestra cuando las dos ya entraron (revelación simultánea).
-  if (bothIn) {
-    var myPlayer = me(state);
-    var myPts = fa.points && myId ? fa.points[myId] : null;
-    var oppPts = fa.points && opp ? fa.points[opp.id] : null;
-    var myWin = state.control === myId;
-    html += '<div class="faceoff-answers">' +
-      '<div class="fo-card' + (myWin ? " winner" : "") + '"><div class="fo-name">' + esc(myPlayer ? myPlayer.name : "Tú") + ' (tú)</div>' +
-      '<div class="fo-answer">' + esc(myAns) + '</div>' +
-      (typeof myPts === "number" ? '<div class="fo-points">' + myPts + ' puntos</div>' : "") +
-      (myWin ? '<div class="fo-points">🏆 ¡Gana el control!</div>' : "") + '</div>' +
-      '<div class="fo-card' + (!myWin ? " winner" : "") + '"><div class="fo-name">' + esc(opp ? opp.name : "Rival") + '</div>' +
-      '<div class="fo-answer">' + esc(oppAns) + '</div>' +
-      (typeof oppPts === "number" ? '<div class="fo-points">' + oppPts + ' puntos</div>' : "") +
-      (!myWin ? '<div class="fo-points">🏆 ¡Gana el control!</div>' : "") + '</div></div>';
-  } else if (myAns != null) {
-    html += '<div class="faceoff-answers"><div class="fo-card"><div class="fo-name">Tú</div><div class="fo-answer">' + esc(myAns) + '</div></div>' +
-      '<div class="fo-card"><div class="fo-name">' + esc(opp ? opp.name : "Rival") + '</div><div class="fo-secret">🔒 ???</div></div></div>';
+    // Ya contesté: la barra se bloquea (no se muestra el formulario) y sale
+    // el aviso inmediato de si acerté o no, SIN revelar la respuesta en el
+    // tablero: palomita si está en el tablero, tache si no está.
+    var correct = fa.correct ? fa.correct[myId] : null;
+    if (correct === true) {
+      html += '<div class="faceoff-verdict good">✅ ¡Tu respuesta está en el tablero!</div>';
+    } else if (correct === false) {
+      html += '<div class="faceoff-verdict bad">❌ Esa respuesta no está en el tablero.</div>';
+    } else {
+      html += '<div class="waiting">✅ Respuesta enviada.</div>';
+    }
+    html += '<div class="waiting">Esperando a tu rival<span class="dots"></span></div>';
   }
 
   stage.innerHTML = html;
@@ -1159,10 +1165,18 @@ function renderFaceoffReveal(state) {
     var ans = answers[p.id];
     var pts = typeof points[p.id] === "number" ? points[p.id] : null;
     var isWinner = p.id === winnerId;
+    var isMe = p.id === myId;
+    // La respuesta del GANADOR es pública (ya queda revelada en el tablero).
+    // La del PERDEDOR se esconde del oponente: si no, el que tiene el control
+    // la ve gratis y la adivina en el tablero, y en el robo ya no sirve.
+    // El perdedor sí ve su propia respuesta (él sabe lo que escribió).
+    var showAns = isWinner || isMe;
     return '<div class="fo-card' + (isWinner ? " winner" : "") + '">' +
-      '<div class="fo-name">' + esc(p.name) + (p.id === myId ? " (tú)" : "") + '</div>' +
-      '<div class="fo-answer">' + esc(ans == null ? "— sin respuesta —" : ans) + '</div>' +
-      (pts != null ? '<div class="fo-points">' + pts + ' puntos</div>' : '<div class="fo-points">Sin puntos</div>') +
+      '<div class="fo-name">' + esc(p.name) + (isMe ? " (tú)" : "") + '</div>' +
+      '<div class="fo-answer">' + (showAns ? esc(ans == null ? "— sin respuesta —" : ans) : "🔒 Respuesta oculta") + '</div>' +
+      (showAns
+        ? (pts != null ? '<div class="fo-points">' + pts + ' puntos</div>' : '<div class="fo-points">Sin puntos</div>')
+        : "") +
       (isWinner ? '<div class="fo-points">🏆 ¡Gana el control!</div>' : "") +
       '</div>';
   }).join("");
@@ -1222,6 +1236,11 @@ function renderBoard(state) {
     boardHTML(state, false) +
     strikesHTML(state);
 
+  // Aviso persistente (p. ej. repetiste una respuesta ya revelada).
+  if (persistentNotice) {
+    html += '<div class="persistent-notice">⚠️ ' + esc(persistentNotice) + ' ¡Da otra respuesta diferente!</div>';
+  }
+
   if (iControl) {
     html += '<p class="phase-sub">🎤 <b>¡Es tu turno!</b> Adivina una respuesta del tablero.</p>' +
       answerFormHTML("guessForm", "Escribe una respuesta…", "🎯 ¡La digo!");
@@ -1233,7 +1252,7 @@ function renderBoard(state) {
     html += wildcardButtonHTML(state);
   }
   stage.innerHTML = html;
-  bindForm("guessForm", function (val) { send({ type: "guess", answer: val }); });
+  bindForm("guessForm", function (val) { persistentNotice = ""; send({ type: "guess", answer: val }); });
   bindWildcardButton(state);
 }
 
@@ -1244,16 +1263,22 @@ function renderSteal(state) {
   var html = '<div class="phase-title">🚨 ¡ROBO!</div>' +
     '<p class="phase-sub">Tres cruces… <b>' + esc(iSteal ? "¡Tienes UNA oportunidad!" : ctrlName + " se queda esperando") + '</b><br>' +
     'Si tu respuesta está en el tablero, te llevas <b>TODOS los puntos de la ronda</b>.</p>' +
+    '<p class="phase-sub">💡 Para robar tienes que dar una respuesta que esté en el tablero pero que <b>todavía NO se haya revelado</b>. Si das una que ya está en el tablero, no cuenta y tienes que dar otra.</p>' +
     questionHTML(state) +
     boardHTML(state, false) +
     strikesHTML(state);
+  // Aviso persistente (p. ej. repetiste una respuesta ya revelada): queda
+  // fijo y en grande, no solo el toast que se desvanece.
+  if (persistentNotice) {
+    html += '<div class="persistent-notice">⚠️ ' + esc(persistentNotice) + ' ¡Da otra respuesta diferente!</div>';
+  }
   if (iSteal) {
     html += answerFormHTML("stealForm", "Tu respuesta para robar…", "💰 ¡Robo la ronda!");
   } else {
     html += '<div class="waiting">😬 <b>' + esc(opponent(state) ? opponent(state).name : "Tu rival") + '</b> intenta robarte la ronda<span class="dots"></span></div>';
   }
   stage.innerHTML = html;
-  bindForm("stealForm", function (val) { send({ type: "steal-answer", answer: val }); });
+  bindForm("stealForm", function (val) { persistentNotice = ""; send({ type: "steal-answer", answer: val }); });
 }
 
 /* Fin de ronda: el nombre del ganador EN GRANDE con aplausos, y el tablero
