@@ -319,6 +319,23 @@ describe("cara a cara", () => {
     assert.deepEqual(s.faceoff.answered, {});
   });
 
+  it("la respuesta ganadora del cara a cara queda revelada en el tablero", () => {
+    const s = newGame();
+    const top = s.board[0].text; // 40 pts
+    const second = s.board[1].text; // 30 pts
+    submitFaceoffAnswer(s, "p1", second, 1000);
+    submitFaceoffAnswer(s, "p2", top, 1000);
+    assert.equal(s.phase, "faceoffReveal");
+    // Al terminar la revelación, el tablero ya trae la respuesta ganadora
+    // puesta (como en el programa): el ganador no tiene que adivinarla otra vez.
+    tick(s, 1000 + FACEOFF_REVEAL_MS + 1, fixture);
+    assert.equal(s.phase, "board");
+    assert.equal(s.control, "p2");
+    assert.equal(s.board[0].revealed, true);
+    assert.equal(s.bank, 40);
+    assert.equal(s.board[1].revealed, false);
+  });
+
   it("el ganador se anuncia en faceoffReveal con respuestas y puntos antes del tablero", () => {
     const s = newGame();
     const top = s.board[0].text; // 40 pts
@@ -368,8 +385,12 @@ describe("ronda del tablero", () => {
   it("acierto suma puntos × multiplicador y revela la respuesta", () => {
     const s = newGame();
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
+    // La respuesta ganadora del cara a cara (Comal, 40) ya está revelada
+    // y en el banco; el siguiente acierto suma sobre eso.
+    assert.equal(s.bank, 40);
+    assert.equal(s.board[0].revealed, true);
     const top = s.board.find((a) => !a.revealed);
-    const expected = top.points * s.multiplier;
+    const expected = s.bank + top.points * s.multiplier;
     assert.equal(submitGuess(s, control, top.text, 1000).ok, true);
     assert.equal(s.bank, expected);
     assert.equal(top.revealed, true);
@@ -379,21 +400,22 @@ describe("ronda del tablero", () => {
     const s = newGame();
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
     const stealer = control === "p1" ? "p2" : "p1";
-    // El control acierta una (40 pts) y falla 3 veces.
-    const first = s.board[0].text;
-    submitGuess(s, control, first, 1000);
+    // La respuesta del cara a cara (Comal, 40) ya está revelada y en el banco.
     assert.equal(s.bank, 40);
+    // El control acierta otra (Sartén, 30) y falla 3 veces.
+    submitGuess(s, control, s.board[1].text, 1000);
+    assert.equal(s.bank, 70);
     for (let i = 0; i < 3; i++) {
       assert.equal(submitGuess(s, control, "invento", 1000).ok, true);
     }
     assert.equal(s.phase, "steal");
     assert.equal(s.strikes, 3);
     assert.equal(s.stealPlayer, stealer);
-    // El robo acierta la segunda respuesta (30 pts): se lleva 40 + 30.
+    // El robo acierta la tercera respuesta (Licuadora, 20): se lleva 70 + 20.
     const before = s.players.find((p) => p.id === stealer).score;
-    assert.equal(submitStealAnswer(s, stealer, s.board[1].text, 1000).ok, true);
+    assert.equal(submitStealAnswer(s, stealer, s.board[2].text, 1000).ok, true);
     assert.equal(s.phase, "roundEnd");
-    assert.equal(s.players.find((p) => p.id === stealer).score - before, 70);
+    assert.equal(s.players.find((p) => p.id === stealer).score - before, 90);
     assert.equal(s.roundResult.winner, stealer);
   });
 
@@ -423,10 +445,13 @@ describe("ronda del tablero", () => {
   it("decir una respuesta ya revelada cuenta como fallo", () => {
     const s = newGame();
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
-    submitGuess(s, control, s.board[0].text, 1000);
-    assert.equal(s.strikes, 0);
+    // Comal ya está revelada desde el cara a cara: decirla cuenta como fallo.
     submitGuess(s, control, s.board[0].text, 1000);
     assert.equal(s.strikes, 1);
+    // Y una respuesta nueva sí acierta sin sumar cruz.
+    submitGuess(s, control, s.board[1].text, 1000);
+    assert.equal(s.strikes, 1);
+    assert.equal(s.board[1].revealed, true);
   });
 
   it("el tiempo agotado en un intento cuenta como cruz", () => {
@@ -466,13 +491,14 @@ describe("multiplicadores", () => {
       sweepBoard(s);
       assert.equal(advance(s, fixture, 1000).ok, true);
     }
-    // Ronda 3 (×2): un solo acierto de 40 pts deja el banco en 80.
+    // Ronda 3 (×2): el cara a cara ya deja 40×2=80 en el banco; un acierto
+    // de 30 pts suma 60 más: 140.
     assert.equal(s.round, 3);
     assert.equal(s.multiplier, 2);
     const control = playFaceoff(s, s.board[0].text, s.board[1].text);
     const top = s.board.find((a) => !a.revealed);
     submitGuess(s, control, top.text, 1000);
-    assert.equal(s.bank, 80);
+    assert.equal(s.bank, 140);
   });
 });
 
@@ -571,10 +597,12 @@ describe("comodines", () => {
       const s = newGame();
       const control = playFaceoff(s, s.board[0].text, s.board[1].text);
       s.players.find((p) => p.id === control).wildcards = 1;
-      const top = s.board[0];
+      // Comal (40) ya está revelada desde el cara a cara; el comodín revela
+      // gratis la de más puntos que queda (Sartén, 30).
+      const next = s.board[1];
       assert.equal(useWildcard(s, control, 1000).ok, true);
-      assert.equal(top.revealed, true);
-      assert.equal(s.bank, top.points * s.multiplier);
+      assert.equal(next.revealed, true);
+      assert.equal(s.bank, 70);
       assert.equal(s.players.find((p) => p.id === control).wildcards, 0);
     } finally {
       setWildcardEffect("forgive-strike");

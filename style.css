@@ -225,6 +225,7 @@ body {
 .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--gold-dark); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 .btn-red { background: linear-gradient(180deg, #ff6b60, var(--red)); color: #fff; box-shadow: 0 4px 0 #8f130c, 0 6px 14px rgba(0,0,0,.45); }
+.btn-ghost { background: rgba(255, 215, 0, .12); border: 2px solid var(--gold); color: var(--gold-soft); box-shadow: none; font-size: 17px; padding: 10px 14px; margin-bottom: 10px; }
 .btn-ghost { background: rgba(255,255,255,.12); color: #fff; border: 2px solid rgba(255,255,255,.5); box-shadow: none; }
 .btn-row { display: flex; gap: 10px; margin-top: 14px; }
 .btn-row .btn { flex: 1; }

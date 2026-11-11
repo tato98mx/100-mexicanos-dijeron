@@ -487,6 +487,18 @@ function resolveFaceoff(state: GameState, now: number, rng: Rng): void {
   state.deadline = now + FACEOFF_MS;
 }
 
+/** Revela en el tablero la respuesta con la que el ganador ganó el cara a
+ *  cara (como en el programa de TV: esa respuesta ya queda puesta y suma
+ *  sus puntos al banco). El ganador NO tiene que volver a adivinarla. */
+function revealFaceoffWinnerAnswer(state: GameState, winnerId: string): void {
+  const answer = state.faceoff.answers[winnerId] ?? null;
+  if (!answer) return;
+  const idx = matchAnswer(answer, state.board);
+  if (idx < 0 || state.board[idx].revealed) return;
+  state.board[idx].revealed = true;
+  state.bank += state.board[idx].points * state.multiplier;
+}
+
 /** El ganador del cara a cara toma el control (o gana la muerte súbita).
  *  En vez de ir directo al tablero, pasa por la fase "faceoffReveal" para
  *  anunciar el ganador con su nombre, mostrar las dos respuestas con sus
@@ -779,6 +791,8 @@ export function tick(
     case "faceoffReveal": {
       // Terminó el anuncio del ganador y la cuenta atrás: empieza el tablero
       // con el ganador del cara a cara en control (ya se fijó en finishFaceoff).
+      // La respuesta con la que ganó ya queda revelada en el tablero.
+      revealFaceoffWinnerAnswer(state, state.faceoff.winner ?? "");
       state.phase = "board";
       state.deadline = now + GUESS_MS;
       return true;
@@ -790,6 +804,8 @@ export function tick(
         state.winner = diceWinner;
         beginFastMoney(state, now);
       } else {
+        // La respuesta empatada (la que dieron los dos) queda revelada.
+        if (diceWinner) revealFaceoffWinnerAnswer(state, diceWinner);
         state.control = diceWinner;
         state.phase = "board";
         state.deadline = now + GUESS_MS;

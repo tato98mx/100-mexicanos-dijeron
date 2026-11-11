@@ -50,10 +50,13 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   intentos). El servidor reasocia al jugador por su nombre. Sin esto, la
   pantalla se quedaba en "Esperando rival" aunque el otro ya hubiera entrado.
 - **Sonido:** la música 8-bit arranca con el primer toque y suena más fuerte
-  (ganancia 0.09). Al tocar el botón de sonido para encenderlo, suena un
-  ding inmediato para comprobar que se oye. Los archivos CSS/JS llevan
-  versión (`?v=4`) para que el teléfono no se quede con la versión vieja
-  en caché.
+  (ganancia 0.12). El desbloqueo de audio se reintenta en CADA toque (si el
+  contexto se suspendió, el siguiente toque lo vuelve a arrancar). En el
+  lobby hay un botón **"🔊 Probar sonido"** que suena un ding fuerte para
+  comprobar que se oye; si no suena nada, el teléfono está en silencio o el
+  volumen está bajo. Al tocar el botón de sonido para encenderlo también
+  suena un ding inmediato. Los archivos CSS/JS llevan versión (`?v=5`) para
+  que el teléfono no se quede con la versión vieja en caché.
 
 ### Cara a cara (al inicio de cada ronda)
 - La computadora muestra la pregunta a los dos jugadores **al mismo tiempo**.
@@ -86,6 +89,11 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 - El servidor guarda los puntos de cada respuesta en `faceoff.points`
   (`{p1: 32, p2: 28}` o `null` si no acertó) y los envía en el estado
   público para mostrarlos en la revelación.
+- **La respuesta ganadora queda en el tablero:** al entrar al tablero, la
+  respuesta con la que el ganador ganó el cara a cara ya aparece revelada
+  y sus puntos ya están en el banco (como en el programa de TV). El ganador
+  NO tiene que volver a adivinarla. Lo mismo pasa con los dados: la
+  respuesta empatada queda revelada.
 
 ### Ronda del tablero
 - El jugador con el control adivina respuestas una por una (escribe la

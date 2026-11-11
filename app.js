@@ -231,7 +231,7 @@ function ensureAudio() {
     if (!AC) return false;
     audioCtx = new AC();
     musicGainNode = audioCtx.createGain();
-    musicGainNode.gain.value = 0.09; // música de fondo, que se escuche sin tapar los efectos
+    musicGainNode.gain.value = 0.12; // música de fondo, que se escuche sin tapar los efectos
     musicGainNode.connect(audioCtx.destination);
     sfxGainNode = audioCtx.createGain();
     sfxGainNode.gain.value = 0.5;
@@ -916,6 +916,8 @@ function renderLobby(state) {
 
   stage.innerHTML = '<div class="lobby-card">' +
     '<div class="phase-title">¡A JUGAR! 🎤</div>' +
+    '<button type="button" class="btn btn-ghost" id="testSoundBtn">🔊 Probar sonido</button>' +
+    '<p class="share-note">Si no oyes la musiquita, toca <b>Probar sonido</b>: debe sonar un ding. Si no suena nada, revisa que tu teléfono no esté en silencio (el interruptor del lado) y sube el volumen.</p>' +
     '<form class="lobby-form" id="lobbyForm">' +
       '<label for="nameInput">Tu nombre</label>' +
       '<input type="text" id="nameInput" placeholder="Ej. Tato" value="' + esc(name) + '" maxlength="20" autocomplete="off">' +
@@ -934,6 +936,15 @@ function renderLobby(state) {
   var joinBtn = $("joinBtn");
   if (joinBtn) joinBtn.addEventListener("click", function () {
     var c = $("codeInput"); joinRoom(c ? c.value : "");
+  });
+  // Botón para comprobar el sonido: toca y debe sonar un ding fuerte.
+  // Si no suena nada, el teléfono está en silencio o el volumen está bajo.
+  var testBtn = $("testSoundBtn");
+  if (testBtn) testBtn.addEventListener("click", function () {
+    unlockAudio();
+    if (soundMuted) setMuted(false);
+    sfxWin();
+    toast("🔊 ¿Oíste el ding? Si no, revisa el silencio y el volumen.");
   });
   var nameInput = $("nameInput");
   if (nameInput && !nameInput.value) nameInput.focus();
@@ -1464,16 +1475,12 @@ function init() {
       if (!soundMuted) sfxCorrect();
     });
   }
-  // La música 8-bit arranca con el primer toque (política de autoplay).
-  // Se escucha pointerdown y touchstart por si el navegador no dispara
-  // el primero (iOS antiguo), y también se intenta al crear/unirse a sala.
-  var unlockOnce = function () {
-    document.removeEventListener("pointerdown", unlockOnce);
-    document.removeEventListener("touchstart", unlockOnce);
-    unlockAudio();
-  };
-  document.addEventListener("pointerdown", unlockOnce);
-  document.addEventListener("touchstart", unlockOnce);
+  // La música 8-bit arranca con el primer toque (política de autoplay) y
+  // se reintenta en CADA toque: si el contexto se suspendió (el teléfono se
+  // durmió, cambió de app, etc.), el siguiente toque lo vuelve a arrancar.
+  var ensureAudioOnGesture = function () { unlockAudio(); };
+  document.addEventListener("pointerdown", ensureAudioOnGesture);
+  document.addEventListener("touchstart", ensureAudioOnGesture);
   var params = new URLSearchParams(window.location.search || "");
   if (params.get("demo") === "1") { startDemo(); return; }
   if (!apiBase()) {
