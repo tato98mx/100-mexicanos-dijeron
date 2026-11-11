@@ -6,6 +6,7 @@ import {
   FACEOFF_MS,
   FACEOFF_REVEAL_MS,
   FAST_MONEY_COUNT,
+  FAST_MONEY_MS,
   MULTIPLIERS,
   ROUND_COUNTDOWN_MS,
   addPlayer,
@@ -640,7 +641,7 @@ describe("Dinero Rápido", () => {
       total: null,
       wildcardEarned: false,
     };
-    s.deadline = 1000 + 20000;
+    s.deadline = 1000 + FAST_MONEY_MS;
     return s;
   }
 
@@ -681,9 +682,38 @@ describe("Dinero Rápido", () => {
     const s = fastMoneyState("p1");
     assert.equal(submitFastMoneyAnswer(s, "p1", 0, null, 1000).ok, true);
     assert.equal(s.fastMoney.points[0], 0);
-    tick(s, 1000 + 20001, fixture);
+    tick(s, 1000 + FAST_MONEY_MS + 1, fixture);
     assert.equal(s.phase, "fastMoneyReveal");
     assert.equal(s.fastMoney.total, 0);
+  });
+
+  it("el Dinero Rápido dura 1 minuto (60 s), no 20 s", () => {
+    assert.equal(FAST_MONEY_MS, 60_000);
+    const s = fastMoneyState("p1");
+    // A los 20 s (el tiempo viejo) la fase sigue en fastMoney, no se cerró.
+    tick(s, 1000 + 20_001, fixture);
+    assert.equal(s.phase, "fastMoney");
+    // A los 60 s sí se cierra.
+    tick(s, 1000 + FAST_MONEY_MS + 1, fixture);
+    assert.equal(s.phase, "fastMoneyReveal");
+  });
+
+  it("'licuadora' en 'Digan un electrodoméstico' vale 9 puntos, no 0", () => {
+    // Banco real (no el fixture): la pregunta f16 tiene "Licuadora" con 9.
+    // El fallo era del cliente (buscaba los puntos en la respuesta, texto
+    // plano), pero aquí se verifica que el servidor sí la puntúa bien.
+    const f16 = bank.fastMoney.find((q) => q.id === "f16");
+    assert.ok(f16, "existe f16 en el banco real");
+    assert.equal(f16.text, "Digan un electrodoméstico");
+    const lic = f16.answers.find((a) => a.text === "Licuadora");
+    assert.ok(lic, "Licuadora está en f16");
+    assert.equal(lic.points, 9);
+    assert.equal(matchAnswer("licuadora", f16.answers), f16.answers.indexOf(lic));
+    // Y en una partida real con esa pregunta, la respuesta suma 9.
+    const s = fastMoneyState("p1");
+    s.fastMoneyQuestions = [f16, ...s.fastMoneyQuestions.slice(1)];
+    assert.equal(submitFastMoneyAnswer(s, "p1", 0, "licuadora", 1000).ok, true);
+    assert.equal(s.fastMoney.points[0], 9);
   });
 
   it("de fastMoneyReveal se avanza a gameOver", () => {

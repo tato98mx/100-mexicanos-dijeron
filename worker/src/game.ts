@@ -33,7 +33,7 @@ export function multiplierForRound(round: number): number {
 /** Duración de los temporizadores (ms). */
 export const FACEOFF_MS = 20_000; // cara a cara: 20 s por jugador
 export const GUESS_MS = 20_000; // intento en el tablero: 20 s
-export const FAST_MONEY_MS = 20_000; // Dinero Rápido: 20 s en total (5 preguntas)
+export const FAST_MONEY_MS = 60_000; // Dinero Rápido: 1 minuto en total (5 preguntas)
 export const DICE_MS = 3_000; // pausa para animar los dados antes de seguir
 /** Revelación del ganador del cara a cara: 5 s para leer quién ganó y la
  *  cuenta atrás 3-2-1 antes de que empiece el tablero. */

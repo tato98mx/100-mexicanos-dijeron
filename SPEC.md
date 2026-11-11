@@ -58,7 +58,7 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   un ding fuerte para comprobar que se oye; si no suena nada, el teléfono está
   en silencio o el volumen está bajo. Al tocar el botón de sonido para
   encenderlo también suena un ding inmediato. Los archivos CSS/JS llevan
-  versión (`?v=10`) para que el teléfono no se quede con la versión vieja en
+  versión (`?v=11`) para que el teléfono no se quede con la versión vieja en
   caché.
 - **Aplausos al ganar la ronda:** al terminar cada ronda, el fin de ronda
   muestra el nombre del ganador **EN GRANDE** (👏 ¡GANA LA RONDA! [nombre] —
@@ -146,9 +146,14 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 - **Solo participa el ganador del juego**, como en el programa de TV. El
   perdedor NO juega el Dinero Rápido (lo ve en vivo como espectador).
 - El ganador del partido (más puntos en las rondas del tablero) juega solo
-  el Dinero Rápido: **5 preguntas en 20 segundos** en total, contestadas
+  el Dinero Rápido: **5 preguntas en 1 minuto** en total, contestadas
   una tras otra.
-- Puntos: valor de encuesta de cada respuesta, **sin multiplicador**.
+- Puntos: valor de encuesta de cada respuesta, **sin multiplicador**. El
+  servidor manda los puntos por pregunta en `fastMoney.points[i]` y el total
+  en `fastMoney.total`; el cliente los lee de ahí. Antes el cliente buscaba
+  los puntos en la respuesta misma (texto plano, sin puntos) y TODAS salían
+  con "(0 pts)" aunque el servidor sí las había puntuado (p. ej. "licuadora"
+  valía 9 y salía 0). Ese era el fallo del puntaje del Dinero Rápido.
 - Si el ganador logra **100 puntos o más** en sus 5 respuestas, se gana
   **una carta comodín para la siguiente partida**. (El 100 es el número
   correcto: en el programa son 200 puntos entre los dos jugadores de la
@@ -296,7 +301,7 @@ empatan, el servidor vuelve a tirar automáticamente tras una pausa corta.
 
 ### Temporizadores
 El servidor guarda la fecha límite de cada fase con tiempo (cara a cara 20 s,
-revelación del ganador 5 s, intento del tablero 20 s, Dinero Rápido 20 s por jugador). El cliente muestra
+revelación del ganador 5 s, intento del tablero 20 s, Dinero Rápido 1 minuto por jugador). El cliente muestra
 la cuenta regresiva; si se agota sin respuesta, el cliente envía la
 respuesta nula / paso correspondiente. El servidor ignora respuestas que
 lleguen fuera de plazo.

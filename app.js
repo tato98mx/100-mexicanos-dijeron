@@ -10,7 +10,7 @@
  *   servidor -> cliente: {type:"state", state} | {type:"error", message}
  *
  * Dinero Rápido (versión corregida): SOLO juega el ganador del juego.
- * 5 preguntas en 20 s en total. 100 puntos o más = carta comodín para la
+ * 5 preguntas en 1 minuto en total. 100 puntos o más = carta comodín para la
  * siguiente partida. El perdedor lo ve como espectador.
  */
 
@@ -34,7 +34,7 @@ var WILDCARD_EFFECT_LABEL = {
 var WILDCARD_THRESHOLD = 100; // puntos de Dinero Rápido para ganar comodín
 var FACEOFF_SECONDS = 20;
 var GUESS_SECONDS = 20;
-var FASTMONEY_SECONDS = 20;
+var FASTMONEY_SECONDS = 60; // Dinero Rápido: 1 minuto en total (5 preguntas)
 
 var LS_NAME = "100mxd-name";
 var LS_RECENT = "100mxd-recent-questions"; // IDs usados en las últimas 3 partidas
@@ -727,7 +727,7 @@ function onTimeout(state) {
       var idx = fmCurrentIndex(state);
       if (idx >= 0) send({ type: "fastmoney-pass", index: idx });
     }
-    toast("⏰ ¡Se acabaron los 20 segundos del Dinero Rápido!");
+    toast("⏰ ¡Se acabó el minuto del Dinero Rápido!");
   } else if (state.phase === "board") {
     toast("⏰ ¡Tiempo agotado! El servidor marca la cruz.");
   } else if (state.phase === "steal") {
@@ -764,6 +764,18 @@ function fmAnswerPoints(entry) {
   return null;
 }
 
+/* Puntos de una pregunta de Dinero Rápido según el servidor: el servidor
+ * manda los puntos como un arreglo aparte (state.fastMoney.points[i]) y el
+ * total como state.fastMoney.total. Antes el cliente solo miraba entry.points
+ * en la respuesta (que es un texto plano, sin puntos), así que TODAS las
+ * respuestas salían con "(0 pts)" aunque el servidor sí las había puntuado
+ * (p. ej. "licuadora" valía 9 y salía 0). Ese era el fallo del puntaje. */
+function fmPointsFor(state, i) {
+  var fm = state && state.fastMoney;
+  if (fm && Array.isArray(fm.points) && typeof fm.points[i] === "number") return fm.points[i];
+  return null;
+}
+
 function fmCurrentIndex(state) {
   var ans = fmAnswers(state);
   for (var i = 0; i < ans.length; i++) {
@@ -773,7 +785,17 @@ function fmCurrentIndex(state) {
 }
 
 function fmTotalPoints(state) {
+  // El total lo calcula el servidor y viene en fastMoney.total (revelación).
+  var fm = state && state.fastMoney;
+  if (fm && typeof fm.total === "number") return fm.total;
+  // Respaldo: sumar los puntos por pregunta del servidor.
   var total = 0, known = false;
+  if (fm && Array.isArray(fm.points)) {
+    fm.points.forEach(function (p) {
+      if (typeof p === "number") { total += p; known = true; }
+    });
+    if (known) return total;
+  }
   fmAnswers(state).forEach(function (a) {
     var p = fmAnswerPoints(a);
     if (p != null) { total += p; known = true; }
@@ -1385,7 +1407,7 @@ function renderFastMoney(state) {
   }).join("");
 
   stage.innerHTML = '<div class="phase-title">💰 ¡DINERO RÁPIDO!</div>' +
-    '<p class="phase-sub">¡Ganaste el juego y ahora vas por el comodín!<br>Contesta las <b>5 preguntas en 20 segundos</b>. Si sumas <b>100 puntos o más</b>, te llevas una <b>carta comodín 🃏</b> para la siguiente partida.</p>' +
+    '<p class="phase-sub">¡Ganaste el juego y ahora vas por el comodín!<br>Contesta las <b>5 preguntas en 1 minuto</b>. Si sumas <b>100 puntos o más</b>, te llevas una <b>carta comodín 🃏</b> para la siguiente partida.</p>' +
     '<div class="fm-list">' + list + '</div>';
 
   if (idx >= 0 && questions[idx]) {
@@ -1412,10 +1434,14 @@ function renderFastMoneyReveal(state) {
   var rows = questions.map(function (q, i) {
     var entry = answers[i];
     var txt = fmAnswerText(entry);
-    var pts = fmAnswerPoints(entry);
+    // Los puntos vienen del servidor en fastMoney.points[i] (no en la
+    // respuesta, que es texto plano). Si no hay puntos del servidor, no se
+    // inventa un 0: se muestra sin puntos hasta que lleguen.
+    var pts = fmPointsFor(state, i);
+    if (pts == null) pts = fmAnswerPoints(entry);
     return '<div class="fm-item done"><b>' + (i + 1) + '.</b> ' + esc(q.text) +
       (pts != null ? '<span class="fm-points">' + pts + '</span>' : "") +
-      '<div class="fm-answer">' + (txt ? esc(txt) : "— sin respuesta —") + (pts == null && txt ? " · (0 pts)" : "") + '</div></div>';
+      '<div class="fm-answer">' + (txt ? esc(txt) : "— sin respuesta —") + (pts === 0 && txt ? " · (0 pts)" : "") + '</div></div>';
   }).join("");
 
   var html = '<div class="phase-title">💰 DINERO RÁPIDO — RESULTADO</div>' +

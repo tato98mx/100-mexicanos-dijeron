@@ -168,6 +168,35 @@ console.log("cara a cara: aviso inmediato y barra bloqueada tras contestar:");
   check("sin repeticiones no muestra el aviso", !html.includes("Nadie acertó"));
 }
 
+console.log("Dinero Rápido: la revelación muestra los puntos del servidor (no 0 pts):");
+{
+  // La revelación trae fastMoney.points[i] y fastMoney.total del servidor.
+  // Antes el cliente buscaba los puntos en la respuesta (texto plano) y TODAS
+  // salían con "(0 pts)" aunque el servidor sí las había puntuado.
+  const s = clone(base);
+  s.phase = "fastMoneyReveal";
+  s.winner = "p1";
+  s.fastMoney = {
+    player: "p1",
+    questions: [
+      { id: "f16", text: "Digan un electrodoméstico" },
+      { id: "f1", text: "Nombren un color" },
+      { id: "f2", text: "Digan un mes del año" },
+      { id: "f3", text: "Nombren un día de la semana" },
+      { id: "f4", text: "Digan un número de la suerte" },
+    ],
+    answers: ["licuadora", "rojo", "enero", null, "siete"],
+    points: [9, 32, 28, 0, 12],
+    total: 81,
+    wildcardEarned: false,
+  };
+  api.renderState(s);
+  const html = getEl("stage").innerHTML;
+  check("licuadora muestra 9 puntos (no 0 pts)", html.includes("licuadora") && html.includes(">9<") && !html.includes("licuadora · (0 pts)"));
+  check("muestra el total 81 puntos", html.includes("81") && html.includes("PUNTOS"));
+  check("una respuesta sin contestar no inventa puntos", html.includes("sin respuesta"));
+}
+
 console.log("demo de Listo a jugar:");
 {
   const demos = api.demoStates();
