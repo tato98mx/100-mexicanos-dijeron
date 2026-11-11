@@ -289,6 +289,10 @@ export class RoomDO extends DurableObject<Env> {
         const existing = state.players.find((p) => p.name === name);
         if (existing) {
           ws.serializeAttachment({ playerId: existing.id });
+          // Al reconectar, el cliente necesita el estado actual: sin esto
+          // se queda sin pantalla (antes el servidor nunca se lo mandaba
+          // y el jugador se quedaba en "no pasa nada").
+          this.send(ws, { type: "state", state: publicState(state) });
           break;
         }
         const id = addPlayer(state, name);
