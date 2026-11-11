@@ -38,6 +38,9 @@ export const DICE_MS = 3_000; // pausa para animar los dados antes de seguir
 /** Revelación del ganador del cara a cara: 5 s para leer quién ganó y la
  *  cuenta atrás 3-2-1 antes de que empiece el tablero. */
 export const FACEOFF_REVEAL_MS = 5_000;
+/** Cuenta atrás antes de la siguiente ronda: 5 s (5-4-3-2-1) tras oprimir
+ *  "Siguiente ronda", antes de desplegar la siguiente pregunta. */
+export const ROUND_COUNTDOWN_MS = 5_000;
 
 /** Puntos necesarios en Dinero Rápido para ganar un comodín. */
 export const FAST_MONEY_WILDCARD_THRESHOLD = 100;
@@ -77,6 +80,7 @@ export type Phase =
   | "board"
   | "steal"
   | "roundEnd"
+  | "roundCountdown"
   | "fastMoney"
   | "fastMoneyReveal"
   | "gameOver";
@@ -151,6 +155,9 @@ export interface GameState {
   /** Fecha límite (epoch ms) de la fase actual con tiempo, o null. */
   deadline: number | null;
   // --- Solo servidor (nunca se envía al cliente) ---
+  /** Pregunta del cara a cara que se desplegará al terminar la cuenta atrás
+   *  de "roundCountdown" (índice en roundQuestions). */
+  pendingFaceoffIndex: number | null;
   /** Preguntas de ronda elegidas para esta partida (la 5ª es reserva para
    *  muerte súbita; solo se usa si hay empate tras la ronda 4). */
   roundQuestions: QuestionDef[];
@@ -381,6 +388,7 @@ export function createGame(code: string, opts: CreateGameOptions = {}): GameStat
     roundQuestions: [],
     fastMoneyQuestions: [],
     usedIdsHistory: [...(opts.usedQuestionIds ?? [])],
+    pendingFaceoffIndex: null,
   };
 }
 
@@ -675,8 +683,9 @@ function endRound(state: GameState, winnerId: string): void {
   state.deadline = null;
 }
 
-/** Avanzar: de fin de ronda al siguiente cara a cara (o a muerte súbita /
- *  Dinero Rápido); de la revelación de Dinero Rápido al fin del juego. */
+/** Avanzar: de fin de ronda a la cuenta atrás de la siguiente ronda (o a
+ *  muerte súbita / Dinero Rápido); de la revelación de Dinero Rápido al
+ *  fin del juego. */
 export function advance(
   state: GameState,
   bank: QuestionBank,
@@ -687,7 +696,10 @@ export function advance(
     if (state.round < TOTAL_ROUNDS) {
       state.round += 1;
       state.multiplier = multiplierForRound(state.round);
-      setupFaceoff(state, state.round - 1, now);
+      // Cuenta atrás de 5 s antes de desplegar la siguiente pregunta.
+      state.pendingFaceoffIndex = state.round - 1;
+      state.phase = "roundCountdown";
+      state.deadline = now + ROUND_COUNTDOWN_MS;
       return ok();
     }
     // Fin de la ronda 4: ¿empate?
@@ -701,7 +713,9 @@ export function advance(
           state.usedIdsHistory.push(spare[0].id);
         }
       }
-      setupFaceoff(state, state.roundQuestions.length - 1, now);
+      state.pendingFaceoffIndex = state.roundQuestions.length - 1;
+      state.phase = "roundCountdown";
+      state.deadline = now + ROUND_COUNTDOWN_MS;
       return ok();
     }
     state.winner = p1.score > p2.score ? p1.id : p2.id;
@@ -883,6 +897,14 @@ export function tick(
       revealFaceoffWinnerAnswer(state, state.faceoff.winner ?? "");
       state.phase = "board";
       state.deadline = now + GUESS_MS;
+      return true;
+    }
+    case "roundCountdown": {
+      // Terminó la cuenta atrás de 5 s: se despliega la siguiente pregunta
+      // (cara a cara de la siguiente ronda, o muerte súbita).
+      const idx = state.pendingFaceoffIndex ?? state.round - 1;
+      state.pendingFaceoffIndex = null;
+      setupFaceoff(state, idx, now);
       return true;
     }
     case "dice": {

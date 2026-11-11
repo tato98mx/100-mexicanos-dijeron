@@ -49,14 +49,21 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   mismo nombre (espera creciente 1 s, 2 s, 4 s… hasta 30 s, máximo 12
   intentos). El servidor reasocia al jugador por su nombre. Sin esto, la
   pantalla se quedaba en "Esperando rival" aunque el otro ya hubiera entrado.
-- **Sonido:** la música 8-bit arranca con el primer toque y suena más fuerte
-  (ganancia 0.12). El desbloqueo de audio se reintenta en CADA toque (si el
-  contexto se suspendió, el siguiente toque lo vuelve a arrancar). En el
-  lobby hay un botón **"🔊 Probar sonido"** que suena un ding fuerte para
-  comprobar que se oye; si no suena nada, el teléfono está en silencio o el
-  volumen está bajo. Al tocar el botón de sonido para encenderlo también
-  suena un ding inmediato. Los archivos CSS/JS llevan versión (`?v=5`) para
-  que el teléfono no se quede con la versión vieja en caché.
+- **Sonido (volúmenes en escala de Tato, 1 a 5):** la música 8-bit va en **2**
+  (ganancia 0.05, bajita, que apenas se oiga) y los efectos van en **5**
+  (ganancia 0.9, bien fuertes: ding de acierto, zumbido de X, bips, dados,
+  botones). La música arranca con el primer toque. El desbloqueo de audio se
+  reintenta en CADA toque (si el contexto se suspendió, el siguiente toque lo
+  vuelve a arrancar). En el lobby hay un botón **"🔊 Probar sonido"** que suena
+  un ding fuerte para comprobar que se oye; si no suena nada, el teléfono está
+  en silencio o el volumen está bajo. Al tocar el botón de sonido para
+  encenderlo también suena un ding inmediato. Los archivos CSS/JS llevan
+  versión (`?v=9`) para que el teléfono no se quede con la versión vieja en
+  caché.
+- **Aplausos al ganar la ronda:** al terminar cada ronda, el fin de ronda
+  muestra el nombre del ganador **EN GRANDE** (👏 ¡GANA LA RONDA! [nombre] —
+  se lleva X puntos) y suenan **aplausos** (ruido de público, ~2 s) junto con
+  el jingle de fin de ronda. Lo mismo aplica cuando alguien gana por robo.
 
 ### Cara a cara (al inicio de cada ronda)
 - La computadora muestra la pregunta a los dos jugadores **al mismo tiempo**.
@@ -201,8 +208,9 @@ decide; el cliente nunca puntúa.
 - `{type:"fastmoney-answer", index, answer}` — una respuesta de Dinero
   Rápido (el cliente las envía una por una según el jugador contesta).
 - `{type:"fastmoney-pass", index}` — pasar una pregunta de Dinero Rápido.
-- `{type:"next"}` — avanzar (de fin de ronda al siguiente cara a cara;
-  de la revelación de Dinero Rápido al fin del juego).
+- `{type:"next"}` — avanzar (de fin de ronda a la cuenta atrás de la
+  siguiente ronda, o a Dinero Rápido tras la ronda 4; de la revelación de
+  Dinero Rápido al fin del juego).
 - `{type:"rematch"}` — nueva partida en la misma sala (nuevas preguntas).
 
 ### Mensajes servidor → cliente
@@ -211,23 +219,36 @@ decide; el cliente nunca puntúa.
   calculan puntos ni transiciones.**
 - `{type:"error", message}` — sala llena, movimiento no válido, etc.
 
+### Cuenta atrás antes de la siguiente ronda (fase `roundCountdown`)
+- Al oprimir "Siguiente ronda" en el fin de ronda, el servidor NO despliega
+  la siguiente pregunta directo: entra en la fase **`roundCountdown`** de
+  **5 segundos** (`ROUND_COUNTDOWN_MS`), y al terminar pasa al cara a cara
+  de la siguiente ronda (la ronda ya se incrementó al entrar en la cuenta
+  atrás, así que el cliente muestra "RONDA X"). Lo mismo aplica a la muerte
+  súbita por empate tras la ronda 4.
+- El cliente muestra la cuenta atrás en grande (**5-4-3-2-1**) con un bip por
+  número, y "¡YA!" al terminar. El servidor guarda la pregunta pendiente en
+  `pendingFaceoffIndex` (solo servidor) y la despliega con `setupFaceoff`
+  cuando el `tick` agota la fecha límite.
+
 ### Sonido (cliente, Web Audio API, sin archivos de audio)
 - **Música de fondo 8-bit** en loop (melodía con onda cuadrada + bajo),
-  bajita, que arranca con el primer toque del usuario (autoplay) y se
-  puede apagar con el botón 🔊/🔇 de la barra superior (se guarda en
-  `localStorage`).
-- **Efectos:** acierto (ding ascendente), cruz/X (**zumbido grave tipo
-  buzzer del show**), fanfarria del ganador, bip de la cuenta atrás 3-2-1,
-  bip agudo de "¡a jugar!", traqueteo de dados, alerta de robo, jingle de
-  fin de ronda y fanfarria de fin de juego. El cliente los dispara al
-  detectar el cambio de estado (nueva cruz, nueva respuesta revelada,
-  cambio de fase); nunca decide puntos ni transiciones.
+  **bajita (nivel 2 de 5, ganancia 0.05)**, que arranca con el primer toque
+  del usuario (autoplay) y se puede apagar con el botón 🔊/🔇 de la barra
+  superior (se guarda en `localStorage`).
+- **Efectos (nivel 5 de 5, ganancia 0.9, bien fuertes):** acierto (ding
+  ascendente), cruz/X (**zumbido grave tipo buzzer del show**), fanfarria del
+  ganador, bip de la cuenta atrás 3-2-1, bip agudo de "¡a jugar!", traqueteo
+  de dados, alerta de robo, jingle de fin de ronda, **aplausos al ganar la
+  ronda** (ruido de público, ~2 s) y fanfarria de fin de juego. El cliente
+  los dispara al detectar el cambio de estado (nueva cruz, nueva respuesta
+  revelada, cambio de fase); nunca decide puntos ni transiciones.
 
 ### Forma del estado (JSON)
 ```json
 {
   "code": "ABCD",
-  "phase": "lobby|ready|faceoff|faceoffReveal|dice|board|steal|roundEnd|fastMoney|fastMoneyReveal|gameOver",
+  "phase": "lobby|ready|faceoff|faceoffReveal|dice|board|steal|roundEnd|roundCountdown|fastMoney|fastMoneyReveal|gameOver",
   "ready": {"p1": true},
   "players": [{"id": "p1", "name": "Tato", "score": 0, "wildcards": 0},
               {"id": "p2", "name": "Ledya", "score": 0, "wildcards": 0}],

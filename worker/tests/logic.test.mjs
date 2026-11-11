@@ -7,6 +7,7 @@ import {
   FACEOFF_REVEAL_MS,
   FAST_MONEY_COUNT,
   MULTIPLIERS,
+  ROUND_COUNTDOWN_MS,
   addPlayer,
   advance,
   createGame,
@@ -528,6 +529,27 @@ describe("multiplicadores", () => {
     assert.deepEqual([...MULTIPLIERS], [1, 1, 2, 3]);
   });
 
+  it("tras 'Siguiente ronda' hay una cuenta atrás de 5 s antes de la siguiente pregunta", () => {
+    const s = newGame();
+    playFaceoff(s, s.board[0].text, s.board[1].text);
+    sweepBoard(s);
+    assert.equal(s.phase, "roundEnd");
+    assert.equal(s.round, 1);
+    // "Siguiente ronda" no despliega la pregunta directo: pasa por la
+    // cuenta atrás de 5 s (fase roundCountdown, ronda ya en 2).
+    assert.equal(advance(s, fixture, 1000).ok, true);
+    assert.equal(s.phase, "roundCountdown");
+    assert.equal(s.round, 2);
+    assert.equal(s.multiplier, 1);
+    // Antes de que pasen los 5 s, sigue en cuenta atrás.
+    tick(s, 1000 + ROUND_COUNTDOWN_MS - 100, fixture);
+    assert.equal(s.phase, "roundCountdown");
+    // Al pasar los 5 s, empieza el cara a cara de la ronda 2.
+    tick(s, 1000 + ROUND_COUNTDOWN_MS + 1, fixture);
+    assert.equal(s.phase, "faceoff");
+    assert.equal(s.round, 2);
+  });
+
   it("la ronda 3 paga doble: una partida simulada lo refleja en el banco", () => {
     const s = newGame();
     // Rondas 1 y 2: el control barre el tablero (100 pts cada una).
@@ -537,6 +559,11 @@ describe("multiplicadores", () => {
       playFaceoff(s, s.board[0].text, s.board[1].text);
       sweepBoard(s);
       assert.equal(advance(s, fixture, 1000).ok, true);
+      // Tras "Siguiente ronda" hay una cuenta atrás de 5 s antes de la
+      // siguiente pregunta: se pasa con tick.
+      assert.equal(s.phase, "roundCountdown");
+      tick(s, 1000 + ROUND_COUNTDOWN_MS + 1, fixture);
+      assert.equal(s.phase, "faceoff");
     }
     // Ronda 3 (×2): el cara a cara ya deja 40×2=80 en el banco; un acierto
     // de 30 pts suma 60 más: 140.

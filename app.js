@@ -231,10 +231,11 @@ function ensureAudio() {
     if (!AC) return false;
     audioCtx = new AC();
     musicGainNode = audioCtx.createGain();
-    musicGainNode.gain.value = 0.12; // música de fondo, que se escuche sin tapar los efectos
+    // Volumen (escala de Tato, 1 a 5): música bajita en 2, efectos fuertes en 5.
+    musicGainNode.gain.value = 0.05; // música de fondo, que apenas se oiga
     musicGainNode.connect(audioCtx.destination);
     sfxGainNode = audioCtx.createGain();
-    sfxGainNode.gain.value = 0.5;
+    sfxGainNode.gain.value = 0.9; // efectos (ding, aplausos, botones) bien fuertes
     sfxGainNode.connect(audioCtx.destination);
     return true;
   } catch (e) { return false; }
@@ -353,6 +354,44 @@ function sfxRoundEnd() { // jingle corto de fin de ronda
   playTone(523.25, 0.11, 0.12, "square", 0.45);
   playTone(659.25, 0.22, 0.2, "square", 0.5);
 }
+/* Aplausos: ruido blanco con envolvente (fuerte al inicio, se apaga en ~2 s),
+ * como el público del programa. Si el audio está suspendido, reanuda y
+ * reintenta una vez, como playTone. */
+function sfxApplause(_retried) {
+  if (!audioCtx || soundMuted) return;
+  if (audioCtx.state !== "running") {
+    if (!_retried && audioCtx.resume) {
+      audioCtx.resume().then(function () {
+        setTimeout(function () { sfxApplause(true); }, 60);
+      }).catch(function () {});
+    }
+    return;
+  }
+  try {
+    var dur = 2.2;
+    var len = Math.floor(audioCtx.sampleRate * dur);
+    var buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+    var data = buffer.getChannelData(0);
+    for (var i = 0; i < len; i++) {
+      var t = i / len;
+      // Aplausos: muchas palmas juntas suenan como ruido con pulsos.
+      var pulse = 0.6 + 0.4 * Math.sin(i * 0.11) * Math.sin(i * 0.031);
+      data[i] = (Math.random() * 2 - 1) * (1 - t * 0.85) * 0.55 * pulse;
+    }
+    var src = audioCtx.createBufferSource();
+    src.buffer = buffer;
+    var filter = audioCtx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.value = 1200;
+    filter.Q.value = 0.4;
+    var g = audioCtx.createGain();
+    g.gain.value = 1.0;
+    src.connect(filter);
+    filter.connect(g);
+    g.connect(sfxGainNode);
+    src.start();
+  } catch (e) { /* sin audio, no pasa nada */ }
+}
 function sfxGameWin() { // fanfarria larga al ganar el juego
   playTone(523.25, 0, 0.14, "square", 0.5);
   playTone(659.25, 0.12, 0.14, "square", 0.5);
@@ -394,7 +433,8 @@ function handleStateSounds(prev, next) {
     else if (next.phase === "dice") sfxDice();
     else if (next.phase === "board" && prev.phase === "faceoffReveal") sfxGo();
     else if (next.phase === "steal") sfxSteal();
-    else if (next.phase === "roundEnd") sfxRoundEnd();
+    else if (next.phase === "roundEnd") { sfxRoundEnd(); sfxApplause(); }
+    else if (next.phase === "roundCountdown") sfxGo();
     else if (next.phase === "fastMoney") sfxWin();
     else if (next.phase === "fastMoneyReveal") {
       if (fmWildcardEarned(next)) sfxWin(); else sfxRoundEnd();
@@ -1216,9 +1256,22 @@ function renderSteal(state) {
   bindForm("stealForm", function (val) { send({ type: "steal-answer", answer: val }); });
 }
 
+/* Fin de ronda: el nombre del ganador EN GRANDE con aplausos, y el tablero
+ * completo con los puntos que se llevó. */
 function renderRoundEnd(state) {
   var stage = $("stage");
-  stage.innerHTML = '<div class="phase-title">📋 FIN DE LA RONDA ' + (state.round || 1) + '</div>' +
+  var rr = state.roundResult || {};
+  var winnerId = rr.winner || null;
+  var winnerName = otherPlayerName(state, winnerId);
+  var iWon = winnerId === myId;
+  var pts = typeof rr.points === "number" ? rr.points : 0;
+  stage.innerHTML = '<div class="reveal-banner">' +
+    '<div class="reveal-trophy">👏</div>' +
+    '<div class="reveal-title">¡GANA LA RONDA!</div>' +
+    '<div class="reveal-name">' + esc(winnerName) + (iWon ? " (tú)" : "") + '</div>' +
+    '<div class="reveal-sub">Se lleva <b>' + pts + ' puntos</b></div>' +
+    '</div>' +
+    '<div class="phase-title">📋 FIN DE LA RONDA ' + (state.round || 1) + '</div>' +
     '<p class="phase-sub">Así quedó el tablero completo:</p>' +
     questionHTML(state) +
     boardHTML(state, true) +
@@ -1226,6 +1279,48 @@ function renderRoundEnd(state) {
     '<div class="btn-row"><button class="btn" id="nextBtn">➡️ Siguiente ronda</button></div>';
   var btn = $("nextBtn");
   if (btn) btn.addEventListener("click", function () { send({ type: "next" }); });
+}
+
+/* Cuenta atrás de 5 s antes de la siguiente ronda: número grande (5-4-3-2-1)
+ * con bip cada segundo, y luego se despliega la siguiente pregunta. */
+var roundCountdownTimer = null;
+var roundCountdownLast = -1;
+function stopRoundCountdown() {
+  if (roundCountdownTimer) { clearInterval(roundCountdownTimer); roundCountdownTimer = null; }
+  roundCountdownLast = -1;
+}
+function renderRoundCountdown(state) {
+  var stage = $("stage");
+  var nextRound = state.round || 1;
+  var mult = state.multiplier || 1;
+  stage.innerHTML = '<div class="reveal-banner">' +
+    '<div class="reveal-trophy">⏱️</div>' +
+    '<div class="reveal-title">¡PREPÁRATE!</div>' +
+    '<div class="reveal-name">RONDA ' + nextRound + (mult > 1 ? ' ×' + mult : '') + '</div>' +
+    '<div class="reveal-sub">La siguiente pregunta viene en…</div>' +
+    '</div>' +
+    '<div class="countdown-wrap"><div id="roundCountdownNum" class="countdown-big">…</div>' +
+    '<div class="countdown-label">Segundos para la siguiente pregunta</div></div>';
+  startRoundCountdown(state);
+}
+function startRoundCountdown(state) {
+  stopRoundCountdown();
+  var el = $("roundCountdownNum");
+  if (!el || !state.deadline) return;
+  var update = function () {
+    var el2 = $("roundCountdownNum");
+    if (!el2) { stopRoundCountdown(); return; }
+    var remainMs = state.deadline - Date.now();
+    if (remainMs <= 0) { el2.textContent = "¡YA!"; stopRoundCountdown(); return; }
+    var secs = Math.ceil(remainMs / 1000);
+    el2.textContent = String(secs);
+    if (roundCountdownLast !== secs) {
+      roundCountdownLast = secs;
+      sfxCountdown();
+    }
+  };
+  update();
+  roundCountdownTimer = setInterval(update, 200);
 }
 
 function renderFastMoney(state) {
@@ -1381,6 +1476,7 @@ function render(state) {
     case "board": renderBoard(state); break;
     case "steal": renderSteal(state); break;
     case "roundEnd": renderRoundEnd(state); break;
+    case "roundCountdown": renderRoundCountdown(state); break;
     case "fastMoney": renderFastMoney(state); break;
     case "fastMoneyReveal": renderFastMoneyReveal(state); break;
     case "gameOver": renderGameOver(state); break;
