@@ -10,6 +10,8 @@ import {
   addPlayer,
   advance,
   createGame,
+  enterReadyPhase,
+  markReady,
   matchAnswer,
   multiplierForRound,
   normalizeAnswer,
@@ -221,6 +223,48 @@ describe("matching de respuestas", () => {
     assert.equal(matchAnswer("nada que ver", answers), -1);
     assert.equal(matchAnswer(null, answers), -1);
     assert.equal(matchAnswer("", answers), -1);
+  });
+});
+
+describe("listo a jugar", () => {
+  /** Sala con 2 jugadores en fase "ready" (sin arrancar). */
+  function readyGame() {
+    const state = createGame("ABCD");
+    addPlayer(state, "Tato");
+    addPlayer(state, "Ledya");
+    assert.equal(enterReadyPhase(state).ok, true);
+    return state;
+  }
+
+  it("con los 2 jugadores la sala pasa a ready y no arranca sola", () => {
+    const s = readyGame();
+    assert.equal(s.phase, "ready");
+    assert.deepEqual(s.ready, {});
+    assert.equal(s.deadline, null);
+  });
+
+  it("con un solo listo sigue en ready; con los dos arranca el cara a cara", () => {
+    const s = readyGame();
+    assert.equal(markReady(s, "p1", fixture, 1000).ok, true);
+    assert.equal(s.phase, "ready");
+    assert.deepEqual(s.ready, { p1: true });
+    assert.equal(markReady(s, "p2", fixture, 1000).ok, true);
+    assert.equal(s.phase, "faceoff");
+    assert.equal(s.round, 1);
+  });
+
+  it("no se puede marcar listo fuera de la fase ready ni dos veces", () => {
+    const s = newGame(); // ya está en faceoff
+    assert.equal(markReady(s, "p1", fixture, 1000).ok, false);
+    const r = readyGame();
+    assert.equal(markReady(r, "p1", fixture, 1000).ok, true);
+    assert.equal(markReady(r, "p1", fixture, 1000).ok, false);
+  });
+
+  it("el estado público muestra quién está listo", () => {
+    const s = readyGame();
+    markReady(s, "p1", fixture, 1000);
+    assert.deepEqual(publicState(s).ready, { p1: true });
   });
 });
 

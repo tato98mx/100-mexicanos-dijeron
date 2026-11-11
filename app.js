@@ -370,7 +370,8 @@ function handleStateSounds(prev, next) {
   }
   // Cambios de fase.
   if (prev.phase !== next.phase) {
-    if (next.phase === "faceoffReveal") sfxWin();
+    if (next.phase === "ready") sfxCorrect();
+    else if (next.phase === "faceoffReveal") sfxWin();
     else if (next.phase === "dice") sfxDice();
     else if (next.phase === "board" && prev.phase === "faceoffReveal") sfxGo();
     else if (next.phase === "steal") sfxSteal();
@@ -908,6 +909,40 @@ function renderLobby(state) {
   if (nameInput && !nameInput.value) nameInput.focus();
 }
 
+/* Pantalla de "Listo a jugar": con los 2 en la sala, el juego NO arranca
+ * solo. Cada uno oprime Listo cuando esté acomodado (revisar el sonido,
+ * sentarse, etc.) y el cara a cara empieza solo cuando los dos están listos. */
+function renderReady(state) {
+  var stage = $("stage");
+  var players = state.players || [];
+  var ready = state.ready || {};
+  var iReady = myId ? !!ready[myId] : false;
+
+  var cards = players.map(function (p) {
+    var isReady = !!ready[p.id];
+    var isMe = p.id === myId;
+    return '<div class="fo-card' + (isReady ? " winner" : "") + '">' +
+      '<div class="fo-name">' + esc(p.name) + (isMe ? " (tú)" : "") + '</div>' +
+      '<div class="fo-answer" style="font-size:26px">' + (isReady ? "✅ Listo" : "⏳ Esperando…") + '</div>' +
+      '</div>';
+  }).join("");
+
+  stage.innerHTML = '<div class="phase-title">🎤 ¿LISTOS A JUGAR?</div>' +
+    '<p class="phase-sub">¡Ya están los dos en la sala! Oprime <b>Listo a jugar</b> cuando estés acomodado.<br>' +
+    'El cara a cara empieza solo cuando <b>los dos</b> estén listos.<br>' +
+    'Aprovecha para revisar el sonido 🔊 (botón dorado abajo a la derecha).</p>' +
+    '<div class="faceoff-answers">' + cards + '</div>' +
+    (iReady
+      ? '<div class="waiting">✅ ¡Listo! Esperando a tu rival<span class="dots"></span></div>'
+      : '<div class="btn-row"><button class="btn" id="readyBtn">✅ ¡Listo a jugar!</button></div>');
+
+  var btn = $("readyBtn");
+  if (btn) btn.addEventListener("click", function () {
+    btn.disabled = true;
+    send({ type: "ready" });
+  });
+}
+
 function renderFaceoff(state) {
   var stage = $("stage");
   var fa = state.faceoff || {};
@@ -1270,6 +1305,7 @@ function render(state) {
   stopRevealCountdown(); // solo corre durante la revelación del ganador
   switch (state.phase) {
     case "lobby": renderLobby(state); break;
+    case "ready": renderReady(state); break;
     case "faceoff": renderFaceoff(state); break;
     case "faceoffReveal": renderFaceoffReveal(state); break;
     case "dice": renderDice(state); break;
@@ -1330,6 +1366,7 @@ function demoStates() {
 
   return [
     { label: "🏠 Lobby", state: withPhase(base, { phase: "lobby", players: [{ id: "p1", name: "Tato", score: 0, wildcards: 0 }], question: null }) },
+    { label: "✅ Listo a jugar", state: withPhase(base, { phase: "ready", ready: { p1: true, p2: false }, question: null }) },
     { label: "⚔️ Cara a cara", state: withPhase(base, { phase: "faceoff", question: clone(base.question) }) },
     { label: "⚔️ Cara a cara (revelado)", state: withPhase(base, { phase: "faceoff", faceoff: { answers: { p1: "Música", p2: "Comida" }, dice: null, points: { p1: 32, p2: 28 }, retries: 0 } }) },
     { label: "🏆 Ganador del cara a cara", state: withPhase(base, { phase: "faceoffReveal", control: "p1", deadline: Date.now() + 5000, faceoff: { answers: { p1: "Música", p2: "Comida" }, dice: null, winner: "p1", points: { p1: 32, p2: 28 }, retries: 0 } }) },

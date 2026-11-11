@@ -135,6 +135,19 @@ console.log("cara a cara con repetición (nadie acertó):");
   check("sin repeticiones no muestra el aviso", !html.includes("Nadie acertó"));
 }
 
+console.log("demo de Listo a jugar:");
+{
+  const demos = api.demoStates();
+  const d = demos.find((x) => x.state.phase === "ready");
+  check("existe el demo de Listo a jugar", !!d);
+  if (d) {
+    api.renderState(d.state);
+    const html = getEl("stage").innerHTML;
+    check("la pantalla de listos muestra el título y el botón", html.includes("LISTOS A JUGAR") && html.includes("Listo a jugar"));
+    check("la pantalla de listos muestra quién está listo y quién espera", html.includes("Listo") && html.includes("Esperando"));
+  }
+}
+
 console.log("demo de faceoffReveal:");
 {
   const demos = api.demoStates();

@@ -27,6 +27,24 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   **en 1v1 no hay opción de pasar**: quien gana el cara a cara juega la ronda.
   (Simplificación documentada.)
 
+### Listo a jugar (fase `ready`)
+- Cuando el segundo jugador entra a la sala, el juego **NO arranca solo**.
+  La sala pasa a la fase **`ready`**: cada jugador oprime el botón
+  **"✅ ¡Listo a jugar!"** cuando esté acomodado (revisar el sonido,
+  sentarse, etc.). El primer cara a cara solo empieza cuando **los dos**
+  están listos. Así nadie entra a la primera pregunta sin estar preparado.
+- La pantalla muestra a los dos jugadores con su estado (**✅ Listo** /
+  **⏳ Esperando…**) y un aviso de revisar el sonido (botón dorado abajo
+  a la derecha).
+- La fase `ready` **no tiene fecha límite**: pueden tomarse el tiempo que
+  quieran. El servidor guarda quién está listo en `ready` (`{p1: true}`).
+- Mensaje cliente → servidor: `{type:"ready"}`. Si los dos ya están listos,
+  el servidor arranca la partida (elige las preguntas y abre el primer
+  cara a cara). La revancha no pasa por `ready`: arranca directo.
+- El botón de sonido es flotante, abajo a la derecha (al alcance del
+  pulgar), y la página respeta el área segura del teléfono para que el
+  encabezado no quede tapado por el notch.
+
 ### Cara a cara (al inicio de cada ronda)
 - La computadora muestra la pregunta a los dos jugadores **al mismo tiempo**.
 - Cada jugador escribe **UNA respuesta en secreto** (sin ver la del otro),
@@ -182,7 +200,8 @@ normalizada tiene 5+ caracteres y es subcadena de la respuesta del tablero
 ```json
 {
   "code": "ABCD",
-  "phase": "lobby|faceoff|faceoffReveal|dice|board|steal|roundEnd|fastMoney|fastMoneyReveal|gameOver",
+  "phase": "lobby|ready|faceoff|faceoffReveal|dice|board|steal|roundEnd|fastMoney|fastMoneyReveal|gameOver",
+  "ready": {"p1": true},
   "players": [{"id": "p1", "name": "Tato", "score": 0, "wildcards": 0},
               {"id": "p2", "name": "Ledya", "score": 0, "wildcards": 0}],
   "round": 1, "multiplier": 1,

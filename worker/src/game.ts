@@ -70,6 +70,7 @@ export interface QuestionBank {
 
 export type Phase =
   | "lobby"
+  | "ready"
   | "faceoff"
   | "faceoffReveal"
   | "dice"
@@ -139,6 +140,9 @@ export interface GameState {
   };
   control: string | null;
   stealPlayer: string | null;
+  /** Quiénes ya oprimieron "Listo a jugar" en la fase "ready".
+   *  El juego solo empieza cuando los dos están listos. */
+  ready: Record<string, boolean>;
   strikes: number;
   bank: number;
   roundResult: RoundResult | null;
@@ -293,6 +297,7 @@ export function createGame(code: string, opts: CreateGameOptions = {}): GameStat
     faceoff: { answers: {}, answered: {}, dice: null, winner: null, points: {}, retries: 0 },
     control: null,
     stealPlayer: null,
+    ready: {},
     strikes: 0,
     bank: 0,
     roundResult: null,
@@ -334,13 +339,14 @@ export interface StartGameOptions {
 
 /** Arranca la partida: elige 4 preguntas de ronda + 5 de Dinero Rápido
  *  (sin repetir en la partida y excluyendo el historial) y abre el primer
- *  cara a cara. Requiere 2 jugadores y estar en lobby. */
+ *  cara a cara. Requiere 2 jugadores y estar en lobby o en "ready"
+ *  (los dos ya oprimieron "Listo a jugar"). */
 export function startGame(
   state: GameState,
   bank: QuestionBank,
   opts: StartGameOptions = {},
 ): ActionResult {
-  if (state.phase !== "lobby") return fail("La partida ya empezó.");
+  if (state.phase !== "lobby" && state.phase !== "ready") return fail("La partida ya empezó.");
   if (state.players.length !== 2) return fail("Falta un jugador para empezar.");
   const rng = opts.rng ?? defaultRng;
   const now = opts.now ?? Date.now();
@@ -359,8 +365,40 @@ export function startGame(
   state.multiplier = multiplierForRound(1);
   state.suddenDeath = false;
   state.winner = null;
+  state.ready = {};
   for (const p of state.players) p.score = 0;
   setupFaceoff(state, 0, now);
+  return ok();
+}
+
+/** Cuando ya están los 2 jugadores, la sala pasa a la fase "ready": nadie
+ *  juega todavía; cada uno oprime "Listo a jugar" cuando esté acomodado
+ *  (revisar el sonido, sentarse, etc.). Sin fecha límite: pueden tomarse
+ *  el tiempo que quieran. */
+export function enterReadyPhase(state: GameState): ActionResult {
+  if (state.phase !== "lobby") return fail("La sala no está en el lobby.");
+  if (state.players.length !== 2) return fail("Falta un jugador para estar listos.");
+  state.phase = "ready";
+  state.ready = {};
+  state.deadline = null;
+  return ok();
+}
+
+/** Un jugador oprime "Listo a jugar". Cuando los dos están listos, arranca
+ *  la partida (primer cara a cara). */
+export function markReady(
+  state: GameState,
+  playerId: string,
+  bank: QuestionBank,
+  now: number = Date.now(),
+): ActionResult {
+  if (state.phase !== "ready") return fail("No estamos en la pantalla de listos.");
+  if (!playerById(state, playerId)) return fail("Jugador desconocido.");
+  if (state.ready[playerId]) return fail("Ya estás listo.");
+  state.ready[playerId] = true;
+  if (state.players.every((p) => state.ready[p.id])) {
+    return startGame(state, bank, { now });
+  }
   return ok();
 }
 
@@ -840,6 +878,7 @@ export function publicState(state: GameState): Record<string, unknown> {
     },
     control: state.control,
     stealPlayer: state.stealPlayer,
+    ready: { ...state.ready },
     strikes: state.strikes,
     bank: state.bank,
     roundResult: state.roundResult,

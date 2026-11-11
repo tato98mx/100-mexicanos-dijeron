@@ -16,9 +16,10 @@ import {
   addPlayer,
   advance,
   createGame,
+  enterReadyPhase,
+  markReady,
   publicState,
   rematch,
-  startGame,
   submitFaceoffAnswer,
   submitFastMoneyAnswer,
   submitGuess,
@@ -297,12 +298,20 @@ export class RoomDO extends DurableObject<Env> {
         }
         ws.serializeAttachment({ playerId: id });
         changed = true;
+        // Con los 2 jugadores la sala NO arranca sola: pasa a la pantalla
+        // de "Listo a jugar" para que cada uno se acomode (sonido, etc.)
+        // y el juego solo empieza cuando los dos oprimen Listo.
         if (state.players.length === 2 && state.phase === "lobby") {
-          const started = startGame(state, BANK, { now });
-          if (!started.ok) {
-            this.send(ws, { type: "error", message: started.error ?? "No se pudo empezar." });
+          const ready = enterReadyPhase(state);
+          if (!ready.ok) {
+            this.send(ws, { type: "error", message: ready.error ?? "No se pudo preparar la sala." });
           }
         }
+        break;
+      }
+      case "ready": {
+        if (!playerId) break;
+        apply(markReady(state, playerId, BANK, now));
         break;
       }
       case "faceoff-answer": {

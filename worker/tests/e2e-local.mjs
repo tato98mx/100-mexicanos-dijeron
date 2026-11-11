@@ -100,11 +100,21 @@ const ledya = new Client("Ledya");
 await tato.connect(code);
 await ledya.connect(code);
 
+// ============ LISTO A JUGAR: el juego no arranca solo ============
+// Con los 2 en la sala, la fase es "ready": cada uno oprime Listo y el
+// cara a cara solo empieza cuando los dos están listos.
+let s = await tato.waitFor((x) => x.phase === "ready", "pantalla Listo a jugar");
+check(s.ready && Object.keys(s.ready).length === 0, "nadie está listo todavía");
+tato.send({ type: "ready" });
+s = await tato.waitFor((x) => x.phase === "ready" && x.ready.p1 === true, "Tato listo");
+check(s.phase === "ready", "con un solo listo el juego sigue esperando");
+ledya.send({ type: "ready" });
+
 const gameQuestions = [];
 const fmQuestions = [];
 
 // ============ RONDA 1: nadie acierta el cara a cara, se repite ============
-let s = await tato.waitFor((x) => x.phase === "faceoff", "cara a cara ronda 1");
+s = await tato.waitFor((x) => x.phase === "faceoff", "cara a cara ronda 1");
 gameQuestions.push(s.question.id);
 console.log(`\nRonda 1 (x${s.multiplier}): ${s.question.text}`);
 tato.send({ type: "faceoff-answer", answer: NONSENSE });
