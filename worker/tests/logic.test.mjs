@@ -817,8 +817,8 @@ describe("rotación de preguntas", () => {
     assert.ok(!newIds.some((id) => oldIds.includes(id)), "la revancha repitió preguntas");
   });
 
-  it("el banco real tiene 77 rondas + 30 de Dinero Rápido y sus puntos suman 100", () => {
-    assert.equal(bank.rounds.length, 77);
+  it("el banco real tiene 117 rondas + 30 de Dinero Rápido y sus puntos suman 100", () => {
+    assert.equal(bank.rounds.length, 117);
     assert.equal(bank.fastMoney.length, 30);
     for (const q of [...bank.rounds, ...bank.fastMoney]) {
       const sum = q.answers.reduce((n, a) => n + a.points, 0);

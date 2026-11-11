@@ -58,7 +58,7 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
   un ding fuerte para comprobar que se oye; si no suena nada, el teléfono está
   en silencio o el volumen está bajo. Al tocar el botón de sonido para
   encenderlo también suena un ding inmediato. Los archivos CSS/JS llevan
-  versión (`?v=12`) para que el teléfono no se quede con la versión vieja en
+  versión (`?v=13`) para que el teléfono no se quede con la versión vieja en
   caché.
 - **Aplausos al ganar la ronda:** al terminar cada ronda, el fin de ronda
   muestra el nombre del ganador **EN GRANDE** (👏 ¡GANA LA RONDA! [nombre] —
@@ -177,13 +177,17 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 
 ## 2. Preguntas
 
-- Banco: **77 preguntas de ronda** + **30 preguntas de Dinero Rápido**,
+- Banco: **117 preguntas de ronda** + **30 preguntas de Dinero Rápido**,
   cada una con 6 respuestas que suman 100 puntos. Las 60 primeras las creó
   Milly; las 17 de ronda q61–q77 son preguntas mexicanas reales del programa
   (fuente: presentación ACTFL de Gabriela del Villar en SlideServe), con su
   orden de respuestas por popularidad, pero con los puntos de Milly (los de
-  la fuente no son fiables: algunos pasan de 100). No hay encuestas propias:
-  Tato dijo que no quiere hacer encuestas.  en español mexicano, estilo encuesta a 100 mexicanos
+  la fuente no son fiables: algunos pasan de 100); las 40 de ronda q78–q117
+  son preguntas de Family Feud (EEUU) traducidas y adaptadas a México de la
+  lista gratuita de ClassPoint (se descartaron las que no se entienden en
+  México: Thanksgiving, Super Bowl, DMV, jurado, sótanos, nieve, juegos de
+  palabras en inglés), con el orden de la fuente y los puntos de Milly. No
+  hay encuestas propias: Tato dijo que no quiere hacer encuestas.  en español mexicano, estilo encuesta a 100 mexicanos
   (p. ej. "Mencionen algo que..."). Cada pregunta: 5 a 8 respuestas, puntos
   que **sumen 100**. Cada respuesta puede tener 1-3 alias (sinónimos) para
   el matching.

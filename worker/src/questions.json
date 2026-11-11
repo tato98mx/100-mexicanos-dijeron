@@ -3778,6 +3778,2150 @@
           ]
         }
       ]
+    },
+    {
+      "id": "q78",
+      "text": "Nombra algo que la gente intercambia",
+      "answers": [
+        {
+          "text": "Ropa",
+          "points": 34,
+          "aliases": [
+            "ropa",
+            "zapatos",
+            "ropa o zapatos"
+          ]
+        },
+        {
+          "text": "Números de teléfono",
+          "points": 24,
+          "aliases": [
+            "números",
+            "teléfonos"
+          ]
+        },
+        {
+          "text": "Chismes",
+          "points": 18,
+          "aliases": [
+            "chismes",
+            "historias"
+          ]
+        },
+        {
+          "text": "Saliva",
+          "points": 12,
+          "aliases": [
+            "saliva",
+            "gérmenes"
+          ]
+        },
+        {
+          "text": "Libros",
+          "points": 7,
+          "aliases": [
+            "libros"
+          ]
+        },
+        {
+          "text": "Recetas",
+          "points": 5,
+          "aliases": [
+            "recetas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q79",
+      "text": "Nombra algo que se puede inflar o desinflar",
+      "answers": [
+        {
+          "text": "Globo",
+          "points": 36,
+          "aliases": [
+            "globo",
+            "globos"
+          ]
+        },
+        {
+          "text": "Llanta",
+          "points": 26,
+          "aliases": [
+            "llanta",
+            "llantas",
+            "neumático"
+          ]
+        },
+        {
+          "text": "Pelota de playa",
+          "points": 16,
+          "aliases": [
+            "pelota de playa",
+            "pelota"
+          ]
+        },
+        {
+          "text": "Ego",
+          "points": 12,
+          "aliases": [
+            "ego",
+            "el ego"
+          ]
+        },
+        {
+          "text": "Balsa",
+          "points": 6,
+          "aliases": [
+            "balsa"
+          ]
+        },
+        {
+          "text": "Colchón inflable",
+          "points": 4,
+          "aliases": [
+            "colchón inflable",
+            "colchón"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q80",
+      "text": "Nombra un lugar al que dejas de ir cuando no tienes dinero",
+      "answers": [
+        {
+          "text": "Restaurantes",
+          "points": 34,
+          "aliases": [
+            "restaurantes",
+            "restaurante"
+          ]
+        },
+        {
+          "text": "Tiendas",
+          "points": 24,
+          "aliases": [
+            "tiendas",
+            "plaza",
+            "centro comercial"
+          ]
+        },
+        {
+          "text": "Bar",
+          "points": 18,
+          "aliases": [
+            "bar",
+            "antro",
+            "cantina"
+          ]
+        },
+        {
+          "text": "Casino",
+          "points": 12,
+          "aliases": [
+            "casino"
+          ]
+        },
+        {
+          "text": "Cine",
+          "points": 7,
+          "aliases": [
+            "cine",
+            "películas"
+          ]
+        },
+        {
+          "text": "Conciertos",
+          "points": 5,
+          "aliases": [
+            "conciertos",
+            "concierto"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q81",
+      "text": "Nombra algo que puede estar lleno de hoyos",
+      "answers": [
+        {
+          "text": "Queso suizo",
+          "points": 34,
+          "aliases": [
+            "queso suizo",
+            "queso"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 24,
+          "aliases": [
+            "ropa",
+            "calcetines",
+            "calcetín"
+          ]
+        },
+        {
+          "text": "Coartada",
+          "points": 18,
+          "aliases": [
+            "coartada",
+            "historia"
+          ]
+        },
+        {
+          "text": "Red de pesca",
+          "points": 12,
+          "aliases": [
+            "red",
+            "red de pesca"
+          ]
+        },
+        {
+          "text": "Colador",
+          "points": 7,
+          "aliases": [
+            "colador"
+          ]
+        },
+        {
+          "text": "Calle",
+          "points": 5,
+          "aliases": [
+            "calle",
+            "carretera"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q82",
+      "text": "Nombra una casa en la que nunca querrías estar",
+      "answers": [
+        {
+          "text": "Casa embrujada",
+          "points": 36,
+          "aliases": [
+            "casa embrujada",
+            "embrujada"
+          ]
+        },
+        {
+          "text": "Casa del terror",
+          "points": 26,
+          "aliases": [
+            "casa del terror",
+            "terror"
+          ]
+        },
+        {
+          "text": "Casa de los espejos",
+          "points": 16,
+          "aliases": [
+            "casa de los espejos",
+            "espejos"
+          ]
+        },
+        {
+          "text": "Casa de naipes",
+          "points": 12,
+          "aliases": [
+            "casa de naipes",
+            "naipes"
+          ]
+        },
+        {
+          "text": "Casa de paja",
+          "points": 6,
+          "aliases": [
+            "casa de paja",
+            "paja"
+          ]
+        },
+        {
+          "text": "Casa en ruinas",
+          "points": 4,
+          "aliases": [
+            "casa en ruinas",
+            "ruinas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q83",
+      "text": "Nombra algo que puedes encontrar en una tina",
+      "answers": [
+        {
+          "text": "Agua",
+          "points": 36,
+          "aliases": [
+            "agua"
+          ]
+        },
+        {
+          "text": "Jabón",
+          "points": 26,
+          "aliases": [
+            "jabón",
+            "jabon"
+          ]
+        },
+        {
+          "text": "Patito de hule",
+          "points": 16,
+          "aliases": [
+            "patito",
+            "patito de hule",
+            "pato"
+          ]
+        },
+        {
+          "text": "Shampoo",
+          "points": 12,
+          "aliases": [
+            "shampoo",
+            "champú"
+          ]
+        },
+        {
+          "text": "Burbujas",
+          "points": 6,
+          "aliases": [
+            "burbujas",
+            "espuma"
+          ]
+        },
+        {
+          "text": "Esponja",
+          "points": 4,
+          "aliases": [
+            "esponja"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q84",
+      "text": "Además de los pies, nombra algo que corre",
+      "answers": [
+        {
+          "text": "Agua",
+          "points": 34,
+          "aliases": [
+            "agua",
+            "excusado",
+            "inodoro"
+          ]
+        },
+        {
+          "text": "Motor",
+          "points": 26,
+          "aliases": [
+            "motor",
+            "carro",
+            "coche"
+          ]
+        },
+        {
+          "text": "Refrigerador",
+          "points": 18,
+          "aliases": [
+            "refrigerador",
+            "refri"
+          ]
+        },
+        {
+          "text": "Nariz",
+          "points": 12,
+          "aliases": [
+            "nariz",
+            "mocos"
+          ]
+        },
+        {
+          "text": "Medias",
+          "points": 6,
+          "aliases": [
+            "medias",
+            "pantimedias"
+          ]
+        },
+        {
+          "text": "Reloj",
+          "points": 4,
+          "aliases": [
+            "reloj"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q85",
+      "text": "Nombra algo asociado con los vampiros",
+      "answers": [
+        {
+          "text": "Colmillos",
+          "points": 36,
+          "aliases": [
+            "colmillos",
+            "dientes"
+          ]
+        },
+        {
+          "text": "Capa",
+          "points": 26,
+          "aliases": [
+            "capa"
+          ]
+        },
+        {
+          "text": "Ajo",
+          "points": 16,
+          "aliases": [
+            "ajo",
+            "ajos"
+          ]
+        },
+        {
+          "text": "Cruz",
+          "points": 12,
+          "aliases": [
+            "cruz",
+            "crucifijo"
+          ]
+        },
+        {
+          "text": "Estaca",
+          "points": 6,
+          "aliases": [
+            "estaca"
+          ]
+        },
+        {
+          "text": "Sangre",
+          "points": 4,
+          "aliases": [
+            "sangre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q86",
+      "text": "Nombra una razón por la que alguien se despierta a las 2 de la mañana",
+      "answers": [
+        {
+          "text": "Ir al baño",
+          "points": 36,
+          "aliases": [
+            "ir al baño",
+            "hacer pipí",
+            "orinar"
+          ]
+        },
+        {
+          "text": "Sed",
+          "points": 26,
+          "aliases": [
+            "sed",
+            "tengo sed"
+          ]
+        },
+        {
+          "text": "Hambre",
+          "points": 16,
+          "aliases": [
+            "hambre",
+            "tengo hambre"
+          ]
+        },
+        {
+          "text": "Pesadilla",
+          "points": 12,
+          "aliases": [
+            "pesadilla"
+          ]
+        },
+        {
+          "text": "Inquietud",
+          "points": 6,
+          "aliases": [
+            "inquietud",
+            "no puedo dormir"
+          ]
+        },
+        {
+          "text": "Un ruido",
+          "points": 4,
+          "aliases": [
+            "un ruido",
+            "ruido"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q87",
+      "text": "Nombra algo que tiene dientes",
+      "answers": [
+        {
+          "text": "Animales",
+          "points": 36,
+          "aliases": [
+            "animales",
+            "perro",
+            "tiburón"
+          ]
+        },
+        {
+          "text": "Personas",
+          "points": 26,
+          "aliases": [
+            "personas",
+            "gente",
+            "humanos"
+          ]
+        },
+        {
+          "text": "Peine",
+          "points": 16,
+          "aliases": [
+            "peine"
+          ]
+        },
+        {
+          "text": "Cierre",
+          "points": 12,
+          "aliases": [
+            "cierre",
+            "cremallera"
+          ]
+        },
+        {
+          "text": "Sierra",
+          "points": 6,
+          "aliases": [
+            "sierra",
+            "serrucho"
+          ]
+        },
+        {
+          "text": "Llave",
+          "points": 4,
+          "aliases": [
+            "llave"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q88",
+      "text": "Nombra algo que te puede salir por la nariz cuando te ríes",
+      "answers": [
+        {
+          "text": "Mocos",
+          "points": 36,
+          "aliases": [
+            "mocos",
+            "moco"
+          ]
+        },
+        {
+          "text": "Leche",
+          "points": 26,
+          "aliases": [
+            "leche"
+          ]
+        },
+        {
+          "text": "Agua",
+          "points": 16,
+          "aliases": [
+            "agua"
+          ]
+        },
+        {
+          "text": "Refresco",
+          "points": 12,
+          "aliases": [
+            "refresco",
+            "soda",
+            "coca"
+          ]
+        },
+        {
+          "text": "Aire",
+          "points": 6,
+          "aliases": [
+            "aire",
+            "aliento"
+          ]
+        },
+        {
+          "text": "Comida",
+          "points": 4,
+          "aliases": [
+            "comida"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q89",
+      "text": "Nombra una ocasión para usar tu ropa interior de la suerte",
+      "answers": [
+        {
+          "text": "Una cita",
+          "points": 34,
+          "aliases": [
+            "una cita",
+            "cita",
+            "salir con alguien"
+          ]
+        },
+        {
+          "text": "Entrevista de trabajo",
+          "points": 26,
+          "aliases": [
+            "entrevista",
+            "entrevista de trabajo"
+          ]
+        },
+        {
+          "text": "Casino",
+          "points": 16,
+          "aliases": [
+            "casino",
+            "apostar"
+          ]
+        },
+        {
+          "text": "Evento deportivo",
+          "points": 12,
+          "aliases": [
+            "evento deportivo",
+            "partido",
+            "deportes"
+          ]
+        },
+        {
+          "text": "Boda",
+          "points": 7,
+          "aliases": [
+            "boda"
+          ]
+        },
+        {
+          "text": "Aniversario",
+          "points": 5,
+          "aliases": [
+            "aniversario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q90",
+      "text": "Nombra un lugar lleno de gente que no quiere estar ahí",
+      "answers": [
+        {
+          "text": "Cárcel",
+          "points": 36,
+          "aliases": [
+            "cárcel",
+            "carcel",
+            "prisión"
+          ]
+        },
+        {
+          "text": "Infierno",
+          "points": 24,
+          "aliases": [
+            "infierno"
+          ]
+        },
+        {
+          "text": "Trabajo",
+          "points": 18,
+          "aliases": [
+            "trabajo",
+            "oficina",
+            "junta"
+          ]
+        },
+        {
+          "text": "Panteón",
+          "points": 12,
+          "aliases": [
+            "panteón",
+            "panteon",
+            "cementerio"
+          ]
+        },
+        {
+          "text": "Iglesia",
+          "points": 6,
+          "aliases": [
+            "iglesia"
+          ]
+        },
+        {
+          "text": "Escuela",
+          "points": 4,
+          "aliases": [
+            "escuela",
+            "clases"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q91",
+      "text": "Nombra un animal fácil de imitar en mímica",
+      "answers": [
+        {
+          "text": "Mono",
+          "points": 34,
+          "aliases": [
+            "mono",
+            "chango",
+            "simio"
+          ]
+        },
+        {
+          "text": "Perro",
+          "points": 26,
+          "aliases": [
+            "perro"
+          ]
+        },
+        {
+          "text": "Gato",
+          "points": 18,
+          "aliases": [
+            "gato"
+          ]
+        },
+        {
+          "text": "Pájaro",
+          "points": 12,
+          "aliases": [
+            "pájaro",
+            "pajaro",
+            "ave"
+          ]
+        },
+        {
+          "text": "Elefante",
+          "points": 6,
+          "aliases": [
+            "elefante"
+          ]
+        },
+        {
+          "text": "Canguro",
+          "points": 4,
+          "aliases": [
+            "canguro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q92",
+      "text": "¿Qué sería difícil de hacer si te pusieras pegamento en vez de labial?",
+      "answers": [
+        {
+          "text": "Comer",
+          "points": 34,
+          "aliases": [
+            "comer"
+          ]
+        },
+        {
+          "text": "Hablar",
+          "points": 26,
+          "aliases": [
+            "hablar"
+          ]
+        },
+        {
+          "text": "Besar",
+          "points": 18,
+          "aliases": [
+            "besar"
+          ]
+        },
+        {
+          "text": "Respirar",
+          "points": 12,
+          "aliases": [
+            "respirar"
+          ]
+        },
+        {
+          "text": "Quitarlo",
+          "points": 6,
+          "aliases": [
+            "quitarlo",
+            "quitarme el pegamento"
+          ]
+        },
+        {
+          "text": "Sonreír",
+          "points": 4,
+          "aliases": [
+            "sonreír",
+            "sonreir"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q93",
+      "text": "Nombra algo que odiarías que pasara mientras te bañas",
+      "answers": [
+        {
+          "text": "Que suene el teléfono",
+          "points": 34,
+          "aliases": [
+            "suene el teléfono",
+            "una llamada",
+            "que me llamen"
+          ]
+        },
+        {
+          "text": "Que no haya agua caliente",
+          "points": 26,
+          "aliases": [
+            "no haya agua caliente",
+            "agua fría"
+          ]
+        },
+        {
+          "text": "Que toquen la puerta",
+          "points": 16,
+          "aliases": [
+            "toquen la puerta",
+            "que entre alguien"
+          ]
+        },
+        {
+          "text": "Que te dé toques",
+          "points": 12,
+          "aliases": [
+            "toques",
+            "electrocutarme"
+          ]
+        },
+        {
+          "text": "Que se vaya la luz",
+          "points": 7,
+          "aliases": [
+            "se vaya la luz",
+            "apagón"
+          ]
+        },
+        {
+          "text": "Resbalarte",
+          "points": 5,
+          "aliases": [
+            "resbalarte",
+            "caerme"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q94",
+      "text": "Después de mover el sillón por primera vez en 10 años, ¿qué podrías encontrar debajo?",
+      "answers": [
+        {
+          "text": "Dinero",
+          "points": 36,
+          "aliases": [
+            "dinero",
+            "monedas",
+            "cambio"
+          ]
+        },
+        {
+          "text": "Polvo",
+          "points": 26,
+          "aliases": [
+            "polvo"
+          ]
+        },
+        {
+          "text": "Comida",
+          "points": 16,
+          "aliases": [
+            "comida"
+          ]
+        },
+        {
+          "text": "Juguetes",
+          "points": 12,
+          "aliases": [
+            "juguetes",
+            "juguete"
+          ]
+        },
+        {
+          "text": "Control remoto",
+          "points": 6,
+          "aliases": [
+            "control",
+            "control remoto"
+          ]
+        },
+        {
+          "text": "Ropa",
+          "points": 4,
+          "aliases": [
+            "ropa",
+            "calcetines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q95",
+      "text": "Nombra un lugar al que la gente tiene que ir, le guste o no",
+      "answers": [
+        {
+          "text": "Baño",
+          "points": 34,
+          "aliases": [
+            "baño",
+            "excusado"
+          ]
+        },
+        {
+          "text": "Trabajo",
+          "points": 26,
+          "aliases": [
+            "trabajo",
+            "oficina"
+          ]
+        },
+        {
+          "text": "Hospital",
+          "points": 18,
+          "aliases": [
+            "hospital",
+            "dentista",
+            "doctor"
+          ]
+        },
+        {
+          "text": "Súper",
+          "points": 12,
+          "aliases": [
+            "súper",
+            "super",
+            "tienda",
+            "mercado"
+          ]
+        },
+        {
+          "text": "Juzgado",
+          "points": 6,
+          "aliases": [
+            "juzgado",
+            "corte",
+            "tribunal"
+          ]
+        },
+        {
+          "text": "Escuela",
+          "points": 4,
+          "aliases": [
+            "escuela",
+            "clases"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q96",
+      "text": "Nombra algo que hace estornudar",
+      "answers": [
+        {
+          "text": "Pimienta",
+          "points": 34,
+          "aliases": [
+            "pimienta"
+          ]
+        },
+        {
+          "text": "Polen",
+          "points": 26,
+          "aliases": [
+            "polen"
+          ]
+        },
+        {
+          "text": "Polvo",
+          "points": 18,
+          "aliases": [
+            "polvo"
+          ]
+        },
+        {
+          "text": "Perfume",
+          "points": 12,
+          "aliases": [
+            "perfume",
+            "loción"
+          ]
+        },
+        {
+          "text": "Resfriado",
+          "points": 6,
+          "aliases": [
+            "resfriado",
+            "gripe"
+          ]
+        },
+        {
+          "text": "El sol",
+          "points": 4,
+          "aliases": [
+            "sol",
+            "el sol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q97",
+      "text": "Nombra algo que la gente patea",
+      "answers": [
+        {
+          "text": "Pelotas",
+          "points": 36,
+          "aliases": [
+            "pelotas",
+            "pelota",
+            "balón"
+          ]
+        },
+        {
+          "text": "Llantas",
+          "points": 26,
+          "aliases": [
+            "llantas",
+            "llanta"
+          ]
+        },
+        {
+          "text": "Perros",
+          "points": 16,
+          "aliases": [
+            "perros",
+            "perro"
+          ]
+        },
+        {
+          "text": "Latas",
+          "points": 12,
+          "aliases": [
+            "latas",
+            "lata"
+          ]
+        },
+        {
+          "text": "Cubetas",
+          "points": 6,
+          "aliases": [
+            "cubetas",
+            "cubeta",
+            "balde"
+          ]
+        },
+        {
+          "text": "Piedras",
+          "points": 4,
+          "aliases": [
+            "piedras",
+            "piedra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q98",
+      "text": "Si tu refri pudiera hablar, ¿de qué se quejaría?",
+      "answers": [
+        {
+          "text": "Comida echada a perder",
+          "points": 34,
+          "aliases": [
+            "comida echada a perder",
+            "comida podrida",
+            "caducada"
+          ]
+        },
+        {
+          "text": "Que lo abres a cada rato",
+          "points": 26,
+          "aliases": [
+            "lo abres a cada rato",
+            "abrirlo mucho"
+          ]
+        },
+        {
+          "text": "Que no limpias lo que se derrama",
+          "points": 18,
+          "aliases": [
+            "no limpias",
+            "derrames"
+          ]
+        },
+        {
+          "text": "Que ignoras las verduras",
+          "points": 12,
+          "aliases": [
+            "ignoras las verduras",
+            "las verduras"
+          ]
+        },
+        {
+          "text": "Sobras raras",
+          "points": 6,
+          "aliases": [
+            "sobras",
+            "sobras raras"
+          ]
+        },
+        {
+          "text": "Que huele feo",
+          "points": 4,
+          "aliases": [
+            "huele feo",
+            "mal olor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q99",
+      "text": "Nombra algo que la gente hace en el baño y no admitiría",
+      "answers": [
+        {
+          "text": "Cantar fuerte",
+          "points": 34,
+          "aliases": [
+            "cantar",
+            "cantar fuerte"
+          ]
+        },
+        {
+          "text": "Hablar solo",
+          "points": 26,
+          "aliases": [
+            "hablar solo",
+            "hablarme"
+          ]
+        },
+        {
+          "text": "Ver redes sociales",
+          "points": 18,
+          "aliases": [
+            "redes sociales",
+            "celular",
+            "ver el celular"
+          ]
+        },
+        {
+          "text": "Bailar",
+          "points": 12,
+          "aliases": [
+            "bailar"
+          ]
+        },
+        {
+          "text": "Leer la etiqueta del shampoo",
+          "points": 6,
+          "aliases": [
+            "leer el shampoo",
+            "leer etiquetas"
+          ]
+        },
+        {
+          "text": "Echarse un pedo",
+          "points": 4,
+          "aliases": [
+            "pedo",
+            "echarse un gas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q100",
+      "text": "¿De qué puedes tener capas?",
+      "answers": [
+        {
+          "text": "Ropa",
+          "points": 34,
+          "aliases": [
+            "ropa"
+          ]
+        },
+        {
+          "text": "Piel",
+          "points": 26,
+          "aliases": [
+            "piel"
+          ]
+        },
+        {
+          "text": "Pastel",
+          "points": 18,
+          "aliases": [
+            "pastel"
+          ]
+        },
+        {
+          "text": "Grasa",
+          "points": 12,
+          "aliases": [
+            "grasa",
+            "lonjas"
+          ]
+        },
+        {
+          "text": "Cabello",
+          "points": 6,
+          "aliases": [
+            "cabello",
+            "pelo"
+          ]
+        },
+        {
+          "text": "Cobija",
+          "points": 4,
+          "aliases": [
+            "cobija",
+            "manta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q101",
+      "text": "Nombra una razón que dan los hombres para quedarse calvos",
+      "answers": [
+        {
+          "text": "Estrés",
+          "points": 34,
+          "aliases": [
+            "estrés",
+            "estres"
+          ]
+        },
+        {
+          "text": "Virilidad",
+          "points": 26,
+          "aliases": [
+            "virilidad",
+            "hombría"
+          ]
+        },
+        {
+          "text": "Herencia",
+          "points": 18,
+          "aliases": [
+            "herencia",
+            "genética",
+            "familia"
+          ]
+        },
+        {
+          "text": "La edad",
+          "points": 12,
+          "aliases": [
+            "edad",
+            "vejez"
+          ]
+        },
+        {
+          "text": "Inteligencia",
+          "points": 6,
+          "aliases": [
+            "inteligencia",
+            "listo"
+          ]
+        },
+        {
+          "text": "La esposa",
+          "points": 4,
+          "aliases": [
+            "esposa",
+            "mi mujer",
+            "el matrimonio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q102",
+      "text": "Nombra algo que desearías que creciera en los árboles",
+      "answers": [
+        {
+          "text": "Dinero",
+          "points": 36,
+          "aliases": [
+            "dinero",
+            "billetes"
+          ]
+        },
+        {
+          "text": "Pizza",
+          "points": 26,
+          "aliases": [
+            "pizza"
+          ]
+        },
+        {
+          "text": "Chocolate",
+          "points": 16,
+          "aliases": [
+            "chocolate"
+          ]
+        },
+        {
+          "text": "Ropa limpia",
+          "points": 12,
+          "aliases": [
+            "ropa limpia",
+            "ropa"
+          ]
+        },
+        {
+          "text": "Señal de Wi-Fi",
+          "points": 6,
+          "aliases": [
+            "wifi",
+            "wi-fi",
+            "internet"
+          ]
+        },
+        {
+          "text": "Cerveza",
+          "points": 4,
+          "aliases": [
+            "cerveza",
+            "chelas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q103",
+      "text": "Nombra un regalo de bodas popular",
+      "answers": [
+        {
+          "text": "Tostador",
+          "points": 34,
+          "aliases": [
+            "tostador",
+            "tostadora"
+          ]
+        },
+        {
+          "text": "Dinero",
+          "points": 26,
+          "aliases": [
+            "dinero",
+            "efectivo"
+          ]
+        },
+        {
+          "text": "Vajilla",
+          "points": 18,
+          "aliases": [
+            "vajilla",
+            "platos"
+          ]
+        },
+        {
+          "text": "Cubiertos",
+          "points": 12,
+          "aliases": [
+            "cubiertos"
+          ]
+        },
+        {
+          "text": "Cristalería",
+          "points": 6,
+          "aliases": [
+            "cristalería",
+            "copas",
+            "vasos"
+          ]
+        },
+        {
+          "text": "Licuadora",
+          "points": 4,
+          "aliases": [
+            "licuadora"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q104",
+      "text": "Si te suena el celular en la iglesia, ¿quién tiene que ser?",
+      "answers": [
+        {
+          "text": "Dios",
+          "points": 36,
+          "aliases": [
+            "dios",
+            "el señor",
+            "jesús"
+          ]
+        },
+        {
+          "text": "Mis hijos",
+          "points": 26,
+          "aliases": [
+            "mis hijos",
+            "hijos"
+          ]
+        },
+        {
+          "text": "Mi mamá",
+          "points": 16,
+          "aliases": [
+            "mi mamá",
+            "mamá",
+            "madre"
+          ]
+        },
+        {
+          "text": "Mi hermano",
+          "points": 12,
+          "aliases": [
+            "mi hermano",
+            "hermano"
+          ]
+        },
+        {
+          "text": "Mi esposo",
+          "points": 6,
+          "aliases": [
+            "mi esposo",
+            "esposo",
+            "marido"
+          ]
+        },
+        {
+          "text": "Mi jefe",
+          "points": 4,
+          "aliases": [
+            "mi jefe",
+            "jefe",
+            "patrón"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q105",
+      "text": "Nombra algo que sales a hacer en bata",
+      "answers": [
+        {
+          "text": "Recoger el periódico",
+          "points": 36,
+          "aliases": [
+            "periódico",
+            "recoger el periódico"
+          ]
+        },
+        {
+          "text": "Sacar la basura",
+          "points": 26,
+          "aliases": [
+            "basura",
+            "sacar la basura"
+          ]
+        },
+        {
+          "text": "Recoger el correo",
+          "points": 16,
+          "aliases": [
+            "correo",
+            "recoger el correo"
+          ]
+        },
+        {
+          "text": "Regar el pasto",
+          "points": 12,
+          "aliases": [
+            "regar",
+            "regar el pasto"
+          ]
+        },
+        {
+          "text": "Pasear al perro",
+          "points": 6,
+          "aliases": [
+            "pasear al perro",
+            "sacar al perro"
+          ]
+        },
+        {
+          "text": "Hablar con el vecino",
+          "points": 4,
+          "aliases": [
+            "vecino",
+            "hablar con el vecino"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q106",
+      "text": "Nombra algo que odiarías descubrir que caducó",
+      "answers": [
+        {
+          "text": "Licencia de conducir",
+          "points": 34,
+          "aliases": [
+            "licencia",
+            "licencia de conducir"
+          ]
+        },
+        {
+          "text": "Leche",
+          "points": 26,
+          "aliases": [
+            "leche"
+          ]
+        },
+        {
+          "text": "Tarjeta de crédito",
+          "points": 18,
+          "aliases": [
+            "tarjeta",
+            "tarjeta de crédito"
+          ]
+        },
+        {
+          "text": "Seguro",
+          "points": 12,
+          "aliases": [
+            "seguro"
+          ]
+        },
+        {
+          "text": "Tarjeta de circulación",
+          "points": 6,
+          "aliases": [
+            "tarjeta de circulación",
+            "circulación"
+          ]
+        },
+        {
+          "text": "Mi vida",
+          "points": 4,
+          "aliases": [
+            "mi vida",
+            "la vida"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q107",
+      "text": "Nombra una comida que es un desastre comer",
+      "answers": [
+        {
+          "text": "Espagueti",
+          "points": 34,
+          "aliases": [
+            "espagueti",
+            "pasta",
+            "fideos"
+          ]
+        },
+        {
+          "text": "Tacos",
+          "points": 26,
+          "aliases": [
+            "tacos",
+            "taco"
+          ]
+        },
+        {
+          "text": "Elote",
+          "points": 18,
+          "aliases": [
+            "elote",
+            "maíz"
+          ]
+        },
+        {
+          "text": "Sopa",
+          "points": 12,
+          "aliases": [
+            "sopa",
+            "caldo"
+          ]
+        },
+        {
+          "text": "Costillas",
+          "points": 6,
+          "aliases": [
+            "costillas"
+          ]
+        },
+        {
+          "text": "Pizza",
+          "points": 4,
+          "aliases": [
+            "pizza"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q108",
+      "text": "Nombra algo bueno de vivir solo",
+      "answers": [
+        {
+          "text": "Libertad",
+          "points": 34,
+          "aliases": [
+            "libertad"
+          ]
+        },
+        {
+          "text": "Paz",
+          "points": 26,
+          "aliases": [
+            "paz",
+            "tranquilidad"
+          ]
+        },
+        {
+          "text": "Privacidad",
+          "points": 18,
+          "aliases": [
+            "privacidad"
+          ]
+        },
+        {
+          "text": "Menos que limpiar",
+          "points": 12,
+          "aliases": [
+            "menos que limpiar",
+            "menos limpieza"
+          ]
+        },
+        {
+          "text": "Control de la comida",
+          "points": 6,
+          "aliases": [
+            "control de la comida",
+            "mi comida"
+          ]
+        },
+        {
+          "text": "Control del control remoto",
+          "points": 4,
+          "aliases": [
+            "control remoto",
+            "el control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q109",
+      "text": "¿Qué harías si vieras un fantasma?",
+      "answers": [
+        {
+          "text": "Gritar",
+          "points": 36,
+          "aliases": [
+            "gritar",
+            "grito"
+          ]
+        },
+        {
+          "text": "Hablarle",
+          "points": 26,
+          "aliases": [
+            "hablarle",
+            "hablar con él"
+          ]
+        },
+        {
+          "text": "Correr",
+          "points": 16,
+          "aliases": [
+            "correr",
+            "huir"
+          ]
+        },
+        {
+          "text": "Rezar",
+          "points": 12,
+          "aliases": [
+            "rezar",
+            "orar"
+          ]
+        },
+        {
+          "text": "Desmayarme",
+          "points": 6,
+          "aliases": [
+            "desmayarme",
+            "desmayo"
+          ]
+        },
+        {
+          "text": "Pellizcarme",
+          "points": 4,
+          "aliases": [
+            "pellizcarme"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q110",
+      "text": "Nombra una queja de los hospitales",
+      "answers": [
+        {
+          "text": "Comida",
+          "points": 34,
+          "aliases": [
+            "comida"
+          ]
+        },
+        {
+          "text": "Espera",
+          "points": 26,
+          "aliases": [
+            "espera",
+            "tardan mucho"
+          ]
+        },
+        {
+          "text": "Costo",
+          "points": 18,
+          "aliases": [
+            "costo",
+            "caro",
+            "precio"
+          ]
+        },
+        {
+          "text": "Olor",
+          "points": 12,
+          "aliases": [
+            "olor",
+            "huele feo"
+          ]
+        },
+        {
+          "text": "Servicio",
+          "points": 6,
+          "aliases": [
+            "servicio"
+          ]
+        },
+        {
+          "text": "Enfermeras",
+          "points": 4,
+          "aliases": [
+            "enfermeras"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q111",
+      "text": "Nombra algo que puede arruinar la cena",
+      "answers": [
+        {
+          "text": "Comida quemada",
+          "points": 36,
+          "aliases": [
+            "comida quemada",
+            "se quemó",
+            "quemada"
+          ]
+        },
+        {
+          "text": "Una llamada",
+          "points": 24,
+          "aliases": [
+            "una llamada",
+            "teléfono"
+          ]
+        },
+        {
+          "text": "Una pelea",
+          "points": 16,
+          "aliases": [
+            "pelea",
+            "discusión"
+          ]
+        },
+        {
+          "text": "Picar antes",
+          "points": 12,
+          "aliases": [
+            "picar antes",
+            "comer antes"
+          ]
+        },
+        {
+          "text": "Un pelo en la comida",
+          "points": 7,
+          "aliases": [
+            "pelo en la comida",
+            "un pelo",
+            "cabello"
+          ]
+        },
+        {
+          "text": "Que el invitado llegue tarde",
+          "points": 5,
+          "aliases": [
+            "llegue tarde",
+            "invitado tarde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q112",
+      "text": "Nombra un ruido que la gente no puede evitar hacer",
+      "answers": [
+        {
+          "text": "Eructo",
+          "points": 34,
+          "aliases": [
+            "eructo"
+          ]
+        },
+        {
+          "text": "Estornudo",
+          "points": 26,
+          "aliases": [
+            "estornudo"
+          ]
+        },
+        {
+          "text": "Ronquido",
+          "points": 18,
+          "aliases": [
+            "ronquido",
+            "roncar"
+          ]
+        },
+        {
+          "text": "Pedo",
+          "points": 12,
+          "aliases": [
+            "pedo",
+            "gas"
+          ]
+        },
+        {
+          "text": "Hipo",
+          "points": 6,
+          "aliases": [
+            "hipo"
+          ]
+        },
+        {
+          "text": "Tos",
+          "points": 4,
+          "aliases": [
+            "tos",
+            "toser"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q113",
+      "text": "Nombra algo que siempre se acaba en una fiesta",
+      "answers": [
+        {
+          "text": "Bebidas",
+          "points": 36,
+          "aliases": [
+            "bebidas",
+            "alcohol",
+            "chelas",
+            "cerveza"
+          ]
+        },
+        {
+          "text": "Hielo",
+          "points": 26,
+          "aliases": [
+            "hielo"
+          ]
+        },
+        {
+          "text": "Comida",
+          "points": 16,
+          "aliases": [
+            "comida",
+            "botanas"
+          ]
+        },
+        {
+          "text": "Vasos",
+          "points": 12,
+          "aliases": [
+            "vasos",
+            "copas"
+          ]
+        },
+        {
+          "text": "Papel de baño",
+          "points": 6,
+          "aliases": [
+            "papel de baño",
+            "papel"
+          ]
+        },
+        {
+          "text": "Servilletas",
+          "points": 4,
+          "aliases": [
+            "servilletas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q114",
+      "text": "Nombra algo que tiembla",
+      "answers": [
+        {
+          "text": "Gelatina",
+          "points": 34,
+          "aliases": [
+            "gelatina"
+          ]
+        },
+        {
+          "text": "Una persona",
+          "points": 26,
+          "aliases": [
+            "persona",
+            "gente",
+            "bailarín"
+          ]
+        },
+        {
+          "text": "La tierra",
+          "points": 18,
+          "aliases": [
+            "tierra",
+            "terremoto",
+            "sismo"
+          ]
+        },
+        {
+          "text": "Sonaja",
+          "points": 12,
+          "aliases": [
+            "sonaja"
+          ]
+        },
+        {
+          "text": "Hojas",
+          "points": 6,
+          "aliases": [
+            "hojas",
+            "árbol"
+          ]
+        },
+        {
+          "text": "Perro",
+          "points": 4,
+          "aliases": [
+            "perro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q115",
+      "text": "Nombra algo que nunca querrías que tu hijo trajera a casa",
+      "answers": [
+        {
+          "text": "Piojos",
+          "points": 34,
+          "aliases": [
+            "piojos"
+          ]
+        },
+        {
+          "text": "Perro",
+          "points": 26,
+          "aliases": [
+            "perro",
+            "gato",
+            "mascota"
+          ]
+        },
+        {
+          "text": "Boleta reprobada",
+          "points": 18,
+          "aliases": [
+            "boleta",
+            "malas calificaciones",
+            "reprobado"
+          ]
+        },
+        {
+          "text": "Gérmenes",
+          "points": 12,
+          "aliases": [
+            "gérmenes",
+            "enfermedad"
+          ]
+        },
+        {
+          "text": "Policías",
+          "points": 6,
+          "aliases": [
+            "policías",
+            "policía"
+          ]
+        },
+        {
+          "text": "Novio",
+          "points": 4,
+          "aliases": [
+            "novio",
+            "novia",
+            "pareja"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q116",
+      "text": "Nombra algo que la gente unta",
+      "answers": [
+        {
+          "text": "Gérmenes",
+          "points": 34,
+          "aliases": [
+            "gérmenes",
+            "enfermedades"
+          ]
+        },
+        {
+          "text": "Mantequilla",
+          "points": 26,
+          "aliases": [
+            "mantequilla"
+          ]
+        },
+        {
+          "text": "Chismes",
+          "points": 18,
+          "aliases": [
+            "chismes",
+            "rumores"
+          ]
+        },
+        {
+          "text": "Crema de cacahuate",
+          "points": 12,
+          "aliases": [
+            "crema de cacahuate",
+            "cacahuate"
+          ]
+        },
+        {
+          "text": "Mermelada",
+          "points": 6,
+          "aliases": [
+            "mermelada"
+          ]
+        },
+        {
+          "text": "Mayonesa",
+          "points": 4,
+          "aliases": [
+            "mayonesa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q117",
+      "text": "Nombra algo que te saltarías si vas tarde al trabajo",
+      "answers": [
+        {
+          "text": "Desayuno",
+          "points": 34,
+          "aliases": [
+            "desayuno"
+          ]
+        },
+        {
+          "text": "Bañarte",
+          "points": 26,
+          "aliases": [
+            "bañarte",
+            "ducha",
+            "baño"
+          ]
+        },
+        {
+          "text": "Contestar el teléfono",
+          "points": 18,
+          "aliases": [
+            "contestar el teléfono",
+            "el teléfono"
+          ]
+        },
+        {
+          "text": "Lavarte los dientes",
+          "points": 12,
+          "aliases": [
+            "lavarte los dientes",
+            "cepillarme"
+          ]
+        },
+        {
+          "text": "Noticias",
+          "points": 6,
+          "aliases": [
+            "noticias",
+            "periódico"
+          ]
+        },
+        {
+          "text": "Maquillarte",
+          "points": 4,
+          "aliases": [
+            "maquillarte",
+            "maquillaje"
+          ]
+        }
+      ]
     }
   ],
   "fastMoney": [
