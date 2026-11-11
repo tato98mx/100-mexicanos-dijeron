@@ -241,9 +241,20 @@ function ensureAudio() {
 }
 
 /* Tono simple con envolvente. Si el audio no está corriendo o está
- * silenciado, no hace nada (evita acumular notas en pausa). */
-function playTone(freq, startOffset, dur, type, vol, dest) {
-  if (!audioCtx || audioCtx.state !== "running" || soundMuted) return;
+ * silenciado, no hace nada (evita acumular notas en pausa). En iOS el
+ * contexto de audio arranca suspendido: si está suspendido, se pide
+ * reanudarlo y se reintenta el tono una sola vez cuando ya corra. */
+function playTone(freq, startOffset, dur, type, vol, dest, _retried) {
+  if (!audioCtx || soundMuted) return;
+  if (audioCtx.state !== "running") {
+    if (!_retried && audioCtx.resume) {
+      var args = [freq, startOffset, dur, type, vol, dest, true];
+      audioCtx.resume().then(function () {
+        setTimeout(function () { playTone.apply(null, args); }, 60);
+      }).catch(function () {});
+    }
+    return;
+  }
   var t0 = audioCtx.currentTime + (startOffset || 0);
   var osc = audioCtx.createOscillator();
   var g = audioCtx.createGain();
@@ -943,8 +954,24 @@ function renderLobby(state) {
   if (testBtn) testBtn.addEventListener("click", function () {
     unlockAudio();
     if (soundMuted) setMuted(false);
-    sfxWin();
-    toast("🔊 ¿Oíste el ding? Si no, revisa el silencio y el volumen.");
+    // En iOS el contexto arranca suspendido: esperar a que resume() lo
+    // ponga en "running" y solo entonces sonar el ding.
+    var ctx = audioCtx;
+    var play = function () {
+      sfxWin();
+      setTimeout(function () {
+        if (ctx && ctx.state !== "running") {
+          toast("⚠️ El navegador bloqueó el audio. Toca de nuevo Probar sonido.");
+        } else {
+          toast("🔊 ¿Oíste el ding? Si no, revisa el silencio y el volumen.");
+        }
+      }, 400);
+    };
+    if (ctx && ctx.state !== "running" && ctx.resume) {
+      ctx.resume().then(function () { setTimeout(play, 80); }).catch(function () { setTimeout(play, 150); });
+    } else {
+      play();
+    }
   });
   var nameInput = $("nameInput");
   if (nameInput && !nameInput.value) nameInput.focus();
