@@ -44,6 +44,16 @@ formato de 4 rondas fijas** (más ágil para dos jugadores por teléfono):
 - El botón de sonido es flotante, abajo a la derecha (al alcance del
   pulgar), y la página respeta el área segura del teléfono para que el
   encabezado no quede tapado por el notch.
+- **Reconexión automática:** si se cae el WebSocket (red móvil, el teléfono
+  se duerme, etc.), el cliente vuelve a entrar solo a la misma sala con el
+  mismo nombre (espera creciente 1 s, 2 s, 4 s… hasta 30 s, máximo 12
+  intentos). El servidor reasocia al jugador por su nombre. Sin esto, la
+  pantalla se quedaba en "Esperando rival" aunque el otro ya hubiera entrado.
+- **Sonido:** la música 8-bit arranca con el primer toque y suena más fuerte
+  (ganancia 0.09). Al tocar el botón de sonido para encenderlo, suena un
+  ding inmediato para comprobar que se oye. Los archivos CSS/JS llevan
+  versión (`?v=4`) para que el teléfono no se quede con la versión vieja
+  en caché.
 
 ### Cara a cara (al inicio de cada ronda)
 - La computadora muestra la pregunta a los dos jugadores **al mismo tiempo**.

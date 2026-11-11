@@ -50,6 +50,14 @@ var myId = null;          // "p1" | "p2" — se infiere del estado (ver identify
 var roomCode = "";
 var currentState = null;
 var connected = false;
+/* Reconexión automática del WebSocket: si se cae la conexión (red móvil,
+ * el teléfono se duerme, etc.), el cliente vuelve a entrar solo a la misma
+ * sala con el mismo nombre; el servidor lo reasocia a su jugador. Sin esto,
+ * la pantalla se quedaba en "Esperando rival" aunque el otro ya hubiera
+ * entrado. */
+var reconnectTimer = null;
+var reconnectAttempts = 0;
+var MAX_RECONNECT_ATTEMPTS = 12;
 var demoMode = false;
 var demoIndex = 0;
 var seenQuestionIds = []; // para la rotación de preguntas (SPEC §2)
@@ -223,7 +231,7 @@ function ensureAudio() {
     if (!AC) return false;
     audioCtx = new AC();
     musicGainNode = audioCtx.createGain();
-    musicGainNode.gain.value = 0.065; // música de fondo, que se escuche sin tapar los efectos
+    musicGainNode.gain.value = 0.09; // música de fondo, que se escuche sin tapar los efectos
     musicGainNode.connect(audioCtx.destination);
     sfxGainNode = audioCtx.createGain();
     sfxGainNode.gain.value = 0.5;
@@ -255,8 +263,8 @@ function musicTick() {
   var stepDur = 60 / MUSIC_BPM / 2; // corchea
   var mel = MUSIC_MELODY[musicStep % MUSIC_MELODY.length];
   var bass = MUSIC_BASS[musicStep % MUSIC_BASS.length];
-  if (mel) playTone(mel, 0, stepDur * 0.9, "square", 0.35, musicGainNode);
-  if (bass) playTone(bass, 0, stepDur * 1.8, "triangle", 0.6, musicGainNode);
+  if (mel) playTone(mel, 0, stepDur * 0.9, "square", 0.5, musicGainNode);
+  if (bass) playTone(bass, 0, stepDur * 1.8, "triangle", 0.7, musicGainNode);
   musicStep++;
 }
 
@@ -433,12 +441,16 @@ function send(msg) {
 function connectWS(code) {
   var base = wsBase();
   if (!base) { showConfigWarning(); return; }
+  if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
   var url = base + "/room/" + code + "/ws?name=" + encodeURIComponent(myName);
   try { ws = new WebSocket(url); } catch (e) {
     toast("No se pudo abrir la conexión: " + e.message, "error");
+    scheduleReconnect(code);
     return;
   }
   ws.onopen = function () {
+    reconnectAttempts = 0;
+    if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
     setConnected(true);
     send({ type: "join", name: myName });
   };
@@ -450,11 +462,29 @@ function connectWS(code) {
   };
   ws.onclose = function () {
     setConnected(false);
-    if (currentState && currentState.phase !== "gameOver") {
-      toast("Se perdió la conexión. Vuelve a entrar con el código de la sala.");
-    }
+    // No dejar la pantalla colgada: reintentar solo a la misma sala.
+    if (currentState && currentState.phase === "gameOver") return;
+    scheduleReconnect(code);
   };
   ws.onerror = function () { setConnected(false); };
+}
+
+/** Reintenta entrar a la misma sala con espera creciente (1 s, 2 s, 4 s…
+ *  hasta 30 s). El servidor reasocia al jugador por su nombre. */
+function scheduleReconnect(code) {
+  if (!code || !myName) return;
+  if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
+    toast("Se perdió la conexión. Vuelve a entrar con el código de la sala.");
+    return;
+  }
+  if (reconnectTimer) return;
+  var delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);
+  reconnectAttempts++;
+  toast("Se perdió la conexión. Reconectando…");
+  reconnectTimer = setTimeout(function () {
+    reconnectTimer = null;
+    connectWS(code);
+  }, delay);
 }
 
 function createRoom() {
@@ -1430,6 +1460,8 @@ function init() {
     soundBtn.addEventListener("click", function () {
       unlockAudio();
       setMuted(!soundMuted);
+      // Al encender el sonido, un ding inmediato para comprobar que se oye.
+      if (!soundMuted) sfxCorrect();
     });
   }
   // La música 8-bit arranca con el primer toque (política de autoplay).
