@@ -2886,6 +2886,898 @@
           ]
         }
       ]
+    },
+    {
+      "id": "q61",
+      "text": "¿Qué haces antes de desayunar?",
+      "answers": [
+        {
+          "text": "Cepillarme los dientes",
+          "points": 34,
+          "aliases": [
+            "cepillarme",
+            "lavarme los dientes"
+          ]
+        },
+        {
+          "text": "Bañarme",
+          "points": 24,
+          "aliases": [
+            "bañarme",
+            "ducharme"
+          ]
+        },
+        {
+          "text": "Lavarme las manos",
+          "points": 18,
+          "aliases": [
+            "lavarme las manos"
+          ]
+        },
+        {
+          "text": "Despertarme",
+          "points": 12,
+          "aliases": [
+            "despertar"
+          ]
+        },
+        {
+          "text": "Lavarme la cara",
+          "points": 7,
+          "aliases": [
+            "lavarme la cara"
+          ]
+        },
+        {
+          "text": "Preparar el desayuno",
+          "points": 5,
+          "aliases": [
+            "preparar desayuno",
+            "hacer el desayuno"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q62",
+      "text": "¿Mes con el mejor clima?",
+      "answers": [
+        {
+          "text": "Mayo",
+          "points": 34,
+          "aliases": []
+        },
+        {
+          "text": "Junio",
+          "points": 24,
+          "aliases": []
+        },
+        {
+          "text": "Abril",
+          "points": 18,
+          "aliases": []
+        },
+        {
+          "text": "Julio",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Marzo",
+          "points": 7,
+          "aliases": []
+        },
+        {
+          "text": "Diciembre",
+          "points": 5,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q63",
+      "text": "¿En qué piensas cuando escuchas la palabra \"sillón\"?",
+      "answers": [
+        {
+          "text": "Sentarme",
+          "points": 34,
+          "aliases": [
+            "sentar"
+          ]
+        },
+        {
+          "text": "Descansar",
+          "points": 26,
+          "aliases": [
+            "descanso"
+          ]
+        },
+        {
+          "text": "Televisión",
+          "points": 16,
+          "aliases": [
+            "tele",
+            "tv",
+            "ver tele"
+          ]
+        },
+        {
+          "text": "Comodidad",
+          "points": 12,
+          "aliases": [
+            "cómodo",
+            "comodo"
+          ]
+        },
+        {
+          "text": "Sala",
+          "points": 7,
+          "aliases": [
+            "la sala"
+          ]
+        },
+        {
+          "text": "Dormir",
+          "points": 5,
+          "aliases": [
+            "dormirme",
+            "echarme una siesta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q64",
+      "text": "¿Menciona un mes con 31 días?",
+      "answers": [
+        {
+          "text": "Enero",
+          "points": 34,
+          "aliases": []
+        },
+        {
+          "text": "Diciembre",
+          "points": 26,
+          "aliases": []
+        },
+        {
+          "text": "Marzo",
+          "points": 18,
+          "aliases": []
+        },
+        {
+          "text": "Mayo",
+          "points": 12,
+          "aliases": []
+        },
+        {
+          "text": "Octubre",
+          "points": 6,
+          "aliases": []
+        },
+        {
+          "text": "Julio",
+          "points": 4,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "q65",
+      "text": "¿Qué es lo primero que harías si te ganaras la lotería?",
+      "answers": [
+        {
+          "text": "Pagar mis deudas",
+          "points": 34,
+          "aliases": [
+            "pagar deudas",
+            "pagar mis deudas"
+          ]
+        },
+        {
+          "text": "Viajar",
+          "points": 26,
+          "aliases": [
+            "viajar por el mundo",
+            "ir de viaje"
+          ]
+        },
+        {
+          "text": "Comprar una casa",
+          "points": 18,
+          "aliases": [
+            "comprar casa",
+            "una casa"
+          ]
+        },
+        {
+          "text": "Hacer donaciones",
+          "points": 12,
+          "aliases": [
+            "donar",
+            "ayudar a los demás"
+          ]
+        },
+        {
+          "text": "Dejar de trabajar",
+          "points": 6,
+          "aliases": [
+            "salirme de trabajar",
+            "renunciar"
+          ]
+        },
+        {
+          "text": "Comprar un carro",
+          "points": 4,
+          "aliases": [
+            "comprar carro",
+            "un carro",
+            "un coche"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q66",
+      "text": "¿Algo que no te gustaría que ocurriera cuando estás en la tina?",
+      "answers": [
+        {
+          "text": "Caerme",
+          "points": 36,
+          "aliases": [
+            "caer",
+            "resbalarme"
+          ]
+        },
+        {
+          "text": "Que se acabe el agua",
+          "points": 26,
+          "aliases": [
+            "se acabe el agua",
+            "quedarme sin agua"
+          ]
+        },
+        {
+          "text": "Que entre una llamada",
+          "points": 16,
+          "aliases": [
+            "entre una llamada",
+            "que me llamen"
+          ]
+        },
+        {
+          "text": "Que llegue una visita",
+          "points": 12,
+          "aliases": [
+            "llegue una visita",
+            "que toquen la puerta"
+          ]
+        },
+        {
+          "text": "Que haya un terremoto",
+          "points": 6,
+          "aliases": [
+            "haya un terremoto",
+            "un temblor"
+          ]
+        },
+        {
+          "text": "Que se tape el drenaje",
+          "points": 4,
+          "aliases": [
+            "se tape el drenaje",
+            "que se inunde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q67",
+      "text": "¿Algo que tiene un artista famoso y que a ti te gustaría tener?",
+      "answers": [
+        {
+          "text": "Dinero",
+          "points": 36,
+          "aliases": [
+            "mucho dinero",
+            "fortuna"
+          ]
+        },
+        {
+          "text": "Casa",
+          "points": 24,
+          "aliases": [
+            "una casa",
+            "mansión",
+            "mansion"
+          ]
+        },
+        {
+          "text": "Fama",
+          "points": 18,
+          "aliases": [
+            "ser famoso",
+            "famoso"
+          ]
+        },
+        {
+          "text": "Carro",
+          "points": 12,
+          "aliases": [
+            "un carro",
+            "coche",
+            "auto"
+          ]
+        },
+        {
+          "text": "Buena voz",
+          "points": 6,
+          "aliases": [
+            "cantar bien",
+            "voz"
+          ]
+        },
+        {
+          "text": "Un avión privado",
+          "points": 4,
+          "aliases": [
+            "avión",
+            "avion",
+            "jet privado"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q68",
+      "text": "¿Tipo de celebración donde la gente echa la casa por la ventana?",
+      "answers": [
+        {
+          "text": "Boda",
+          "points": 34,
+          "aliases": [
+            "una boda",
+            "casarse"
+          ]
+        },
+        {
+          "text": "15 años",
+          "points": 26,
+          "aliases": [
+            "quince años",
+            "quinceañera",
+            "xv años"
+          ]
+        },
+        {
+          "text": "Cumpleaños",
+          "points": 18,
+          "aliases": [
+            "cumpleaños",
+            "cumple"
+          ]
+        },
+        {
+          "text": "Navidad",
+          "points": 12,
+          "aliases": [
+            "navidad"
+          ]
+        },
+        {
+          "text": "Bautismo",
+          "points": 6,
+          "aliases": [
+            "bautizo"
+          ]
+        },
+        {
+          "text": "Graduación",
+          "points": 4,
+          "aliases": [
+            "graduacion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q69",
+      "text": "¿Un tipo de padrinos de bodas?",
+      "answers": [
+        {
+          "text": "De anillos",
+          "points": 36,
+          "aliases": [
+            "anillos",
+            "padrinos de anillos"
+          ]
+        },
+        {
+          "text": "De lazo",
+          "points": 24,
+          "aliases": [
+            "lazo",
+            "padrinos de lazo"
+          ]
+        },
+        {
+          "text": "De arras",
+          "points": 18,
+          "aliases": [
+            "arras",
+            "padrinos de arras"
+          ]
+        },
+        {
+          "text": "De velación",
+          "points": 12,
+          "aliases": [
+            "velación",
+            "velacion",
+            "de misa",
+            "misa"
+          ]
+        },
+        {
+          "text": "De pastel",
+          "points": 6,
+          "aliases": [
+            "pastel",
+            "padrinos de pastel"
+          ]
+        },
+        {
+          "text": "De brindis",
+          "points": 4,
+          "aliases": [
+            "brindis",
+            "padrinos de brindis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q70",
+      "text": "¿Algo tradicional en una fiesta de quinceañera?",
+      "answers": [
+        {
+          "text": "El vals",
+          "points": 34,
+          "aliases": [
+            "vals",
+            "bailar el vals"
+          ]
+        },
+        {
+          "text": "El pastel",
+          "points": 26,
+          "aliases": [
+            "pastel",
+            "el pastel"
+          ]
+        },
+        {
+          "text": "El brindis",
+          "points": 16,
+          "aliases": [
+            "brindis",
+            "el brindis"
+          ]
+        },
+        {
+          "text": "El vestido",
+          "points": 12,
+          "aliases": [
+            "vestido",
+            "el vestido"
+          ]
+        },
+        {
+          "text": "El chambelán",
+          "points": 7,
+          "aliases": [
+            "chambelán",
+            "chambelan",
+            "los chambelanes"
+          ]
+        },
+        {
+          "text": "La misa",
+          "points": 5,
+          "aliases": [
+            "misa",
+            "la misa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q71",
+      "text": "¿En qué lugar se conoce a los mejores amigos?",
+      "answers": [
+        {
+          "text": "En la escuela",
+          "points": 34,
+          "aliases": [
+            "escuela",
+            "en el colegio",
+            "en la prepa"
+          ]
+        },
+        {
+          "text": "En el hospital",
+          "points": 26,
+          "aliases": [
+            "hospital",
+            "enfermo en un hospital"
+          ]
+        },
+        {
+          "text": "En la iglesia",
+          "points": 16,
+          "aliases": [
+            "iglesia",
+            "en la iglesia"
+          ]
+        },
+        {
+          "text": "En la cárcel",
+          "points": 12,
+          "aliases": [
+            "cárcel",
+            "carcel",
+            "en prisión"
+          ]
+        },
+        {
+          "text": "En el trabajo",
+          "points": 7,
+          "aliases": [
+            "trabajo",
+            "en la oficina"
+          ]
+        },
+        {
+          "text": "En el barrio",
+          "points": 5,
+          "aliases": [
+            "barrio",
+            "en la calle",
+            "en la colonia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q72",
+      "text": "Cuando le pides un aumento a tu jefe, ¿qué te aseguras de mencionar?",
+      "answers": [
+        {
+          "text": "Que hago bien mi trabajo",
+          "points": 36,
+          "aliases": [
+            "hago bien mi trabajo",
+            "mi buen trabajo",
+            "que trabajo bien"
+          ]
+        },
+        {
+          "text": "El costo de la vida",
+          "points": 24,
+          "aliases": [
+            "costo de la vida",
+            "todo subió de precio",
+            "la inflación"
+          ]
+        },
+        {
+          "text": "Mi tiempo en la empresa",
+          "points": 16,
+          "aliases": [
+            "tiempo de trabajo",
+            "mis años aquí",
+            "antigüedad"
+          ]
+        },
+        {
+          "text": "Que me lo merezco",
+          "points": 12,
+          "aliases": [
+            "me lo merezco",
+            "lo merezco"
+          ]
+        },
+        {
+          "text": "Por favor",
+          "points": 7,
+          "aliases": [
+            "por favor"
+          ]
+        },
+        {
+          "text": "Mis logros",
+          "points": 5,
+          "aliases": [
+            "logros",
+            "mis resultados",
+            "lo que he logrado"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q73",
+      "text": "¿Cuál es la queja principal que tienen los chicos de sus maestros?",
+      "answers": [
+        {
+          "text": "Dejan mucha tarea",
+          "points": 34,
+          "aliases": [
+            "mucha tarea",
+            "dejan tarea"
+          ]
+        },
+        {
+          "text": "Regañan mucho",
+          "points": 26,
+          "aliases": [
+            "regañan",
+            "regañan mucho"
+          ]
+        },
+        {
+          "text": "Son estrictos",
+          "points": 18,
+          "aliases": [
+            "estrictos",
+            "muy estrictos"
+          ]
+        },
+        {
+          "text": "No nos comprenden",
+          "points": 12,
+          "aliases": [
+            "no los comprenden",
+            "no me comprenden"
+          ]
+        },
+        {
+          "text": "Castigan",
+          "points": 6,
+          "aliases": [
+            "castigan",
+            "nos castigan"
+          ]
+        },
+        {
+          "text": "Son aburridos",
+          "points": 4,
+          "aliases": [
+            "aburridos",
+            "aburren"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q74",
+      "text": "¿Una razón para renunciar al trabajo?",
+      "answers": [
+        {
+          "text": "Maltrato",
+          "points": 36,
+          "aliases": [
+            "maltrato",
+            "me maltratan"
+          ]
+        },
+        {
+          "text": "El sueldo",
+          "points": 24,
+          "aliases": [
+            "sueldo",
+            "pagan poco",
+            "el salario"
+          ]
+        },
+        {
+          "text": "No aguanto a mi jefe",
+          "points": 16,
+          "aliases": [
+            "no aguanto a mi jefe",
+            "mi jefe"
+          ]
+        },
+        {
+          "text": "No estoy a gusto",
+          "points": 12,
+          "aliases": [
+            "no estoy a gusto",
+            "no me gusta"
+          ]
+        },
+        {
+          "text": "Mala relación con mis compañeros",
+          "points": 7,
+          "aliases": [
+            "mala relación",
+            "mis compañeros"
+          ]
+        },
+        {
+          "text": "Me ofrecieron algo mejor",
+          "points": 5,
+          "aliases": [
+            "me ofrecieron algo mejor",
+            "otra oferta",
+            "mejor trabajo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q75",
+      "text": "¿Un alimento perteneciente a la vitamina \"T\"?",
+      "answers": [
+        {
+          "text": "Tacos",
+          "points": 34,
+          "aliases": [
+            "taco",
+            "tacos"
+          ]
+        },
+        {
+          "text": "Tamales",
+          "points": 26,
+          "aliases": [
+            "tamal",
+            "tamales"
+          ]
+        },
+        {
+          "text": "Tortas",
+          "points": 18,
+          "aliases": [
+            "torta",
+            "tortas"
+          ]
+        },
+        {
+          "text": "Tostadas",
+          "points": 12,
+          "aliases": [
+            "tostada",
+            "tostadas"
+          ]
+        },
+        {
+          "text": "Tortillas",
+          "points": 6,
+          "aliases": [
+            "tortilla",
+            "tortillas"
+          ]
+        },
+        {
+          "text": "Tlacoyos",
+          "points": 4,
+          "aliases": [
+            "tlacoyo",
+            "tlacoyos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q76",
+      "text": "¿El tipo de torta más común?",
+      "answers": [
+        {
+          "text": "De jamón",
+          "points": 36,
+          "aliases": [
+            "jamón",
+            "jamon",
+            "de jamon"
+          ]
+        },
+        {
+          "text": "Ahogada",
+          "points": 24,
+          "aliases": [
+            "ahogada",
+            "torta ahogada"
+          ]
+        },
+        {
+          "text": "Cubana",
+          "points": 16,
+          "aliases": [
+            "cubana",
+            "torta cubana"
+          ]
+        },
+        {
+          "text": "De milanesa",
+          "points": 12,
+          "aliases": [
+            "milanesa",
+            "de milanesa"
+          ]
+        },
+        {
+          "text": "Hawaiana",
+          "points": 7,
+          "aliases": [
+            "hawaiana",
+            "torta hawaiana"
+          ]
+        },
+        {
+          "text": "De pollo",
+          "points": 5,
+          "aliases": [
+            "pollo",
+            "de pollo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q77",
+      "text": "¿El taco más pedido en una taquería o puesto callejero?",
+      "answers": [
+        {
+          "text": "Pastor",
+          "points": 36,
+          "aliases": [
+            "pastor",
+            "al pastor",
+            "tacos al pastor"
+          ]
+        },
+        {
+          "text": "Suadero",
+          "points": 26,
+          "aliases": [
+            "suadero",
+            "de suadero"
+          ]
+        },
+        {
+          "text": "Longaniza",
+          "points": 16,
+          "aliases": [
+            "longaniza",
+            "de longaniza"
+          ]
+        },
+        {
+          "text": "De cabeza",
+          "points": 12,
+          "aliases": [
+            "cabeza",
+            "de cabeza"
+          ]
+        },
+        {
+          "text": "De tripa",
+          "points": 6,
+          "aliases": [
+            "tripa",
+            "de tripa"
+          ]
+        },
+        {
+          "text": "De carnitas",
+          "points": 4,
+          "aliases": [
+            "carnitas",
+            "de carnitas"
+          ]
+        }
+      ]
     }
   ],
   "fastMoney": [
